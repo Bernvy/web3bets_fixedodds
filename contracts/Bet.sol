@@ -24,15 +24,6 @@ contract Bet is IBet {
 
     IWeb3BetsFO private web3bets = IWeb3BetsFO(w3bAddr);
 
-    modifier onlyFactory() {
-        require(
-            msg.sender == web3bets.marketFactory(),
-            "better only"
-        );
-        _;
-    }
-
-
     constructor(
         address caller_,
         address market_,

@@ -3,6 +3,7 @@
 pragma solidity ^0.8.4;
 import "./Bet.sol";
 import "./interface/IBetFactory.sol";
+import "./interface/IEvent.sol";
 import "./interface/IMarket.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
@@ -26,13 +27,14 @@ contract BetFactory is IBetFactory {
         require(!isBlack, "o 0 black");
         _stake = _stake * 10 ** 18;
         _odds = _odds * 10 ** 2;
+        IMarket _market = IMarket(_marketAddress);
+        IEvent _event = IEvent(_market.eventAddress());
+        require(!(_market.hasSetWinningSide() || _market.isCanceled() ) && _event.status() == IEvent.EventStatus.UPCOMING );
         _stableCoinWrapper.safeTransferFrom(msg.sender, _marketAddress, _stake);
         
         Bet _bet = new Bet(msg.sender, _marketAddress, _marketSide, _stake, _odds);
         
-        IMarket _market = IMarket(_marketAddress);
         _market.addBet(msg.sender, address(_bet), _stake, _odds, _marketSide);
-
 
         emit BetCreated(msg.sender, _marketAddress, _stake, _odds, _marketSide);
         return address(_bet);

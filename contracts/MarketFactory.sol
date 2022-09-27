@@ -43,15 +43,20 @@ contract MarketFactory is IMarketFactory {
         return _market.withdrawPending(_betAddr);
     }
 
-    function settle(address _pairAddr) external override returns(bool)
+    function settle(address _pairAddr) public override returns(bool)
     {
         IBetPair _bet = IBetPair(_pairAddr);
         IMarket _market = IMarket(_bet.market());
         return _market.settlePair(_pairAddr);
     }
 
-    function settleMarket(address _mktAddr) external {
-        // 
+    function settleBet(address _betAddr) external override returns(bool) {
+        IBet _bet = IBet(_betAddr);
+        address[] memory pairs = _bet.getBetPairs();
+        for(uint i = 0; i < pairs.length; i++){
+            settle(pairs[i]);
+        }
+        return true;
     }
 
     function setWinner(address _marketAddr, string memory _side) external override returns(bool)

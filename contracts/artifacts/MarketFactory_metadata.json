@@ -141,12 +141,18 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_mktAddr",
+						"name": "_betAddr",
 						"type": "address"
 					}
 				],
-				"name": "settleMarket",
-				"outputs": [],
+				"name": "settleBet",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -272,19 +278,19 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0x786461b4bd280d69f159747664f93e4f8d708f5a17442e0b3d0e5dd97540df50",
+			"keccak256": "0x5abbbca2cc6681c8139d5e40e1901d511dc44eb5d6e7c5aa1385878e6b777577",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2cda8de46599587ef61b9ab378ddc0d8113df74b268aa2adb2158607d00b1e74",
-				"dweb:/ipfs/QmW9ZnB4zuZLGFa9z48xPx2ZZt3Puu2jTD1onxWjhLKrBP"
+				"bzz-raw://e2a39d709f15ccfa807e32b2fb149ab51e10112b5c8da367cf53a0bce09d10bb",
+				"dweb:/ipfs/QmTe1WbGUo3hWYbkrcGwRDt9go2oUKd3MTR8ze6BhkV5Mq"
 			]
 		},
 		"contracts/MarketFactory.sol": {
-			"keccak256": "0x2fd12e30c67cac1301bef5d3a40a9264ba5783e6b13579fa428776d39e8294fd",
+			"keccak256": "0x5ccdcf44c10f14cf939551099367b6cccfb9af3fd574c0b5d6f7feaa39869dda",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dab0f311e4ad9e986a48876f5b07a8a5335131f8a045da794af74d6e8f215f60",
-				"dweb:/ipfs/QmNqn2Ao28d5vwMd4A1LKfsGZXTgFVkMbzqPLoB98aDSPp"
+				"bzz-raw://14b734edde89929d9af9d098d815754e7af0140714942a59326578e45487e00d",
+				"dweb:/ipfs/QmYPhPZoqFPtWq91RH2ogfsa5rVdEJuXgJJAiUvUcTqZh3"
 			]
 		},
 		"contracts/interface/IBet.sol": {
@@ -320,11 +326,11 @@
 			]
 		},
 		"contracts/interface/IMarketFactory.sol": {
-			"keccak256": "0x114a0ff3a27adf66b8afffb7c1df43b0f47c41a84cfbf8b2d44af740b7ceffc0",
+			"keccak256": "0xb7d0bab0b746fb29192025b1978db192672826518def03cf365538cbeb9fcebd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://97b6ff19c22fd79cbc1d171bdd2d905058c9a77404eb46c95eb4f02b55eb4838",
-				"dweb:/ipfs/Qmb4JwCwJVMfe9fExP4qja988uYdbFJj6GnztXGTEDnj7K"
+				"bzz-raw://8140389e5bc970937b7b2291613597ccea4e3fd25a5c9bd00850000d70cdf945",
+				"dweb:/ipfs/QmRAUCK6eYY2rvENLExbD6We9xXGJmhnzpMn8JWJ7hUjZh"
 			]
 		},
 		"contracts/interface/IWeb3BetsFO.sol": {

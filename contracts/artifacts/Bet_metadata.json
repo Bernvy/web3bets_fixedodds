@@ -213,11 +213,11 @@
 	},
 	"sources": {
 		"contracts/Bet.sol": {
-			"keccak256": "0xb46b7ed0db6c3775b5d32f5aa207eb9bf72be803003a62752a23c38986d6db83",
+			"keccak256": "0x9bb5d88a9f5877ec3987933643a2b643ba1089c78d4cf5ed4c26bc06560b203b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b3c0b5995750068a8e6eb576adaab02333e5de0718f9e3ff2d5854c9863bce50",
-				"dweb:/ipfs/QmdJ83X1ghd3NFmt3ormdc5hi7H3Bs718gJaaZGYjr9Yin"
+				"bzz-raw://bbe991174dbf877901b90fadabc1b7f1cd59f33cfe9b8b4295e10e164952d7ea",
+				"dweb:/ipfs/QmciSCjYZo3N2PRQ3K8NTpw73EjsoEfHCULNVdqVLXtCEp"
 			]
 		},
 		"contracts/interface/IBet.sol": {

@@ -451,11 +451,11 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0x786461b4bd280d69f159747664f93e4f8d708f5a17442e0b3d0e5dd97540df50",
+			"keccak256": "0x5abbbca2cc6681c8139d5e40e1901d511dc44eb5d6e7c5aa1385878e6b777577",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2cda8de46599587ef61b9ab378ddc0d8113df74b268aa2adb2158607d00b1e74",
-				"dweb:/ipfs/QmW9ZnB4zuZLGFa9z48xPx2ZZt3Puu2jTD1onxWjhLKrBP"
+				"bzz-raw://e2a39d709f15ccfa807e32b2fb149ab51e10112b5c8da367cf53a0bce09d10bb",
+				"dweb:/ipfs/QmTe1WbGUo3hWYbkrcGwRDt9go2oUKd3MTR8ze6BhkV5Mq"
 			]
 		},
 		"contracts/interface/IBet.sol": {

@@ -16,7 +16,7 @@ contract Market is IMarket {
 
     string public override name;
     address public override eventAddress;
-    bool public override hasSetWinningSide;
+    bool public override hasSetWinningSide = false;
     string public override winningSide;
     bool public override isCanceled = false;
 

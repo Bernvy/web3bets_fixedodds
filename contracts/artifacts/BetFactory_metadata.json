@@ -145,11 +145,11 @@
 			]
 		},
 		"contracts/BetFactory.sol": {
-			"keccak256": "0x049d6aae29200d5917b77d9ab86aa078d68b6dd5cee95e90c742aac6df0a88df",
+			"keccak256": "0x9c926f231704e6957afaf557d70698f97e333525546b9aa0cd8576bcab501ea0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://51dc9a76648d27bea7f12d8e05fe5b0aa07f6ee89aa9c3aeaf0026db5a57d5c2",
-				"dweb:/ipfs/QmUsEaAqQpuWsewe71JKRkdwByZ6YXkQFGi3x3UGc5GDmj"
+				"bzz-raw://5093adfbfee6ac7b18967e93f4b216d0e4a0e711721e9d5e6abb9184dfc101d5",
+				"dweb:/ipfs/QmQJda36pWAC9CNLpph2JeUrviKa2PiMSYs2nXULknNWg8"
 			]
 		},
 		"contracts/interface/IBet.sol": {
@@ -174,6 +174,14 @@
 			"urls": [
 				"bzz-raw://e351510d0ae75b187be135926688aeb09dd7feeca20e9913a88912a4ce6fc475",
 				"dweb:/ipfs/QmaAp33QhSnVy493VntxyqgJuPsKcNYQJ6pAhLAa3gUWbG"
+			]
+		},
+		"contracts/interface/IEvent.sol": {
+			"keccak256": "0x8e2ea108ac8ad01a110dbfccde1e4d731958f12f82a2d90f1e84900c7fa5efde",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8cd1313e1ff843720650938df8a3f7b519cd57efc5b3be2c4beca343be98d681",
+				"dweb:/ipfs/QmcFXBxyQhKpMLLTCN7b7XmHQfAvFoFQGk8vZ5usKm5UMA"
 			]
 		},
 		"contracts/interface/IMarket.sol": {

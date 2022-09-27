@@ -47,8 +47,9 @@ contract Event is IEvent {
         uint256 startTime_,
         uint256 minimumStake_
     ) {
+        minimumStake_ *= 10 ** 18;
         require(msg.sender == web3bets.eventFactory(), "fty o");
-        require(minimumStake_ * 10 ** 18 >= MINIMUM_STAKE, "x min stake");
+        require( minimumStake_ >= MINIMUM_STAKE, "x min stake");
         name = eventTitle_;
         eventOwner = caller_;
         startTime = startTime_;
