@@ -1,0 +1,331 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_web3bets",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventOwner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventAddress",
+						"type": "address"
+					}
+				],
+				"name": "EventCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventAddr",
+						"type": "address"
+					}
+				],
+				"name": "cancelThisEvent",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_minimumStake",
+						"type": "uint256"
+					}
+				],
+				"name": "createEvent",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventAddr",
+						"type": "address"
+					}
+				],
+				"name": "endThisEvent",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "events",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getEvents",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_account",
+						"type": "address"
+					}
+				],
+				"name": "getEventsByOwner",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_startTime",
+						"type": "uint256"
+					}
+				],
+				"name": "postponeThisEvent",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventAddr",
+						"type": "address"
+					}
+				],
+				"name": "startThisEvent",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "updateEventName",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "userEvents",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/EventFactory.sol": "EventFactory"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Event.sol": {
+			"keccak256": "0xcb045bbdce16aab461e6fa670d956d7bea46e0bfa57f4f3b891c13ce3f5f9577",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://69539e920ded7868b67155fdbdb2c470f8be59c6db3ca072cb3374e0f0e545a7",
+				"dweb:/ipfs/Qmb6b1JrynQ3bgiSVRga7aQrEzLtC1dMqDKSLZNLahaqyT"
+			]
+		},
+		"contracts/EventFactory.sol": {
+			"keccak256": "0x8aa6e96975bc486c20099e85c1f84c665204ed24bf78a2159ab8a98a5ca38ef8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8d7d39a8e67a281d2766d89b2a028f7a0718e49c273e9aca7ec2a70a1cef9a2a",
+				"dweb:/ipfs/QmfNKvLdzovjy2tof2eV3UtHQpKfM7fbXT6P9c18Crk5TG"
+			]
+		},
+		"contracts/interface/IEvent.sol": {
+			"keccak256": "0x8e2ea108ac8ad01a110dbfccde1e4d731958f12f82a2d90f1e84900c7fa5efde",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8cd1313e1ff843720650938df8a3f7b519cd57efc5b3be2c4beca343be98d681",
+				"dweb:/ipfs/QmcFXBxyQhKpMLLTCN7b7XmHQfAvFoFQGk8vZ5usKm5UMA"
+			]
+		},
+		"contracts/interface/IEventFactory.sol": {
+			"keccak256": "0xf536d2c1efe2857e080db3505b34a59e23f3b3bfed407e0413b922aa005a45bf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://27a14c11833801a40b14ae1d7457030d61a1644211842ecf2dedf92385f8b2a8",
+				"dweb:/ipfs/QmZ32SBpjEC4eu98Mbb7a1ZJPfP5CvoWXQive82mbAH8az"
+			]
+		},
+		"contracts/interface/IMarket.sol": {
+			"keccak256": "0x3717ad6317acbb34aec42b944da884ad6334f0bdb451e54a3115d0c997dad7d8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6504381374db970e37f4ddbb4b273c8f68f45c165fdbf5bd44424d84d2278503",
+				"dweb:/ipfs/Qmdp4tTSFzeqbaE89QQERJhooKtQ5SKmDcDLACGdtjDm6R"
+			]
+		},
+		"contracts/interface/IWeb3BetsFO.sol": {
+			"keccak256": "0x20c3d67d743412db26aa952040f0296c4d416cc366de345313f9fc2be676b786",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e9360392b3e11b08d2bdab94506f5a0fbd0fb874c495c8a1ab1f924fdd4e95eb",
+				"dweb:/ipfs/QmcBiEwLw3UKMWbe9MjNz2vuvbnsFnxyKo4KrBaFhA1hBh"
+			]
+		}
+	},
+	"version": 1
+}

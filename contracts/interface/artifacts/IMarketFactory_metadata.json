@@ -1,0 +1,220 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "marketAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "marketName",
+						"type": "string"
+					}
+				],
+				"name": "MarketCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_marketAddr",
+						"type": "address"
+					}
+				],
+				"name": "cancel",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_eventAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_sideAName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_sideBName",
+						"type": "string"
+					}
+				],
+				"name": "createMarket",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_marketAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_side",
+						"type": "string"
+					}
+				],
+				"name": "setWinner",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pairAddr",
+						"type": "address"
+					}
+				],
+				"name": "settle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_marketAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_sideAName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_sideBName",
+						"type": "string"
+					}
+				],
+				"name": "update",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_betAddr",
+						"type": "address"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interface/IMarketFactory.sol": "IMarketFactory"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interface/IMarketFactory.sol": {
+			"keccak256": "0x114a0ff3a27adf66b8afffb7c1df43b0f47c41a84cfbf8b2d44af740b7ceffc0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://97b6ff19c22fd79cbc1d171bdd2d905058c9a77404eb46c95eb4f02b55eb4838",
+				"dweb:/ipfs/Qmb4JwCwJVMfe9fExP4qja988uYdbFJj6GnztXGTEDnj7K"
+			]
+		}
+	},
+	"version": 1
+}

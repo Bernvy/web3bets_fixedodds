@@ -14,13 +14,11 @@ interface IBet {
 
     function marketSide() external view returns (string memory);
 
-    function marketAddress() external view returns (address);
+    function market() external view returns (address);
 
     function getBetPairs() external  returns (address[] memory);
 
     function addPair(address pairAddress) external returns(bool);
 
     function setMatched(uint _amount) external returns(bool);
-
-    function withdrawPending() external;
 }

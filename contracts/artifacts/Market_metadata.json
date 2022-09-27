@@ -1,0 +1,495 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name_",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "eventAddress_",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "sideAName_",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "sideBName_",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_better",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_betAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_stake",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_odds",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "_side",
+						"type": "string"
+					}
+				],
+				"name": "addBet",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cancelMarket",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "eventAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasSetWinningSide",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isCanceled",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_winningSide",
+						"type": "string"
+					}
+				],
+				"name": "setWinningSide",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pair",
+						"type": "address"
+					}
+				],
+				"name": "settlePair",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "sideABets",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "betAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stake",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "odds",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sideAName",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sideATotalStake",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "sideAUsersStakes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "sideBBets",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "betAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stake",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "odds",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sideBName",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sideBTotalStake",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "sideBUsersStakes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_sideAName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_sideBName",
+						"type": "string"
+					}
+				],
+				"name": "upadteMarket",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "winningSide",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_bet",
+						"type": "address"
+					}
+				],
+				"name": "withdrawPending",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Market.sol": "Market"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+			"keccak256": "0xf41ca991f30855bf80ffd11e9347856a517b977f0a6c2d52e6421a99b7840329",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2717fd2bdac99daa960a6de500754ea1b932093c946388c381da48658234b95",
+				"dweb:/ipfs/QmP6QVMn6UeA3ByahyJbYQr5M6coHKBKsf3ySZSfbyA8R7"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0x032807210d1d7d218963d7355d62e021a84bf1b3339f4f50be2f63b53cccaf29",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11756f42121f6541a35a8339ea899ee7514cfaa2e6d740625fcc844419296aa6",
+				"dweb:/ipfs/QmekMuk6BY4DAjzeXr4MSbKdgoqqsZnA8JPtuyWc6CwXHf"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xd6153ce99bcdcce22b124f755e72553295be6abcd63804cfdffceb188b8bef10",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://35c47bece3c03caaa07fab37dd2bb3413bfbca20db7bd9895024390e0a469487",
+				"dweb:/ipfs/QmPGWT2x3QHcKxqe6gRmAkdakhbaRgx3DLzcakHz5M4eXG"
+			]
+		},
+		"contracts/BetPair.sol": {
+			"keccak256": "0x2cbe4893bf072618eed6d616d4c0289aa932a7411485c9fe5ef531a6b570a1ab",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://27ba1b4c25c8d3996c38417b8172791ebef89bc306e2d453166bf775a23d0815",
+				"dweb:/ipfs/QmdY8HUq6LhKYwXUj4onjHyJoVbHqJSe5H9dLKCd2H29fq"
+			]
+		},
+		"contracts/Market.sol": {
+			"keccak256": "0x786461b4bd280d69f159747664f93e4f8d708f5a17442e0b3d0e5dd97540df50",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2cda8de46599587ef61b9ab378ddc0d8113df74b268aa2adb2158607d00b1e74",
+				"dweb:/ipfs/QmW9ZnB4zuZLGFa9z48xPx2ZZt3Puu2jTD1onxWjhLKrBP"
+			]
+		},
+		"contracts/interface/IBet.sol": {
+			"keccak256": "0x2c21a42a1340fcdfd25037d486a4f920c20ee8de203d0c28db92e3ef186c0571",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://585969eb05acee4faa42bab41c115cc2834156f36396dd0d7c752df7d2b600d4",
+				"dweb:/ipfs/QmZ68XgPkX1ecCKTCZxgtvH4YrLR7E27msfAedZ99St4bU"
+			]
+		},
+		"contracts/interface/IBetPair.sol": {
+			"keccak256": "0x6a8ba0dfe9b0fda209cd3aa469064e814ca2a0adde95b4d784c6bc789791115d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e351510d0ae75b187be135926688aeb09dd7feeca20e9913a88912a4ce6fc475",
+				"dweb:/ipfs/QmaAp33QhSnVy493VntxyqgJuPsKcNYQJ6pAhLAa3gUWbG"
+			]
+		},
+		"contracts/interface/IMarket.sol": {
+			"keccak256": "0x3717ad6317acbb34aec42b944da884ad6334f0bdb451e54a3115d0c997dad7d8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6504381374db970e37f4ddbb4b273c8f68f45c165fdbf5bd44424d84d2278503",
+				"dweb:/ipfs/Qmdp4tTSFzeqbaE89QQERJhooKtQ5SKmDcDLACGdtjDm6R"
+			]
+		},
+		"contracts/interface/IWeb3BetsFO.sol": {
+			"keccak256": "0x20c3d67d743412db26aa952040f0296c4d416cc366de345313f9fc2be676b786",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e9360392b3e11b08d2bdab94506f5a0fbd0fb874c495c8a1ab1f924fdd4e95eb",
+				"dweb:/ipfs/QmcBiEwLw3UKMWbe9MjNz2vuvbnsFnxyKo4KrBaFhA1hBh"
+			]
+		}
+	},
+	"version": 1
+}

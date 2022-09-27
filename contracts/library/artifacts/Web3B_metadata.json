@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/library/Web3BetsLib.sol": "Web3B"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/library/Web3BetsLib.sol": {
+			"keccak256": "0x001461b9fb87ae3ddb06e1259fac20d7d4c1d6059489a42fe66404aad22e5b87",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2eb6bd2f7232f942cca5a7351721536637021258be0bb6a80dace773b4ef08fb",
+				"dweb:/ipfs/QmQwdQTBDpwc5CsnHQHKj5BQ7dgXXYoq2hvQR6XiyNXPDJ"
+			]
+		}
+	},
+	"version": 1
+}

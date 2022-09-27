@@ -3,34 +3,40 @@
 pragma solidity ^0.8.4;
 
 import "./interface/IEvent.sol";
-
 import "./interface/IMarket.sol";
-
-import "./Market.sol";
-
-import "@openzeppelin/contracts/utils/Strings.sol";
-
-// import "./library/DataType.sol";
+import "./interface/IWeb3BetsFO.sol";
 
 contract Event is IEvent {
-    address public eventOwner;
+    address private web3betsAddress;
 
-    uint256 public startTime;
+    address public override eventOwner;
 
-    uint256 public minimumStake;
+    uint256 public override startTime;
+
+    uint256 public override minimumStake;
+
+    uint constant MINIMUM_STAKE = 10 ** 18;
 
     address[] public markets;
 
-    uint constant MINIMUM_STAKE = 1;
+    string public override name;
 
-    string public name;
+    EventStatus public override status;
 
-    EventStatus public status;
+    IWeb3BetsFO private web3bets = IWeb3BetsFO(web3betsAddress);
 
-    modifier onlyOwner() {
+    modifier onlyFactory() {
         require(
-            msg.sender == eventOwner,
-            "Event operations only applicable to owner"
+            msg.sender == web3bets.eventFactory(),
+            "owner o"
+        );
+        _;
+    }
+
+    modifier onlyMarketFactory() {
+        require(
+            msg.sender == web3bets.marketFactory(),
+            "owner o"
         );
         _;
     }
@@ -41,7 +47,8 @@ contract Event is IEvent {
         uint256 startTime_,
         uint256 minimumStake_
     ) {
-        require(minimumStake_ >= MINIMUM_STAKE, "Minimum stake for creating an event must be greater than 10000000000 wei");
+        require(msg.sender == web3bets.eventFactory(), "fty o");
+        require(minimumStake_ * 10 ** 18 >= MINIMUM_STAKE, "x min stake");
         name = eventTitle_;
         eventOwner = caller_;
         startTime = startTime_;
@@ -49,51 +56,29 @@ contract Event is IEvent {
         status = EventStatus.UPCOMING;
     }
 
-    function getName() public view override returns (string memory) {
-        return name;
-    }
-
-    function isValidMarket(address _addr) private view returns (bool){
-        uint32 size;
-        assembly {
-            size := extcodesize(_addr)
-        }
-        if(size > 0){
-            IMarket market = IMarket(_addr);
-            address marketEventAddress = market.eventAddress();
-            if(marketEventAddress == address(this)){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
+    function getMarkets() external view override returns (address[] memory) {
+        return markets;
     }
 
     function addMarket(address _marketAddress)
         external
         override
-        onlyOwner returns(bool)
+        onlyMarketFactory returns(bool)
     {
-        require(isValidMarket(_marketAddress), "The address is not a valid market contract for this event");
         markets.push(_marketAddress);
         return true;
     }
 
-    function updateName(string memory _eventTitle) external override onlyOwner  returns(bool) {
+    function updateName(string memory _eventTitle) external override onlyFactory returns(bool) 
+    {
         name = _eventTitle;
         return true;
     }
 
-    function cancelEvent() external override onlyOwner  returns(bool) {
-        if (status == EventStatus.CANCELED) {
-            revert("Event already canceled");
-        } else if (status == EventStatus.ENDED) {
-            revert("Event already ended");
-        }
+    function cancelEvent() external override onlyFactory returns(bool) 
+    {
+        require (status != EventStatus.CANCELED, "xd event");
+        require(status != EventStatus.ENDED, "ended event");
 
         for (uint256 i = 0; i < markets.length; i++) {
             IMarket market = IMarket(markets[i]);
@@ -104,12 +89,10 @@ contract Event is IEvent {
         return true;
     }
 
-    function postponeEvent(uint256 _startTime) external override onlyOwner  returns(bool) {
-        if (status == EventStatus.CANCELED) {
-            revert("Event already canceled");
-        } else if (status == EventStatus.ENDED) {
-            revert("Event already ended");
-        }
+    function postponeEvent(uint256 _startTime) external override onlyFactory  returns(bool) 
+    {
+        require (status != EventStatus.CANCELED, "xd event");
+        require(status != EventStatus.ENDED, "ended event");
 
         startTime = _startTime;
 
@@ -117,28 +100,9 @@ contract Event is IEvent {
         return true;
     }
 
-    function getMarkets() external view override returns (address[] memory) {
-        return markets;
-    }
-
-    function getMinimumStake() external view override returns (uint256) {
-        return minimumStake;
-    }
-
-    function getCount() internal view returns (uint256 count) {
-        return markets.length;
-    }
-
-    function getEventOwner() external view override returns (address) {
-        return eventOwner;
-    }
-
-    function endEvent() external override onlyOwner  returns(bool) {
-        if (status == EventStatus.CANCELED) {
-            revert("Canceled event can not be ended");
-        } else if (status == EventStatus.ENDED) {
-            revert("Event already ended");
-        }
+    function endEvent() external override onlyFactory  returns(bool) {
+        require (status != EventStatus.CANCELED, "xd event");
+        require(status != EventStatus.ENDED, "ended event");
 
         bool allMarketsAreSettled = true;
         for (uint256 i = 0; i < markets.length; i++) {
@@ -149,32 +113,21 @@ contract Event is IEvent {
             }
         }
 
-        if (!allMarketsAreSettled) {
-            revert(
-                "You must set winning side in all markets before ending event"
-            );
-        } else {
-            status = EventStatus.ENDED;
-        }
+        require(allMarketsAreSettled, "all mkt nt settled");
+        status = EventStatus.ENDED;
         return true;
     }
 
-    function startEvent() external onlyOwner  returns(bool) {
-        if (status == EventStatus.CANCELED) {
-            revert("Canceled event can not be started");
-        } else if (status == EventStatus.ENDED) {
-            revert("Ended event can not be started");
-        } else if (status == EventStatus.STARTED) {
-            revert("Event already started");
-        } else if (status == EventStatus.UPCOMING) {
+    function startEvent() external override onlyFactory returns(bool) 
+    {
+        require (status != EventStatus.CANCELED, "xd event");
+        require(status != EventStatus.ENDED, "ended event");
+        require (status != EventStatus.STARTED, "already live");
+        if (status == EventStatus.UPCOMING) {
             status = EventStatus.STARTED;
         } else {
-            revert("An error occurred starting event");
+            revert("err: bad status");
         }
         return true;
-    }
-
-    function getEventStatus() external view override returns (EventStatus) {
-        return status;
     }
 }

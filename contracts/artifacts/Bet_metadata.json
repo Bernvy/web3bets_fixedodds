@@ -1,0 +1,249 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "caller_",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "market_",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "marketSide_",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stake_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "odds_",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pairAddress",
+						"type": "address"
+					}
+				],
+				"name": "addPair",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "betPairs",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "better",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBetPairs",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "market",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "marketSide",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "matched",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "odds",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "setMatched",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stake",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Bet.sol": "Bet"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Bet.sol": {
+			"keccak256": "0xb46b7ed0db6c3775b5d32f5aa207eb9bf72be803003a62752a23c38986d6db83",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b3c0b5995750068a8e6eb576adaab02333e5de0718f9e3ff2d5854c9863bce50",
+				"dweb:/ipfs/QmdJ83X1ghd3NFmt3ormdc5hi7H3Bs718gJaaZGYjr9Yin"
+			]
+		},
+		"contracts/interface/IBet.sol": {
+			"keccak256": "0x2c21a42a1340fcdfd25037d486a4f920c20ee8de203d0c28db92e3ef186c0571",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://585969eb05acee4faa42bab41c115cc2834156f36396dd0d7c752df7d2b600d4",
+				"dweb:/ipfs/QmZ68XgPkX1ecCKTCZxgtvH4YrLR7E27msfAedZ99St4bU"
+			]
+		},
+		"contracts/interface/IBetPair.sol": {
+			"keccak256": "0x6a8ba0dfe9b0fda209cd3aa469064e814ca2a0adde95b4d784c6bc789791115d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e351510d0ae75b187be135926688aeb09dd7feeca20e9913a88912a4ce6fc475",
+				"dweb:/ipfs/QmaAp33QhSnVy493VntxyqgJuPsKcNYQJ6pAhLAa3gUWbG"
+			]
+		},
+		"contracts/interface/IWeb3BetsFO.sol": {
+			"keccak256": "0x20c3d67d743412db26aa952040f0296c4d416cc366de345313f9fc2be676b786",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e9360392b3e11b08d2bdab94506f5a0fbd0fb874c495c8a1ab1f924fdd4e95eb",
+				"dweb:/ipfs/QmcBiEwLw3UKMWbe9MjNz2vuvbnsFnxyKo4KrBaFhA1hBh"
+			]
+		}
+	},
+	"version": 1
+}

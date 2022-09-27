@@ -10,13 +10,14 @@ import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
     using SafeERC20 for IERC20;
     
-    address public override factory;
-    address public override ecosystemAddress = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
-    address public override holdersAddress = 0x6A7612C4ddcF619F8d6aa27f9A604e4384830812;
-    address public override stableCoin = 0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56;
+    address public override eventFactory;
+    address public override marketFactory;
+    address public override betFactory;
+    address public override ecosystemAddress;
+    address public override holdersAddress;
+    address public override stableCoin;
     uint256 public override holdersVig = 50;
-    uint256 public override ecosystemVig = 25;
-    uint256 public override eventOwnersVig = 25;
+    uint256 public override ecosystemVig = 50;
     uint256 public override vigPercentage = 10;
     IERC20 private _stableCoinWrapper = IERC20(stableCoin);
 
@@ -24,9 +25,9 @@ contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
     bytes32 public constant EVENT_ADMIN = keccak256("EVENT_ADMIN");
     bytes32 public constant BLACKLIST = keccak256("BLACKLIST");
 
-    modifier onlyUser() {
+    modifier onlySystemAdmin() {
         require(
-            hasRole(DEFAULT_ADMIN_ROLE, msg.sender),
+            hasRole(SYSTEM_ADMIN, msg.sender),
             "You have no privilege to run this function"
         );
         _;
@@ -43,23 +44,31 @@ contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
         _setRoleAdmin(BLACKLIST, SYSTEM_ADMIN);
     }
 
-    function setFactory(address _factory) public onlyUser{
-        factory = _factory;
+    function setEventFactory(address _factory) public onlySystemAdmin {
+        eventFactory = _factory;
     }
 
-    function setStableCoin(address holder) public onlyUser {
+    function setMarketFactory(address _factory) public onlySystemAdmin {
+        marketFactory = _factory;
+    }
+
+    function setBetFactory(address _factory) public onlySystemAdmin {
+        betFactory = _factory;
+    }
+
+    function setStableCoin(address holder) public onlySystemAdmin {
         holdersAddress = holder;
     }
     
-    function setHoldersAddress(address holder) public onlyUser {
+    function setHoldersAddress(address holder) public onlySystemAdmin {
         holdersAddress = holder;
     }
 
-    function setEcosystemAddress(address holder) public onlyUser {
+    function setEcosystemAddress(address holder) public onlySystemAdmin {
         ecosystemAddress = holder;
     }
 
-    function setVigPercentage(uint256 _percentage) public onlyUser {
+    function setVigPercentage(uint256 _percentage) public onlySystemAdmin {
         require(
             _percentage < 10,
             "Vig percentage must be expressed in 0 to 10 percentage. Example: 6"
@@ -69,33 +78,27 @@ contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
 
     function setVigPercentageShares(
         uint256 hVig,
-        uint256 eVig,
-        uint256 eoVig
-    ) public onlyUser {
+        uint256 eVig
+    ) public onlySystemAdmin {
         require(
-            hVig <= 100 && eVig <= 100 && eoVig <= 100,
+            hVig <= 100 && eVig <= 100,
             "Vig percentages shares must be expressed in a  0 to 100 ratio. Example: 30"
         );
         require(
-            hVig + eVig + eoVig == 100,
+            hVig + eVig  == 100,
             "The sum of all Vig percentage shares must be equal to 100"
         );
 
         holdersVig = hVig;
         ecosystemVig = eVig;
-        eventOwnersVig = eoVig;
     }
 
-    function shareBetEarnings(address _eventOwner, uint256 _vigAmount) external override {
+    function shareBetEarnings(uint256 _vigAmount) external override {
         require(_vigAmount > 0, "bet earnings must be greater than 0");
         uint256 holdersShare = (_vigAmount * holdersVig )/ 100;
         require(holdersShare > 0, "holders' share must be greater than 0");
         uint256 ecosystemShare = (_vigAmount * ecosystemVig) / 100;
         require(ecosystemShare > 0, "ecosystem share must be greater than 0");
-        uint256 eventOwnersShare = (_vigAmount * eventOwnersVig) / 100;
-        require(eventOwnersShare > 0, "event owner's earnings must be greater than 0");
-
-        _stableCoinWrapper.safeTransfer(_eventOwner, eventOwnersShare);
 
         _stableCoinWrapper.safeTransfer(ecosystemAddress, ecosystemShare);
 

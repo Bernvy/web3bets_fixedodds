@@ -1,0 +1,13 @@
+x = invalid
+
+o = only
+
+0 = no, zero, none, empty,
+
+fty = factory
+
+mkt = market
+
+win = win, winner, winning side
+
+xd = canceled

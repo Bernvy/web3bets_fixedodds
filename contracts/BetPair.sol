@@ -3,65 +3,46 @@
 pragma solidity ^0.8.4;
 
 import "./interface/IBetPair.sol";
-import "./interface/IMarket.sol";
 import "./interface/IBet.sol";
-
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "./interface/IWeb3BetsFO.sol";
 
 contract BetPair is IBetPair {
-    using SafeERC20 for IERC20;
 
-    address public override marketAddress;
+    address private w3bAddr;
 
-    address public override sideABetAddress;
+    address public override market;
 
-    address public override sideBBetAddress;
-    
-    address public override winnerBet;
+    address public override sideABet;
 
-    address public override winnerAddress;
+    address public override sideBBet;
 
     uint public override amountA;
 
     uint public override amountB;
 
-    IERC20 private _stableCoinWrapper;
+    bool public override settled = false;
+
+    IWeb3BetsFO private web3bets = IWeb3BetsFO(w3bAddr);
 
     constructor (
-        address marketAddress_,
-        address sideABetAddress_,
-        address sideBBetAddress_,
+        address market_,
+        address sideABet_,
+        address sideBBet_,
         uint amountA_,
         uint amountB_
     ) {
-        marketAddress = marketAddress_;
-        sideABetAddress = sideABetAddress_;
-        sideBBetAddress = sideBBetAddress_;
+        require(msg.sender == web3bets.marketFactory(), "only market factory can match bets");
+        market = market_;
+        sideABet = sideABet_;
+        sideBBet = sideBBet_;
         amountA = amountA_;
         amountB = amountB_;
     }
 
-    function settlePair(address _stableCoin) external override {
-        IMarket market = IMarket(marketAddress);
-        require(market.hasSetWinningSide(), "Markets has not been settled");
-        if(keccak256(abi.encodePacked(market.winningSide())) == keccak256(abi.encodePacked("sideA"))){
-            winnerBet = sideABetAddress;
-            IBet _winnerBet = IBet(winnerBet);
-            winnerAddress = _winnerBet.better();
-
-            _stableCoinWrapper = IERC20(_stableCoin);
-            _stableCoinWrapper.safeTransferFrom(sideABetAddress, winnerAddress, amountA);
-            _stableCoinWrapper.safeTransferFrom(sideBBetAddress, winnerAddress, amountB);
-        }
-        else if(keccak256(abi.encodePacked(market.winningSide())) == keccak256(abi.encodePacked("sideB"))){
-            winnerBet = sideBBetAddress;
-            IBet _winnerBet = IBet(winnerBet);
-            winnerAddress = _winnerBet.better();
-
-            _stableCoinWrapper = IERC20(_stableCoin);
-            _stableCoinWrapper.safeTransferFrom(sideABetAddress, winnerAddress, amountA);
-            _stableCoinWrapper.safeTransferFrom(sideBBetAddress, winnerAddress, amountB);
-        }
+    function settle() external override returns(bool){
+        require(msg.sender == market, "mkt only");
+        settled = true;
+        return true;
     }
+    
 }

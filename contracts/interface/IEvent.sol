@@ -2,9 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import "./IBase.sol";
-
-interface IEvent is IBase{
+interface IEvent{
 
     enum EventStatus {
         UPCOMING,
@@ -12,6 +10,18 @@ interface IEvent is IBase{
         ENDED,
         CANCELED
     }
+
+    function minimumStake() external returns (uint256);
+
+    function eventOwner() external returns (address);
+
+    function startTime() external returns (uint);
+
+    function status() external returns (EventStatus);
+
+    function name() external returns (string memory);
+
+    function getMarkets() external returns (address[] memory);
 
     function addMarket(address marketAddress) external returns(bool);
 
@@ -23,12 +33,6 @@ interface IEvent is IBase{
 
     function endEvent() external returns(bool);
 
-    function getMarkets() external returns (address[] memory);
-
-    function getMinimumStake() external returns (uint256);
-
-    function getEventOwner() external returns (address);
-
-    function getEventStatus() external returns (EventStatus);
+    function startEvent() external returns(bool);
 
 }

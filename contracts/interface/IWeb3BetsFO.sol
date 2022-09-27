@@ -4,7 +4,11 @@ pragma solidity ^0.8.4;
 
 interface IWeb3BetsFO{
 
-    function factory() external view returns(address);
+    function eventFactory() external view returns(address);
+
+    function marketFactory() external view returns(address);
+
+    function betFactory() external view returns(address);
 
     function ecosystemAddress() external view returns(address);
 
@@ -16,11 +20,9 @@ interface IWeb3BetsFO{
 
     function ecosystemVig() external view returns(uint);
 
-    function eventOwnersVig() external view returns(uint);
-
     function vigPercentage() external returns(uint);
 
-    function shareBetEarnings(address eventOwner, uint256 _vigAmount) external;
+    function shareBetEarnings(uint256 _vigAmount) external;
 
     function isSystemAdmin(address _account) external returns (bool);
 

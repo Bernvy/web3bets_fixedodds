@@ -2,17 +2,19 @@
 
 pragma solidity ^0.8.4;
 
-import "./interface/IEvent.sol";
-
 import "./interface/IMarket.sol";
-
 import "./interface/IBet.sol";
-
 import "./BetPair.sol";
+import "./interface/IWeb3BetsFO.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract Market is IMarket {
+    using SafeERC20 for IERC20;
 
-    string public name;
+    address private web3betsAddress;
+
+    string public override name;
     address public override eventAddress;
     bool public override hasSetWinningSide;
     string public override winningSide;
@@ -36,10 +38,25 @@ contract Market is IMarket {
     mapping(address => uint256) public sideAUsersStakes;
     mapping(address => uint256) public sideBUsersStakes;
 
-    modifier onlyEventOwner() {
-        IEvent marketEvent = IEvent(eventAddress);
-        address eventOwner = marketEvent.getEventOwner();
-        require(msg.sender == eventOwner, "Only event owners set winning pool");
+    IWeb3BetsFO private web3bets = IWeb3BetsFO(web3betsAddress);
+
+    address private stableCoin = web3bets.stableCoin();
+
+    IERC20 private _stableCoinWrapper = IERC20(stableCoin);
+
+    modifier onlyFactory() {
+        require(
+            msg.sender == web3bets.marketFactory(),
+            "owner o"
+        );
+        _;
+    }
+
+    modifier onlyBetFactory() {
+        require(
+            msg.sender == web3bets.betFactory(),
+            "owner o"
+        );
         _;
     }
 
@@ -49,46 +66,82 @@ contract Market is IMarket {
         string memory sideAName_,
         string memory sideBName_
     ) {
+        require(msg.sender == web3bets.marketFactory(), "fty o");
         name = name_;
         eventAddress = eventAddress_;
         sideAName = sideAName_;
         sideBName = sideBName_;
     }
-
-    function upadteMarket( string memory name_, string memory sideAName_, string memory sideBName_)
-        external
-        override returns(bool)
-    {
-        name = name_;
-        sideAName = sideAName_;
-        sideBName = sideBName_;
+ 
+    function withdrawPending(address _bet) external override onlyFactory returns(bool){
+        IBet bet = IBet(_bet);
+        uint remStake = bet.stake() - bet.matched();
+        require(address(this).balance > remStake, "0 fund");
+        _stableCoinWrapper.safeTransfer( bet.better(), remStake);
+        bet.setMatched(remStake);
+        return true;
+    }
+    
+    function settlePair(address _pair) external override onlyFactory returns(bool) {
+        IBetPair pair = IBetPair(_pair);
+        address _pairAddr = pair.market();
+        address _sideABet = pair.sideABet();
+        address _sideBBet = pair.sideBBet();
+        uint _amountA = pair.amountA();
+        uint _amountB = pair.amountB();
+        IMarket market = IMarket(_pairAddr);
+        require(!pair.settled(), "pair already settled");
+        require(market.hasSetWinningSide(), "win not set");
+        if(keccak256(abi.encodePacked(market.winningSide())) == keccak256(abi.encodePacked("sideA"))){
+    _stableCoinWrapper.safeTransfer(_sideABet, _amountA + (_amountB * 9 / 10) );
+            _stableCoinWrapper.safeTransfer(web3betsAddress, _amountB / 10);
+            pair.settle();
+        }
+        else if(keccak256(abi.encodePacked(market.winningSide())) == keccak256(abi.encodePacked("sideB"))){
+            _stableCoinWrapper.safeTransfer(_sideBBet, _amountB + (_amountA * 9 / 10) );
+            _stableCoinWrapper.safeTransfer(web3betsAddress, _amountA / 10);
+            pair.settle();
+        }
+        else{
+            revert("x win");
+        }
         return true;
     }
 
-    function isValidBet(address _addr) private view returns (bool){
-        uint32 size;
-        assembly {
-            size := extcodesize(_addr)
-        }
-        if(size > 0){
-            IBet bet = IBet(_addr);
-            address betMarketAddress = bet.marketAddress();
-            if(betMarketAddress == address(this)){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
+    function setWinningSide(string memory _winningSide)
+        external
+        override onlyFactory
+        returns(bool)
+    {
+        require (hasSetWinningSide != true, "!x win");
+        winningSide = _winningSide;
+        hasSetWinningSide = true;
+        return true;
     }
 
-    function addBet(address _better, address _betAddress, uint256 _stake, uint8 _odds, string memory _side)
-        external override returns(bool)
+    function upadteMarket(string memory _name, string memory _sideAName, string memory _sideBName)
+        external
+        override onlyFactory returns(bool)
     {
-        require(isValidBet(_betAddress), "The address is not a valid bet contract for this market");
+        name = _name;
+        sideAName = _sideAName;
+        sideBName = _sideBName;
+        return true;
+    }
+
+    function cancelMarket() external override onlyFactory returns(bool) 
+    { 
+        if (isCanceled) {
+            return true;
+        }
+        isCanceled = true;
+        return true;
+    }
+
+
+    function addBet(address _better, address _betAddress, uint256 _stake, uint8 _odds, string memory _side)
+        external override onlyBetFactory returns(bool)
+    {   
         if(keccak256(abi.encodePacked(_side)) == keccak256(abi.encodePacked("sideA"))){
             _addToSideA(_better, _betAddress, _stake, _odds);
             _matchSideABet(_betAddress,_stake,_odds);
@@ -224,41 +277,5 @@ contract Market is IMarket {
             sideBBetsPending.push(MarketBet({betAddress: _betAddress, stake: _stake, odds: _odds}));
         }
         return;
-    }
-
-    // move this function to Factory
-    function setWinningSide(string memory _winningSide)
-        external
-        override
-        onlyEventOwner returns(bool)
-    {
-        if (hasSetWinningSide == true) {
-            revert("Winning Pool already set");
-        }
-        winningSide = _winningSide;
-        hasSetWinningSide = true;
-
-        if (!hasSetWinningSide) {
-            revert("No Pool Address was found");
-        } else {
-            return true;
-        }
-    }
-
-    function getEventName() external override returns (string memory) {
-        IEvent marketEvent = IEvent(eventAddress);
-        return marketEvent.getName();
-    }
-
-    function getName() external view override returns (string memory) {
-        return name;
-    }
-
-    function cancelMarket() external override returns(bool) {
-        if (isCanceled) {
-            return true;
-        }
-        isCanceled = true;
-        return true;
     }
 }
