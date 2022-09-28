@@ -14,7 +14,7 @@ contract Bet is IBet {
 
     uint256 public override stake;
 
-    uint256 public override matched;
+    uint256 public override matched = 0;
 
     uint8 public override odds;
 
@@ -37,7 +37,6 @@ contract Bet is IBet {
         stake = stake_;
         odds = odds_;
         better = caller_;
-        matched = 0;
 
     }
 

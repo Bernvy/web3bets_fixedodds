@@ -245,11 +245,11 @@
 	},
 	"sources": {
 		"Web3BetsFO_flat.sol": {
-			"keccak256": "0xa887c7d0918820f2bee5fc711fa4144bec670d4eab56943c41efa2fccee86440",
+			"keccak256": "0x4ab5b71cf87d38e759b624e051bb4a39de9b00bb86da8326f856bb56e283433e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3dbbd7ea460e87cb12d1ff7db4135a091ccb36afea070f60860e575c1b92a3ba",
-				"dweb:/ipfs/QmdiqehAV5XGed3T8ZmyGYQpiZHEcUx8u2fdxmzCjXw21f"
+				"bzz-raw://a428e58ef20881d3faaa5a5e84db76b3328d94671807c545d300b9b237c29be1",
+				"dweb:/ipfs/Qmb9Liy8XjRZN78FWa9EsJ819Uj5dCCspwx66kyT7UN3bk"
 			]
 		}
 	},

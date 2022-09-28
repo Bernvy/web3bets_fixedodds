@@ -4,71 +4,85 @@ pragma solidity ^0.8.4;
 
 import "./interface/IWeb3BetsFO.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 
-contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
-    using SafeERC20 for IERC20;
+/// @author Victor Okoro
+/// @title Web3Bets Contract for FixedOdds decentralized betting exchange
+/// @notice Contains Web3Bets ecosystem's variables and functions
+/// @custom:security contact okoro.victor@web3bets.io
+
+/* 
+copied and modified code logic from github Repo: https://github.com/wizardoma/web3_bets_contract.git
+*/
+contract Web3BetsFO is IWeb3BetsFO {
+
+    address public contractOwner;
     
-    address public override eventFactory;
-    address public override marketFactory;
-    address public override betFactory;
     address public override ecosystemAddress;
     address public override holdersAddress;
     address public override stableCoin;
+
+    address public override eventFactory;
+    address public override marketFactory;
+    address public override betFactory;
+
     uint256 public override holdersVig = 50;
     uint256 public override ecosystemVig = 50;
     uint256 public override vigPercentage = 10;
+
+    address[] public systemAdmins;
+    address[] public eventAdmins;
+    address[] public blackList;
+
+    mapping(address => address) public admins;
+    mapping(address => address) public eventOwners;
+    mapping(address => address) public blacked;
+
     IERC20 private _stableCoinWrapper = IERC20(stableCoin);
 
-    bytes32 public constant SYSTEM_ADMIN = keccak256("SYSTEM_ADMIN");
-    bytes32 public constant EVENT_ADMIN = keccak256("EVENT_ADMIN");
-    bytes32 public constant BLACKLIST = keccak256("BLACKLIST");
-
-    modifier onlySystemAdmin() {
+    modifier onlyUser() {
         require(
-            hasRole(SYSTEM_ADMIN, msg.sender),
+            msg.sender == contractOwner,
             "You have no privilege to run this function"
         );
         _;
     }
+    modifier onlySystemAdmin {
+        require(
+            isSystemAdmin(msg.sender) || msg.sender == contractOwner,
+            "You have no privilege to run this function"
+        );
+        _;
+    }
+    modifier uniqueSystemAdmin(address _addr) {
+        require(admins[_addr] == address(0), "already a system admin");
+        _;
+    }
+    modifier uniqueEventAdmin(address _addr) {
+        require(eventOwners[_addr] == address(0), "already an event admin");
+        _;
+    }
+    modifier uniqueBlack(address _addr) {
+        require(blacked[_addr] == address(0), "already in blacklist");
+        _;
+    }
 
     constructor() {
-        // Grant the contract deployer the default admin role: it will be able
-        // to grant and revoke any roles
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(SYSTEM_ADMIN, msg.sender);
-        _setupRole(EVENT_ADMIN, msg.sender);
-        _setRoleAdmin(EVENT_ADMIN, SYSTEM_ADMIN);
-        _setupRole(BLACKLIST, address(0));
-        _setRoleAdmin(BLACKLIST, SYSTEM_ADMIN);
-    }
-
-    function setEventFactory(address _factory) public onlySystemAdmin {
-        eventFactory = _factory;
-    }
-
-    function setMarketFactory(address _factory) public onlySystemAdmin {
-        marketFactory = _factory;
-    }
-
-    function setBetFactory(address _factory) public onlySystemAdmin {
-        betFactory = _factory;
-    }
-
-    function setStableCoin(address holder) public onlySystemAdmin {
-        holdersAddress = holder;
+        contractOwner = msg.sender;
     }
     
-    function setHoldersAddress(address holder) public onlySystemAdmin {
-        holdersAddress = holder;
+    function setAddresses(address holdAddr, address ecoAddr,address scAddr) external onlySystemAdmin {
+        holdersAddress = holdAddr;
+        ecosystemAddress = ecoAddr;
+        stableCoin = scAddr;
     }
 
-    function setEcosystemAddress(address holder) public onlySystemAdmin {
-        ecosystemAddress = holder;
+    function setFactory(address _event,address _market,address _bet) external onlySystemAdmin {
+        eventFactory = _event;
+        marketFactory = _market;
+        betFactory = _bet;
     }
 
-    function setVigPercentage(uint256 _percentage) public onlySystemAdmin {
+    function setVigPercentage(uint256 _percentage) external onlySystemAdmin {
         require(
             _percentage < 10,
             "Vig percentage must be expressed in 0 to 10 percentage. Example: 6"
@@ -79,7 +93,7 @@ contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
     function setVigPercentageShares(
         uint256 hVig,
         uint256 eVig
-    ) public onlySystemAdmin {
+    ) external onlySystemAdmin {
         require(
             hVig <= 100 && eVig <= 100,
             "Vig percentages shares must be expressed in a  0 to 100 ratio. Example: 30"
@@ -93,28 +107,133 @@ contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
         ecosystemVig = eVig;
     }
 
-    function shareBetEarnings(uint256 _vigAmount) external override {
+    function shareBetEarnings() external override {
+        uint256 _vigAmount = _stableCoinWrapper.balanceOf(address(this));
         require(_vigAmount > 0, "bet earnings must be greater than 0");
         uint256 holdersShare = (_vigAmount * holdersVig )/ 100;
         require(holdersShare > 0, "holders' share must be greater than 0");
         uint256 ecosystemShare = (_vigAmount * ecosystemVig) / 100;
         require(ecosystemShare > 0, "ecosystem share must be greater than 0");
 
-        _stableCoinWrapper.safeTransfer(ecosystemAddress, ecosystemShare);
+        _stableCoinWrapper.transfer(ecosystemAddress, ecosystemShare);
 
-        _stableCoinWrapper.safeTransfer(holdersAddress, holdersShare);
+        _stableCoinWrapper.transfer(holdersAddress, holdersShare);
+    }
+    
+    function addSystemAdmin(address _addr)
+        external
+        onlyUser
+        uniqueSystemAdmin(_addr)
+    {
+        systemAdmins.push(_addr);
+        admins[_addr] = _addr;
     }
 
-    function isSystemAdmin(address _account) external view override returns (bool) {
-        return hasRole(SYSTEM_ADMIN, _account);
+    function deleteSystemAdmin(address _systemAdmin) external onlyUser {
+        require (admins[_systemAdmin] != address(0), "Invalid event owner");
+        
+        delete admins[_systemAdmin];
+
+        for (uint256 i = 0; i < systemAdmins.length; i++) {
+            if (systemAdmins[i] == _systemAdmin) {
+                delete systemAdmins[i];
+                break;
+            }
+        }
+    }
+    
+    function addEventAdmin(address _addr)
+        external
+        onlySystemAdmin
+        uniqueEventAdmin(_addr)
+    {
+        require(holdersAddress == address(0) || ecosystemAddress == address(0), "you must set holders and ecosystmeAddress addresses before adding event owners");
+
+        eventAdmins.push(_addr);
+        eventOwners[_addr] = _addr;
     }
 
-    function isEventAdmin(address _account) external view override returns (bool) {
-        return hasRole(EVENT_ADMIN, _account);
+    function deleteEventAdmin(address _eventOwner) external onlySystemAdmin {
+        require (eventOwners[_eventOwner] != address(0), "Invalid event owner");
+        
+        delete eventOwners[_eventOwner];
+
+        for (uint256 i = 0; i < eventAdmins.length; i++) {
+            if (eventAdmins[i] == _eventOwner) {
+                delete eventAdmins[i];
+                break;
+            }
+        }
+    }
+    
+    function addBlacked(address _addr)
+        external
+        onlySystemAdmin
+        uniqueBlack(_addr)
+    {
+        eventAdmins.push(_addr);
+        eventOwners[_addr] = _addr;
     }
 
-    function isBlack(address _account) external view override returns (bool) {
-        return hasRole(BLACKLIST, _account);
+    function removeBlacked(address _eventOwner) external onlySystemAdmin {
+        require (blacked[_eventOwner] != address(0), "Invalid event owner");
+        
+        delete blacked[_eventOwner];
+
+        for (uint256 i = 0; i < blackList.length; i++) {
+            if (blackList[i] == _eventOwner) {
+                delete blackList[i];
+                break;
+            }
+        }
+    }
+
+    function isSystemAdmin(address _addr) public view override returns (bool) {
+        if(admins[_addr] != address(0)){
+            bool found = false;
+            for (uint256 i = 0; i < systemAdmins.length; i++) {
+                if (systemAdmins[i] == _addr) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function isEventAdmin(address _addr) public view override returns (bool) {
+        if(eventOwners[_addr] != address(0)){
+            bool found = false;
+            for (uint256 i = 0; i < eventAdmins.length; i++) {
+                if (eventAdmins[i] == _addr) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function isBlack(address _addr) public view override returns (bool) {
+        if(blacked[_addr] != address(0)){
+            bool found = false;
+            for (uint256 i = 0; i < blackList.length; i++) {
+                if (blackList[i] == _addr) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+        else{
+            return false;
+        }
     }
 
 }

@@ -33,14 +33,6 @@ contract Event is IEvent {
         _;
     }
 
-    modifier onlyMarketFactory() {
-        require(
-            msg.sender == web3bets.marketFactory(),
-            "owner o"
-        );
-        _;
-    }
-
     constructor(
         address caller_,
         string memory eventTitle_,
@@ -64,8 +56,12 @@ contract Event is IEvent {
     function addMarket(address _marketAddress)
         external
         override
-        onlyMarketFactory returns(bool)
+        returns(bool)
     {
+        require(
+            msg.sender == web3bets.marketFactory(),
+            "owner o"
+        );
         markets.push(_marketAddress);
         return true;
     }

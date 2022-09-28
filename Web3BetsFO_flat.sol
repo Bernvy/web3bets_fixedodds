@@ -1472,17 +1472,17 @@ pragma solidity ^0.8.4;
 
 interface IWeb3BetsFO{
 
-    function eventFactory() external view returns(address);
-
-    function marketFactory() external view returns(address);
-
-    function betFactory() external view returns(address);
-
     function ecosystemAddress() external view returns(address);
 
     function holdersAddress() external view returns(address);
 
     function stableCoin() external view returns(address);
+
+    function eventFactory() external view returns(address);
+
+    function marketFactory() external view returns(address);
+
+    function betFactory() external view returns(address);
 
     function holdersVig() external view returns(uint);
 
@@ -1508,23 +1508,33 @@ pragma solidity ^0.8.4;
 
 
 
+/// @author Victor Okoro
+/// @title Web3Bets Contract for FixedOdds decentralized betting exchange
+/// @notice Contains Web3Bets ecosystem's variables and functions
+/// @custom:security contact okoro.victor@web3bets.io
+
+/* 
+copied and modified code logic from github Repo: https://github.com/wizardoma/web3_bets_contract.git
+*/
 contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
     using SafeERC20 for IERC20;
     
-    address public override eventFactory;
-    address public override marketFactory;
-    address public override betFactory;
     address public override ecosystemAddress;
     address public override holdersAddress;
     address public override stableCoin;
-    uint256 public override holdersVig = 50;
-    uint256 public override ecosystemVig = 50;
-    uint256 public override vigPercentage = 10;
-    IERC20 private _stableCoinWrapper = IERC20(stableCoin);
+
+    address public override eventFactory;
+    address public override marketFactory;
+    address public override betFactory;
 
     bytes32 public constant SYSTEM_ADMIN = keccak256("SYSTEM_ADMIN");
     bytes32 public constant EVENT_ADMIN = keccak256("EVENT_ADMIN");
     bytes32 public constant BLACKLIST = keccak256("BLACKLIST");
+
+    uint256 public override holdersVig = 50;
+    uint256 public override ecosystemVig = 50;
+    uint256 public override vigPercentage = 10;
+    IERC20 private _stableCoinWrapper = IERC20(stableCoin);
 
     modifier onlySystemAdmin() {
         require(
@@ -1544,32 +1554,32 @@ contract Web3BetsFO is IWeb3BetsFO, AccessControlEnumerable {
         _setupRole(BLACKLIST, address(0));
         _setRoleAdmin(BLACKLIST, SYSTEM_ADMIN);
     }
-
-    function setEventFactory(address _factory) public onlySystemAdmin {
-        eventFactory = _factory;
-    }
-
-    function setMarketFactory(address _factory) public onlySystemAdmin {
-        marketFactory = _factory;
-    }
-
-    function setBetFactory(address _factory) public onlySystemAdmin {
-        betFactory = _factory;
-    }
-
-    function setStableCoin(address holder) public onlySystemAdmin {
-        holdersAddress = holder;
-    }
     
-    function setHoldersAddress(address holder) public onlySystemAdmin {
+    function setHoldersAddress(address holder) external onlySystemAdmin {
         holdersAddress = holder;
     }
 
-    function setEcosystemAddress(address holder) public onlySystemAdmin {
+    function setEcosystemAddress(address holder) external onlySystemAdmin {
         ecosystemAddress = holder;
     }
 
-    function setVigPercentage(uint256 _percentage) public onlySystemAdmin {
+    function setStableCoin(address holder) external onlySystemAdmin {
+        holdersAddress = holder;
+    }
+
+    function setEventFactory(address _factory) external onlySystemAdmin {
+        eventFactory = _factory;
+    }
+
+    function setMarketFactory(address _factory) external onlySystemAdmin {
+        marketFactory = _factory;
+    }
+
+    function setBetFactory(address _factory) external onlySystemAdmin {
+        betFactory = _factory;
+    }
+
+    function setVigPercentage(uint256 _percentage) external onlySystemAdmin {
         require(
             _percentage < 10,
             "Vig percentage must be expressed in 0 to 10 percentage. Example: 6"
