@@ -1,0 +1,451 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "marketAddress",
+						"type": "address"
+					}
+				],
+				"name": "MarketCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "aVig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "addBlacked",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "addEventAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "addSystemAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "admins",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "black",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "contractOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createMarket",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventOwner",
+						"type": "address"
+					}
+				],
+				"name": "deleteEventAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_systemAdmin",
+						"type": "address"
+					}
+				],
+				"name": "deleteSystemAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "eVig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ecoAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "eventOwners",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hVig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "holdAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "isBlack",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "removeBlacked",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "scAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_holdAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_ecoAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_scAddr",
+						"type": "address"
+					}
+				],
+				"name": "setAddrs",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_percent",
+						"type": "uint256"
+					}
+				],
+				"name": "setVigPercentage",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_hVig",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_eVig",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_aVig",
+						"type": "uint256"
+					}
+				],
+				"name": "setVigShare",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "vig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "Victor Okoro",
+			"custom:security": "contact okoro.victor@web3bets.io",
+			"kind": "dev",
+			"methods": {},
+			"title": "Web3Bets Contract for FixedOdds decentralized betting exchange",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"notice": "Contains Web3Bets ecosystem's variables and functions",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Web3BetsFO.sol": "Web3BetsFO"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0x0e9621f60b2faabe65549f7ed0f24e8853a45c1b7990d47e8160e523683f3935",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://287a2f8d5814dd0f05f22b740f18ca8321acc21c9bd03a6cb2203ea626e2f3f2",
+				"dweb:/ipfs/QmZRQv9iuwU817VuqkA2WweiaibKii69x9QxYBBEfbNEud"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"contracts/Market.sol": {
+			"keccak256": "0xe8bee29f3e33428138a4d0491ee88469c500e3656744a67fa40a31fa733c5012",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7b8a94121df6958f59ff8522d0d60db3814ef84dd9dc6d2f1481a7a8c69e8cf8",
+				"dweb:/ipfs/QmeZ5sq7LCyYXptduMhAkejTa9HfhfrLr2sjvqtomUuJoH"
+			]
+		},
+		"contracts/Web3BetsFO.sol": {
+			"keccak256": "0x8cbe2056ffa46ae27a463c8d733a30c6a4c6cba44a9680043026a5a7a4c94bac",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e24bd7a6bbd6c205616aace7b9d7252e075ec6d90ca915074b468c44b2b09723",
+				"dweb:/ipfs/QmTcxQueGuvLbNYAVrhAgQdfDgeTfs9gnTe9zjsyCH6sBL"
+			]
+		},
+		"contracts/interface/IMarket.sol": {
+			"keccak256": "0x56b060380af4e2f44bd2c31cb64ee1548bcf438629d4a2c7aeacea9062839256",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4240fb5dd11ee0f1b6446da3b92bf6d0bbb96a52f9243a051eb225bf33e6cda5",
+				"dweb:/ipfs/QmcQxvekmGxSFRsBQ2zbRT2Gmu2GkKYCDNmfBhAc9np7in"
+			]
+		},
+		"contracts/interface/IWeb3BetsFO.sol": {
+			"keccak256": "0x08d30de274cda8e93795fe827f0a4b33b1bb5ca5a3bcf008ed88dbdc5125ee45",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8a5edfb319a2eae0a55611a2a19665c4a1f3cc8ac1c30fde3df730b1f75fafa5",
+				"dweb:/ipfs/QmXmPeKDbnusayyS4RgPnBay9H7CvVkXqB3VApCLkcEg8D"
+			]
+		}
+	},
+	"version": 1
+}

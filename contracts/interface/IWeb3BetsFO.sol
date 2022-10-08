@@ -10,11 +10,7 @@ interface IWeb3BetsFO{
 
     function scAddr() external view returns(address);
 
-    // function eventFactory() external view returns(address);
-
-    // function marketFactory() external view returns(address);
-
-    // function betFactory() external view returns(address);
+    function isBlack(address _addr) external view returns(bool);
 
     function hVig() external view returns(uint256);
 
@@ -23,12 +19,4 @@ interface IWeb3BetsFO{
     function aVig() external view returns(uint256);
 
     function vig() external view returns(uint256);
-
-    // function shareBetEarnings() external;
-
-    // function isSystemAdmin(address _account) external returns (uint256);
-
-    // function isEventAdmin(address _account) external returns (uint256);
-
-    // function isBlack(address _account) external returns (uint256);
 }

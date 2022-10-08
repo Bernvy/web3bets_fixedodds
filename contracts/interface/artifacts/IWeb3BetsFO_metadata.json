@@ -71,6 +71,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "isBlack",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "scAddr",
 				"outputs": [
@@ -125,11 +144,11 @@
 	},
 	"sources": {
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x08d30de274cda8e93795fe827f0a4b33b1bb5ca5a3bcf008ed88dbdc5125ee45",
+			"keccak256": "0x58dbd002e19b132fa6638936e38c09add0200e5c62f3076ee1de5d077a41a9a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8a5edfb319a2eae0a55611a2a19665c4a1f3cc8ac1c30fde3df730b1f75fafa5",
-				"dweb:/ipfs/QmXmPeKDbnusayyS4RgPnBay9H7CvVkXqB3VApCLkcEg8D"
+				"bzz-raw://72b2a91203c67eed5535c49d12c403062ed208ed5483a27817998a6e19ffeb11",
+				"dweb:/ipfs/QmczzyrBrD2WmEpziE8muBBNCT8EKAshhGneBMeYEDNJsa"
 			]
 		}
 	},

@@ -38,15 +38,19 @@ contract Web3BetsFO is IWeb3BetsFO {
         _;
     }
 
-    modifier notBlack {
-        require(black[msg.sender] == address(0), "blacklisted");
-        _;
-    }
-
     event MarketCreated(address marketAddress);
 
     constructor() {
         contractOwner = msg.sender;
+    }
+
+    function isBlack(address _addr) external view returns(bool){
+        if(black[_addr] == address(0)) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     function createMarket() external onlySystemAdmin returns(address) {

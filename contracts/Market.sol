@@ -7,7 +7,7 @@ import "./interface/IWeb3BetsFO.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Market is IMarket, ReentrancyGuard {
-    address immutable public override factory;
+    address public override factory;
     /*
     @dev stores the hash of all bets
     */
@@ -37,6 +37,7 @@ contract Market is IMarket, ReentrancyGuard {
     mapping(bytes32 => MarketPair) private pairsInfo;
     mapping(bytes32 => bytes32) private betsPair;
     IERC20 immutable public token;
+    IWeb3BetsFO immutable public app = IWeb3BetsFO(factory);
 
     modifier onlyFactory() {
         require(
@@ -110,7 +111,6 @@ contract Market is IMarket, ReentrancyGuard {
         address affiliate;
         uint256 winAmount;
         uint256 vigAmount;
-        IWeb3BetsFO app = IWeb3BetsFO(factory);
         if(status == 1){
             winner = betsInfo[pairsInfo[_pair].betHashA].better;
             winAmount = pairsInfo[_pair].amountA + (pairsInfo[_pair].amountB * (100 - app.vig()) / 100);
@@ -144,6 +144,9 @@ contract Market is IMarket, ReentrancyGuard {
     {
         require (status == 0 && (_winningSide == 1 || _winningSide == 2), "!x win");
         status = _winningSide;
+        for(uint i = 0; i < pairs.length; i++){
+            settlePair(pairs[i]);
+        }
         return true;
     }
 
@@ -151,7 +154,7 @@ contract Market is IMarket, ReentrancyGuard {
     { 
         require(status == 0);
         for(uint i = 0; i < pairs.length; i++){
-            settlePair(pairs[i]);
+            // cancel pairs
         }
         status = 3;
         return true;
@@ -166,9 +169,9 @@ contract Market is IMarket, ReentrancyGuard {
         bool _instant
     ) 
     external
-    onlyFactory
     returns(bytes32)
     {
+        require(!app.isBlack(msg.sender), "blacklist");
         require(_side == 1 || _side == 2, "invalid side");
         bytes32 betHash = _createBet(_better, _affiliate, _stake, 0, _odds, _side);
         // _odds is the odds the better inputed which represents the min odds they want to receive

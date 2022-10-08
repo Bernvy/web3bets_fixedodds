@@ -54,6 +54,7 @@
 			"ecoAddr()": "09953b2f",
 			"hVig()": "6a0ccd9d",
 			"holdAddr()": "b7640a54",
+			"isBlack(address)": "332daccf",
 			"scAddr()": "04b376c8",
 			"vig()": "55c4a8bf"
 		}
@@ -119,6 +120,25 @@
 					"internalType": "address",
 					"name": "",
 					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_addr",
+					"type": "address"
+				}
+			],
+			"name": "isBlack",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
 				}
 			],
 			"stateMutability": "view",
