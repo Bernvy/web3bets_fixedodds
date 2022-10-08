@@ -11,3 +11,15 @@ mkt = market
 win = win, winner, winning side
 
 xd = canceled
+
+evt = event
+
+own = owner
+
+alr = already
+
+xst = exist
+
+adm = admin
+
+<<< = insufficient

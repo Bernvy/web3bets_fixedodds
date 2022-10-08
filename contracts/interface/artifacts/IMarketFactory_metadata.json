@@ -130,6 +130,25 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "_betAddr",
+						"type": "address"
+					}
+				],
+				"name": "settleBet",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "_marketAddr",
 						"type": "address"
 					},
@@ -208,11 +227,11 @@
 	},
 	"sources": {
 		"contracts/interface/IMarketFactory.sol": {
-			"keccak256": "0x114a0ff3a27adf66b8afffb7c1df43b0f47c41a84cfbf8b2d44af740b7ceffc0",
+			"keccak256": "0xb7d0bab0b746fb29192025b1978db192672826518def03cf365538cbeb9fcebd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://97b6ff19c22fd79cbc1d171bdd2d905058c9a77404eb46c95eb4f02b55eb4838",
-				"dweb:/ipfs/Qmb4JwCwJVMfe9fExP4qja988uYdbFJj6GnztXGTEDnj7K"
+				"bzz-raw://8140389e5bc970937b7b2291613597ccea4e3fd25a5c9bd00850000d70cdf945",
+				"dweb:/ipfs/QmRAUCK6eYY2rvENLExbD6We9xXGJmhnzpMn8JWJ7hUjZh"
 			]
 		}
 	},

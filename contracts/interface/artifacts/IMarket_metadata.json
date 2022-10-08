@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.4+commit.c7e474f2"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -14,7 +14,7 @@
 					},
 					{
 						"internalType": "address",
-						"name": "_betAddress",
+						"name": "_affiliate",
 						"type": "address"
 					},
 					{
@@ -23,22 +23,27 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "_odds",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_side",
 						"type": "uint8"
 					},
 					{
-						"internalType": "string",
-						"name": "_side",
-						"type": "string"
+						"internalType": "bool",
+						"name": "instant",
+						"type": "bool"
 					}
 				],
 				"name": "addBet",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "bytes32",
 						"name": "",
-						"type": "bool"
+						"type": "bytes32"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -58,8 +63,21 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "cancelPending",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
-				"name": "eventAddress",
+				"name": "factory",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -71,39 +89,19 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "hasSetWinningSide",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "isCanceled",
+				"name": "getBalance",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "uint256",
 						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -112,9 +110,60 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserBets",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "better",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "affiliate",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "stake",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "matched",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "odds",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint8",
+								"name": "side",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct IMarket.MarketBet[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8",
 						"name": "_winningSide",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"name": "setWinningSide",
@@ -131,9 +180,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_pair",
-						"type": "address"
+						"internalType": "bytes32",
+						"name": "_pairHash",
+						"type": "bytes32"
 					}
 				],
 				"name": "settlePair",
@@ -149,12 +198,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "sideAName",
+				"name": "status",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -162,80 +211,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "sideATotalStake",
+				"name": "token",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "contract IERC20",
 						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "sideBName",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "sideBTotalStake",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name_",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "sideAName_",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "sideBName_",
-						"type": "string"
-					}
-				],
-				"name": "upadteMarket",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "winningSide",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -245,11 +226,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_betAddr",
+						"name": "_address",
 						"type": "address"
 					}
 				],
-				"name": "withdrawPending",
+				"name": "withdraw",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -276,7 +257,7 @@
 		"compilationTarget": {
 			"contracts/interface/IMarket.sol": "IMarket"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -288,12 +269,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x3717ad6317acbb34aec42b944da884ad6334f0bdb451e54a3115d0c997dad7d8",
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6504381374db970e37f4ddbb4b273c8f68f45c165fdbf5bd44424d84d2278503",
-				"dweb:/ipfs/Qmdp4tTSFzeqbaE89QQERJhooKtQ5SKmDcDLACGdtjDm6R"
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"contracts/interface/IMarket.sol": {
+			"keccak256": "0x56b060380af4e2f44bd2c31cb64ee1548bcf438629d4a2c7aeacea9062839256",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4240fb5dd11ee0f1b6446da3b92bf6d0bbb96a52f9243a051eb225bf33e6cda5",
+				"dweb:/ipfs/QmcQxvekmGxSFRsBQ2zbRT2Gmu2GkKYCDNmfBhAc9np7in"
 			]
 		}
 	},

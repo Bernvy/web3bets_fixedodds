@@ -31,6 +31,7 @@
 	},
 	"data": {
 		"bytecode": {
+			"functionDebugData": {},
 			"generatedSources": [],
 			"linkReferences": {},
 			"object": "",
@@ -38,6 +39,7 @@
 			"sourceMap": ""
 		},
 		"deployedBytecode": {
+			"functionDebugData": {},
 			"generatedSources": [],
 			"immutableReferences": {},
 			"linkReferences": {},
@@ -47,21 +49,17 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addBet(address,address,uint256,uint8,string)": "9bf5b845",
+			"addBet(address,address,uint256,uint256,uint8,bool)": "c7b448bd",
 			"cancelMarket()": "6bfefd6b",
-			"eventAddress()": "fad56779",
-			"hasSetWinningSide()": "bd92630c",
-			"isCanceled()": "0ed5a933",
-			"name()": "06fdde03",
-			"setWinningSide(string)": "b40a4f05",
-			"settlePair(address)": "2b4a3527",
-			"sideAName()": "8eb1a4ad",
-			"sideATotalStake()": "d37e2996",
-			"sideBName()": "a355f897",
-			"sideBTotalStake()": "0b469bda",
-			"upadteMarket(string,string,string)": "83bbe262",
-			"winningSide()": "fbf06338",
-			"withdrawPending(address)": "03afd56b"
+			"cancelPending(bytes32)": "893372ca",
+			"factory()": "c45a0155",
+			"getBalance(address)": "f8b2cb4f",
+			"getUserBets(address)": "2d56657d",
+			"setWinningSide(uint8)": "8f2c4885",
+			"settlePair(bytes32)": "74393a9b",
+			"status()": "200d2ed2",
+			"token()": "fc0c546a",
+			"withdraw(address)": "51cff8d9"
 		}
 	},
 	"abi": [
@@ -74,7 +72,7 @@
 				},
 				{
 					"internalType": "address",
-					"name": "_betAddress",
+					"name": "_affiliate",
 					"type": "address"
 				},
 				{
@@ -83,22 +81,27 @@
 					"type": "uint256"
 				},
 				{
-					"internalType": "uint8",
+					"internalType": "uint256",
 					"name": "_odds",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint8",
+					"name": "_side",
 					"type": "uint8"
 				},
 				{
-					"internalType": "string",
-					"name": "_side",
-					"type": "string"
+					"internalType": "bool",
+					"name": "instant",
+					"type": "bool"
 				}
 			],
 			"name": "addBet",
 			"outputs": [
 				{
-					"internalType": "bool",
+					"internalType": "bytes32",
 					"name": "",
-					"type": "bool"
+					"type": "bytes32"
 				}
 			],
 			"stateMutability": "nonpayable",
@@ -118,8 +121,21 @@
 			"type": "function"
 		},
 		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "_bet",
+					"type": "bytes32"
+				}
+			],
+			"name": "cancelPending",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
 			"inputs": [],
-			"name": "eventAddress",
+			"name": "factory",
 			"outputs": [
 				{
 					"internalType": "address",
@@ -131,39 +147,19 @@
 			"type": "function"
 		},
 		{
-			"inputs": [],
-			"name": "hasSetWinningSide",
-			"outputs": [
+			"inputs": [
 				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
 				}
 			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "isCanceled",
+			"name": "getBalance",
 			"outputs": [
 				{
-					"internalType": "bool",
+					"internalType": "uint256",
 					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "name",
-			"outputs": [
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
+					"type": "uint256"
 				}
 			],
 			"stateMutability": "view",
@@ -172,9 +168,60 @@
 		{
 			"inputs": [
 				{
-					"internalType": "string",
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				}
+			],
+			"name": "getUserBets",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "address",
+							"name": "better",
+							"type": "address"
+						},
+						{
+							"internalType": "address",
+							"name": "affiliate",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "stake",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "matched",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "odds",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint8",
+							"name": "side",
+							"type": "uint8"
+						}
+					],
+					"internalType": "struct IMarket.MarketBet[]",
+					"name": "",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint8",
 					"name": "_winningSide",
-					"type": "string"
+					"type": "uint8"
 				}
 			],
 			"name": "setWinningSide",
@@ -191,9 +238,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "address",
-					"name": "_pair",
-					"type": "address"
+					"internalType": "bytes32",
+					"name": "_pairHash",
+					"type": "bytes32"
 				}
 			],
 			"name": "settlePair",
@@ -209,12 +256,12 @@
 		},
 		{
 			"inputs": [],
-			"name": "sideAName",
+			"name": "status",
 			"outputs": [
 				{
-					"internalType": "string",
+					"internalType": "uint8",
 					"name": "",
-					"type": "string"
+					"type": "uint8"
 				}
 			],
 			"stateMutability": "view",
@@ -222,80 +269,12 @@
 		},
 		{
 			"inputs": [],
-			"name": "sideATotalStake",
+			"name": "token",
 			"outputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "contract IERC20",
 					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "sideBName",
-			"outputs": [
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "sideBTotalStake",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "string",
-					"name": "name_",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "sideAName_",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "sideBName_",
-					"type": "string"
-				}
-			],
-			"name": "upadteMarket",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "winningSide",
-			"outputs": [
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
+					"type": "address"
 				}
 			],
 			"stateMutability": "view",
@@ -305,11 +284,11 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "_betAddr",
+					"name": "_address",
 					"type": "address"
 				}
 			],
-			"name": "withdrawPending",
+			"name": "withdraw",
 			"outputs": [
 				{
 					"internalType": "bool",

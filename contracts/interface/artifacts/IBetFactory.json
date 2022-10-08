@@ -47,7 +47,7 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"placeBet(address,string,uint256,uint8)": "1b7a6119"
+			"placeBet(address,string,uint256,uint8,bool)": "abac3acb"
 		}
 	},
 	"abi": [
@@ -109,6 +109,11 @@
 					"internalType": "uint8",
 					"name": "_odds",
 					"type": "uint8"
+				},
+				{
+					"internalType": "bool",
+					"name": "instant",
+					"type": "bool"
 				}
 			],
 			"name": "placeBet",

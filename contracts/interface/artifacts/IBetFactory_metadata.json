@@ -63,6 +63,11 @@
 						"internalType": "uint8",
 						"name": "_odds",
 						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "instant",
+						"type": "bool"
 					}
 				],
 				"name": "placeBet",
@@ -105,11 +110,11 @@
 	},
 	"sources": {
 		"contracts/interface/IBetFactory.sol": {
-			"keccak256": "0xcdbd7f528ec87e39eb854e96129601b4ea8a9b4705943032480c17ad4933ad89",
+			"keccak256": "0xd141585cd7911f5d2a5b66ba46be45306429827742749c547e7618e735cfd9eb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://be802bee9f876a7453ab9d68626ae2e7d2f94ab6416958ca9dbc7bca293a2282",
-				"dweb:/ipfs/QmPQVef9eSGZ5uzQECBU2gZRf8YbhBCpfASWzw6S3BTNeW"
+				"bzz-raw://81cd2be4d24a5e0b230f9589b1019a80bf59fb2ce0626aed1f752fd6d5c186e4",
+				"dweb:/ipfs/QmPhQm6UqMWDMrW54HHrN3arGfagE5Arebj7anwP26yRpN"
 			]
 		}
 	},

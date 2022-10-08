@@ -2,37 +2,47 @@
 
 pragma solidity ^0.8.4;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 interface IMarket{
+    struct MarketBet {
+        address better;
+        address affiliate;
+        uint256 stake;
+        uint256 matched;
+        uint256 odds;
+        uint8 side;
+    }
 
-    function eventAddress() external view returns (address);
+    function factory() external view returns (address);
 
-    function hasSetWinningSide() external view returns (bool);
+    function status() external view returns (uint8);
 
-    function winningSide() external view returns (string memory);
+    function token() external view returns (IERC20);
 
-    function name() external view returns (string memory);
+    function getBalance(address _user) external view returns(uint256);
 
-    function isCanceled() external view returns (bool);
+    function getUserBets(address _user) external view returns(MarketBet[] memory);
 
-    function sideAName() external view returns (string memory);
+    function withdraw(address _address) external returns(bool);
 
-    function sideBName() external view returns (string memory);
+    function cancelPending(bytes32 _bet) external;
 
-    function sideATotalStake() external view returns (uint);
-
-    function sideBTotalStake() external view returns (uint);
-
-    function addBet(address _better, address _betAddress, uint256 _stake, uint8 _odds, string memory _side) external returns(bool);
-
-    function settlePair(address _pair) external returns(bool);
-
-    // Setting a winning side marks a market as settled
-    function setWinningSide(string memory _winningSide) external returns(bool);
-
-    function withdrawPending(address _betAddr) external returns (bool);
+    function settlePair(bytes32 _pairHash) external returns(bool);
+    /*
+    @dev 1: side A is winner, 2: side B is winer
+    */
+    function setWinningSide(uint8 _winningSide) external returns(bool);
 
     function cancelMarket() external returns(bool);
 
-    function upadteMarket(string memory name_, string memory sideAName_, string memory sideBName_) external returns(bool);
+    function addBet(
+        address _better,
+        address _affiliate,
+        uint256 _stake,
+        uint256 _odds,
+        uint8 _side,
+        bool instant
+    ) external returns(bytes32);
 
 }

@@ -51,6 +51,7 @@
 			"createMarket(string,address,string,string)": "42f537d0",
 			"setWinner(address,string)": "6fd909ac",
 			"settle(address)": "6a256b29",
+			"settleBet(address)": "6d5f3e15",
 			"update(address,string,string,string)": "31445f17",
 			"withdraw(address)": "51cff8d9"
 		}
@@ -167,6 +168,25 @@
 				}
 			],
 			"name": "settle",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_betAddr",
+					"type": "address"
+				}
+			],
+			"name": "settleBet",
 			"outputs": [
 				{
 					"internalType": "bool",
