@@ -537,11 +537,11 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0x106638fcbc68b18bb7118ed811ee14cadf4e1a5732c4c6acbba121d5f973d67b",
+			"keccak256": "0xe89bede1d438379367417cd71bbe5da49ec1507fe6b30867efd36bb6304f725a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://230694541055894cd34e021a836cec9a9454bf70e8c6b8907c2647ffddff522e",
-				"dweb:/ipfs/QmZPzVbWDLbvgHFVNGxt3WzPTS1Rq3HYwD1NcV92ZejtE2"
+				"bzz-raw://b68c3827bf01ff8b66395a6cfc1f7a7a7a6c653b5b3a44067f79e18b5195d9be",
+				"dweb:/ipfs/QmeLejH74GvTYQuF7p1UL8kskonCkMDWrvw7CiHXoRwvyg"
 			]
 		},
 		"contracts/Web3BetsFO.sol": {
