@@ -31,7 +31,6 @@
 	},
 	"data": {
 		"bytecode": {
-			"functionDebugData": {},
 			"generatedSources": [],
 			"linkReferences": {},
 			"object": "",
@@ -39,7 +38,6 @@
 			"sourceMap": ""
 		},
 		"deployedBytecode": {
-			"functionDebugData": {},
 			"generatedSources": [],
 			"immutableReferences": {},
 			"linkReferences": {},
@@ -49,17 +47,18 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addBet(address,address,uint256,uint256,uint8,bool)": "c7b448bd",
-			"cancelMarket()": "6bfefd6b",
-			"cancelPending(bytes32)": "893372ca",
-			"factory()": "c45a0155",
+			"addBet(address,address,uint256,uint256,uint256,bool)": "78d65b2f",
+			"cancel()": "ea8a1af0",
+			"cancelBet(bytes32)": "2940ff1e",
 			"getBalance(address)": "f8b2cb4f",
 			"getUserBets(address)": "2d56657d",
-			"setWinningSide(uint8)": "8f2c4885",
-			"settlePair(bytes32)": "74393a9b",
+			"setWinningSide(uint256)": "d0ed7295",
+			"settle(uint256)": "8df82800",
+			"settleBet(bytes32)": "675f6537",
+			"start()": "be9a6555",
 			"status()": "200d2ed2",
-			"token()": "fc0c546a",
-			"withdraw(address)": "51cff8d9"
+			"withdraw(address)": "51cff8d9",
+			"withdrawPending(bytes32)": "7d7f9232"
 		}
 	},
 	"abi": [
@@ -86,9 +85,9 @@
 					"type": "uint256"
 				},
 				{
-					"internalType": "uint8",
+					"internalType": "uint256",
 					"name": "_side",
-					"type": "uint8"
+					"type": "uint256"
 				},
 				{
 					"internalType": "bool",
@@ -109,7 +108,7 @@
 		},
 		{
 			"inputs": [],
-			"name": "cancelMarket",
+			"name": "cancel",
 			"outputs": [
 				{
 					"internalType": "bool",
@@ -128,22 +127,9 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "cancelPending",
+			"name": "cancelBet",
 			"outputs": [],
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "factory",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -203,12 +189,12 @@
 							"type": "uint256"
 						},
 						{
-							"internalType": "uint8",
+							"internalType": "uint256",
 							"name": "side",
-							"type": "uint8"
+							"type": "uint256"
 						}
 					],
-					"internalType": "struct IMarket.MarketBet[]",
+					"internalType": "struct Struct.MarketBet[]",
 					"name": "",
 					"type": "tuple[]"
 				}
@@ -219,9 +205,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint8",
+					"internalType": "uint256",
 					"name": "_winningSide",
-					"type": "uint8"
+					"type": "uint256"
 				}
 			],
 			"name": "setWinningSide",
@@ -238,12 +224,38 @@
 		{
 			"inputs": [
 				{
+					"internalType": "uint256",
+					"name": "_winningSide",
+					"type": "uint256"
+				}
+			],
+			"name": "settle",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "bytes32",
-					"name": "_pairHash",
+					"name": "_bet",
 					"type": "bytes32"
 				}
 			],
-			"name": "settlePair",
+			"name": "settleBet",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "start",
 			"outputs": [
 				{
 					"internalType": "bool",
@@ -259,22 +271,9 @@
 			"name": "status",
 			"outputs": [
 				{
-					"internalType": "uint8",
+					"internalType": "uint256",
 					"name": "",
-					"type": "uint8"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "token",
-			"outputs": [
-				{
-					"internalType": "contract IERC20",
-					"name": "",
-					"type": "address"
+					"type": "uint256"
 				}
 			],
 			"stateMutability": "view",
@@ -296,6 +295,19 @@
 					"type": "bool"
 				}
 			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "_bet",
+					"type": "bytes32"
+				}
+			],
+			"name": "withdrawPending",
+			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
 		}

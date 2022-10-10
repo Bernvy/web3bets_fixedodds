@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -28,9 +28,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "_side",
-						"type": "uint8"
+						"type": "uint256"
 					},
 					{
 						"internalType": "bool",
@@ -51,7 +51,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "cancelMarket",
+				"name": "cancel",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -70,22 +70,9 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "cancelPending",
+				"name": "cancelBet",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "factory",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -145,12 +132,12 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "uint8",
+								"internalType": "uint256",
 								"name": "side",
-								"type": "uint8"
+								"type": "uint256"
 							}
 						],
-						"internalType": "struct IMarket.MarketBet[]",
+						"internalType": "struct Struct.MarketBet[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -161,9 +148,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "_winningSide",
-						"type": "uint8"
+						"type": "uint256"
 					}
 				],
 				"name": "setWinningSide",
@@ -180,12 +167,38 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_winningSide",
+						"type": "uint256"
+					}
+				],
+				"name": "settle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes32",
-						"name": "_pairHash",
+						"name": "_bet",
 						"type": "bytes32"
 					}
 				],
-				"name": "settlePair",
+				"name": "settleBet",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "start",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -201,22 +214,9 @@
 				"name": "status",
 				"outputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "token",
-				"outputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "",
-						"type": "address"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -240,6 +240,19 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "withdrawPending",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -257,7 +270,7 @@
 		"compilationTarget": {
 			"contracts/interface/IMarket.sol": "IMarket"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -278,11 +291,19 @@
 			]
 		},
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x56b060380af4e2f44bd2c31cb64ee1548bcf438629d4a2c7aeacea9062839256",
+			"keccak256": "0xebd97f4537fd74a5ddf9a83552401597671de23290c1ad91824a2aa66d57bdd0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4240fb5dd11ee0f1b6446da3b92bf6d0bbb96a52f9243a051eb225bf33e6cda5",
-				"dweb:/ipfs/QmcQxvekmGxSFRsBQ2zbRT2Gmu2GkKYCDNmfBhAc9np7in"
+				"bzz-raw://dcbb158a3c9b9e66a86edb2896faf869c6681e6a127dce69aedea688a339bd5e",
+				"dweb:/ipfs/QmSFMG3wJstw8wTnNpejM82LpjErhA6hfU1LprkTB7f4ue"
+			]
+		},
+		"contracts/library/Struct.sol": {
+			"keccak256": "0x14ee8f579f0c902e20996298e3f4ee6dc9e4fc79f80b3b571bbdc1e8df53b4a2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://de551fb25bcc629a2f5936c843b8ec51b873ef2ee03edeff292ee7b46447e02f",
+				"dweb:/ipfs/QmXE67zMRDY33BXgQqJ7HyReRToeiVRPK9oYuBP8eJrGSw"
 			]
 		}
 	},

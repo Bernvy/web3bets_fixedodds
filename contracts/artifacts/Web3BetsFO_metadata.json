@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -13,6 +13,25 @@
 			{
 				"anonymous": false,
 				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "eventHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "EventCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "eventHash",
+						"type": "bytes32"
+					},
 					{
 						"indexed": false,
 						"internalType": "address",
@@ -78,39 +97,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
 					}
 				],
-				"name": "admins",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "black",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
+				"name": "cancelEvent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -128,6 +122,25 @@
 			},
 			{
 				"inputs": [],
+				"name": "createEvent",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
 				"name": "createMarket",
 				"outputs": [
 					{
@@ -192,19 +205,32 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "eventOwners",
+				"inputs": [],
+				"name": "getEvents",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "bytes32[]",
 						"name": "",
-						"type": "address"
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getMarkets",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -256,6 +282,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "minStake",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -297,6 +336,11 @@
 						"internalType": "address",
 						"name": "_scAddr",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_scDecimals",
+						"type": "uint256"
 					}
 				],
 				"name": "setAddrs",
@@ -307,12 +351,47 @@
 			{
 				"inputs": [
 					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Struct.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "setMarketsWinners",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "_percent",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_unitMinStake",
+						"type": "uint256"
 					}
 				],
-				"name": "setVigPercentage",
+				"name": "setVig",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -336,6 +415,49 @@
 					}
 				],
 				"name": "setVigShare",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Struct.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "settleMarkets",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "startEvent",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -386,7 +508,7 @@
 		"compilationTarget": {
 			"contracts/Web3BetsFO.sol": "Web3BetsFO"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -415,35 +537,43 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0xe8bee29f3e33428138a4d0491ee88469c500e3656744a67fa40a31fa733c5012",
+			"keccak256": "0x106638fcbc68b18bb7118ed811ee14cadf4e1a5732c4c6acbba121d5f973d67b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7b8a94121df6958f59ff8522d0d60db3814ef84dd9dc6d2f1481a7a8c69e8cf8",
-				"dweb:/ipfs/QmeZ5sq7LCyYXptduMhAkejTa9HfhfrLr2sjvqtomUuJoH"
+				"bzz-raw://230694541055894cd34e021a836cec9a9454bf70e8c6b8907c2647ffddff522e",
+				"dweb:/ipfs/QmZPzVbWDLbvgHFVNGxt3WzPTS1Rq3HYwD1NcV92ZejtE2"
 			]
 		},
 		"contracts/Web3BetsFO.sol": {
-			"keccak256": "0x8cbe2056ffa46ae27a463c8d733a30c6a4c6cba44a9680043026a5a7a4c94bac",
+			"keccak256": "0x4dd4f6b34b568c2a98500d96b2dfe8f3a58ff3361ea087fdf9b1669d15cf16bd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e24bd7a6bbd6c205616aace7b9d7252e075ec6d90ca915074b468c44b2b09723",
-				"dweb:/ipfs/QmTcxQueGuvLbNYAVrhAgQdfDgeTfs9gnTe9zjsyCH6sBL"
+				"bzz-raw://b9c29b51f801e610d6ef9c330bbf6276219021e859e8685d44b9ed09d29a8047",
+				"dweb:/ipfs/Qmec4TN5hGsRECGdz4ysUocrfhAfWsJVbU6sJ1DgmPRUX7"
 			]
 		},
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x56b060380af4e2f44bd2c31cb64ee1548bcf438629d4a2c7aeacea9062839256",
+			"keccak256": "0xebd97f4537fd74a5ddf9a83552401597671de23290c1ad91824a2aa66d57bdd0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4240fb5dd11ee0f1b6446da3b92bf6d0bbb96a52f9243a051eb225bf33e6cda5",
-				"dweb:/ipfs/QmcQxvekmGxSFRsBQ2zbRT2Gmu2GkKYCDNmfBhAc9np7in"
+				"bzz-raw://dcbb158a3c9b9e66a86edb2896faf869c6681e6a127dce69aedea688a339bd5e",
+				"dweb:/ipfs/QmSFMG3wJstw8wTnNpejM82LpjErhA6hfU1LprkTB7f4ue"
 			]
 		},
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x08d30de274cda8e93795fe827f0a4b33b1bb5ca5a3bcf008ed88dbdc5125ee45",
+			"keccak256": "0x41f0c873e297570d030d56303d5c7d16ea0126e2e44e9d1d6c82d2005d138006",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8a5edfb319a2eae0a55611a2a19665c4a1f3cc8ac1c30fde3df730b1f75fafa5",
-				"dweb:/ipfs/QmXmPeKDbnusayyS4RgPnBay9H7CvVkXqB3VApCLkcEg8D"
+				"bzz-raw://67941851003c3eead5f3e7b56f3c4f1fc79f60c6dfdde930c4651990c1ecf03a",
+				"dweb:/ipfs/QmQuQeCevuzB6TgVduS4tA7FteHqMD1GBKJRWe9Kf4v4CL"
+			]
+		},
+		"contracts/library/Struct.sol": {
+			"keccak256": "0x14ee8f579f0c902e20996298e3f4ee6dc9e4fc79f80b3b571bbdc1e8df53b4a2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://de551fb25bcc629a2f5936c843b8ec51b873ef2ee03edeff292ee7b46447e02f",
+				"dweb:/ipfs/QmXE67zMRDY33BXgQqJ7HyReRToeiVRPK9oYuBP8eJrGSw"
 			]
 		}
 	},

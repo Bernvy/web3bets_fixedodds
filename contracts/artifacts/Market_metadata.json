@@ -1,12 +1,18 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner_",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -45,9 +51,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "side",
-						"type": "uint8"
+						"type": "uint256"
 					}
 				],
 				"name": "BetCreated",
@@ -58,30 +64,18 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "bytes32",
-						"name": "betHashA",
-						"type": "bytes32"
-					},
-					{
-						"indexed": false,
-						"internalType": "bytes32",
-						"name": "betHashB",
-						"type": "bytes32"
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "amountA",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amountB",
+						"name": "value",
 						"type": "uint256"
 					}
 				],
-				"name": "PairCreated",
+				"name": "Withdraw",
 				"type": "event"
 			},
 			{
@@ -107,9 +101,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "_side",
-						"type": "uint8"
+						"type": "uint256"
 					},
 					{
 						"internalType": "bool",
@@ -130,20 +124,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "app",
-				"outputs": [
-					{
-						"internalType": "contract IWeb3BetsFO",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "cancelMarket",
+				"name": "cancel",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -162,22 +143,9 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "cancelPending",
+				"name": "cancelBet",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "factory",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -237,12 +205,12 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "uint8",
+								"internalType": "uint256",
 								"name": "side",
-								"type": "uint8"
+								"type": "uint256"
 							}
 						],
-						"internalType": "struct IMarket.MarketBet[]",
+						"internalType": "struct Struct.MarketBet[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -253,9 +221,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "_winningSide",
-						"type": "uint8"
+						"type": "uint256"
 					}
 				],
 				"name": "setWinningSide",
@@ -272,12 +240,38 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_winningSide",
+						"type": "uint256"
+					}
+				],
+				"name": "settle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes32",
-						"name": "_pair",
+						"name": "_bet",
 						"type": "bytes32"
 					}
 				],
-				"name": "settlePair",
+				"name": "settleBet",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "start",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -293,22 +287,9 @@
 				"name": "status",
 				"outputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "token",
-				"outputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "",
-						"type": "address"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -332,6 +313,19 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "withdrawPending",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -349,7 +343,7 @@
 		"compilationTarget": {
 			"contracts/Market.sol": "Market"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -378,27 +372,35 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0x60477fdb71ec28ddc23b2df508573a3758e978c429eabb5161d9c0acbd0e8ad8",
+			"keccak256": "0xe89bede1d438379367417cd71bbe5da49ec1507fe6b30867efd36bb6304f725a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2b9f59a09722c8c453ccec229302a56eb99c2e6a6e9a4abd0790634a206cd3b0",
-				"dweb:/ipfs/QmSci8ZwETWKtQpWWKqCTYE8Tp4XAtNQEkszjW4V4owqJz"
+				"bzz-raw://b68c3827bf01ff8b66395a6cfc1f7a7a7a6c653b5b3a44067f79e18b5195d9be",
+				"dweb:/ipfs/QmeLejH74GvTYQuF7p1UL8kskonCkMDWrvw7CiHXoRwvyg"
 			]
 		},
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x56b060380af4e2f44bd2c31cb64ee1548bcf438629d4a2c7aeacea9062839256",
+			"keccak256": "0xebd97f4537fd74a5ddf9a83552401597671de23290c1ad91824a2aa66d57bdd0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4240fb5dd11ee0f1b6446da3b92bf6d0bbb96a52f9243a051eb225bf33e6cda5",
-				"dweb:/ipfs/QmcQxvekmGxSFRsBQ2zbRT2Gmu2GkKYCDNmfBhAc9np7in"
+				"bzz-raw://dcbb158a3c9b9e66a86edb2896faf869c6681e6a127dce69aedea688a339bd5e",
+				"dweb:/ipfs/QmSFMG3wJstw8wTnNpejM82LpjErhA6hfU1LprkTB7f4ue"
 			]
 		},
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x58dbd002e19b132fa6638936e38c09add0200e5c62f3076ee1de5d077a41a9a0",
+			"keccak256": "0x41f0c873e297570d030d56303d5c7d16ea0126e2e44e9d1d6c82d2005d138006",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://72b2a91203c67eed5535c49d12c403062ed208ed5483a27817998a6e19ffeb11",
-				"dweb:/ipfs/QmczzyrBrD2WmEpziE8muBBNCT8EKAshhGneBMeYEDNJsa"
+				"bzz-raw://67941851003c3eead5f3e7b56f3c4f1fc79f60c6dfdde930c4651990c1ecf03a",
+				"dweb:/ipfs/QmQuQeCevuzB6TgVduS4tA7FteHqMD1GBKJRWe9Kf4v4CL"
+			]
+		},
+		"contracts/library/Struct.sol": {
+			"keccak256": "0x14ee8f579f0c902e20996298e3f4ee6dc9e4fc79f80b3b571bbdc1e8df53b4a2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://de551fb25bcc629a2f5936c843b8ec51b873ef2ee03edeff292ee7b46447e02f",
+				"dweb:/ipfs/QmXE67zMRDY33BXgQqJ7HyReRToeiVRPK9oYuBP8eJrGSw"
 			]
 		}
 	},

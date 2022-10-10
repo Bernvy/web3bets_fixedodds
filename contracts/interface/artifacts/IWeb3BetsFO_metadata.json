@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -13,6 +13,19 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "contractOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -39,6 +52,38 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getEvents",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getMarkets",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -91,6 +136,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "minStake",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "scAddr",
 				"outputs": [
 					{
@@ -131,7 +189,7 @@
 		"compilationTarget": {
 			"contracts/interface/IWeb3BetsFO.sol": "IWeb3BetsFO"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -144,11 +202,11 @@
 	},
 	"sources": {
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x58dbd002e19b132fa6638936e38c09add0200e5c62f3076ee1de5d077a41a9a0",
+			"keccak256": "0x41f0c873e297570d030d56303d5c7d16ea0126e2e44e9d1d6c82d2005d138006",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://72b2a91203c67eed5535c49d12c403062ed208ed5483a27817998a6e19ffeb11",
-				"dweb:/ipfs/QmczzyrBrD2WmEpziE8muBBNCT8EKAshhGneBMeYEDNJsa"
+				"bzz-raw://67941851003c3eead5f3e7b56f3c4f1fc79f60c6dfdde930c4651990c1ecf03a",
+				"dweb:/ipfs/QmQuQeCevuzB6TgVduS4tA7FteHqMD1GBKJRWe9Kf4v4CL"
 			]
 		}
 	},

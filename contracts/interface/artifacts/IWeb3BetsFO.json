@@ -31,7 +31,6 @@
 	},
 	"data": {
 		"bytecode": {
-			"functionDebugData": {},
 			"generatedSources": [],
 			"linkReferences": {},
 			"object": "",
@@ -39,7 +38,6 @@
 			"sourceMap": ""
 		},
 		"deployedBytecode": {
-			"functionDebugData": {},
 			"generatedSources": [],
 			"immutableReferences": {},
 			"linkReferences": {},
@@ -50,11 +48,15 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"aVig()": "54cd1a5c",
+			"contractOwner()": "ce606ee0",
 			"eVig()": "28576d45",
 			"ecoAddr()": "09953b2f",
+			"getEvents()": "404aa8f9",
+			"getMarkets(bytes32)": "346467f2",
 			"hVig()": "6a0ccd9d",
 			"holdAddr()": "b7640a54",
 			"isBlack(address)": "332daccf",
+			"minStake()": "375b3c0a",
 			"scAddr()": "04b376c8",
 			"vig()": "55c4a8bf"
 		}
@@ -68,6 +70,19 @@
 					"internalType": "uint256",
 					"name": "",
 					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "contractOwner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
 				}
 			],
 			"stateMutability": "view",
@@ -94,6 +109,38 @@
 					"internalType": "address",
 					"name": "",
 					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getEvents",
+			"outputs": [
+				{
+					"internalType": "bytes32[]",
+					"name": "",
+					"type": "bytes32[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "_event",
+					"type": "bytes32"
+				}
+			],
+			"name": "getMarkets",
+			"outputs": [
+				{
+					"internalType": "address[]",
+					"name": "",
+					"type": "address[]"
 				}
 			],
 			"stateMutability": "view",
@@ -139,6 +186,19 @@
 					"internalType": "bool",
 					"name": "",
 					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "minStake",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
 				}
 			],
 			"stateMutability": "view",

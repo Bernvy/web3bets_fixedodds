@@ -9,43 +9,55 @@ import "./Market.sol";
 /// @notice Contains Web3Bets ecosystem's variables and functions
 /// @custom:security contact okoro.victor@web3bets.io
 
-/* 
-copied and modified code logic from github Repo: https://github.com/wizardoma/web3_bets_contract.git
-*/
 contract Web3BetsFO is IWeb3BetsFO {
-    address public contractOwner;
+    uint256 private scDecimals = 18;
+    address public override contractOwner;
     address public override holdAddr = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
-    address public override ecoAddr = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
+    address public override ecoAddr = 0xBffe45D497Bde6f9809200f736084106d1d079df;
     address public override scAddr = 0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee;
     uint256 public override vig = 10;
     uint256 public override hVig = 50;
     uint256 public override eVig = 50;
     uint256 public override aVig = 25;
-    mapping(address => address) public admins;
-    mapping(address => address) public eventOwners;
-    mapping(address => address) public black;
+    uint256 public override minStake = 1 * 10 ** scDecimals;
+    bytes32[] private events;
+    mapping(bytes32 => uint256) private eventsStatus;
+    mapping(bytes32 => address[]) private eventMarkets;
+    mapping(address => address) private admins;
+    mapping(address => address) private eventAdmins;
+    mapping(address => address) private black;
 
     modifier onlyOwner {
-        require(msg.sender == contractOwner,"crt own o");
+        require(msg.sender == contractOwner,"E1");
         _;
     }
 
     modifier onlySystemAdmin {
         require(
             admins[msg.sender] != address(0) || msg.sender == contractOwner,
-            "sys adm o"
+            "E2"
         );
         _;
     }
 
-    event MarketCreated(address marketAddress);
+    modifier onlyEventAdmin {
+        require(
+            eventAdmins[msg.sender] != address(0) || msg.sender == contractOwner,
+            "E3"
+        );
+        _;
+    }
+
+    event MarketCreated(bytes32 eventHash, address marketAddress);
+
+    event EventCreated(bytes32 eventHash);
 
     constructor() {
         contractOwner = msg.sender;
     }
 
-    function isBlack(address _addr) external view returns(bool){
-        if(black[_addr] == address(0)) {
+    function isBlack(address _addr) external view override returns(bool){
+        if(black[_addr] != address(0)) {
             return false;
         }
         else {
@@ -53,28 +65,112 @@ contract Web3BetsFO is IWeb3BetsFO {
         }
     }
 
-    function createMarket() external onlySystemAdmin returns(address) {
-        Market market = new Market();
-        emit MarketCreated(address(market));
+    function getEvents() external view override returns(bytes32[] memory){
+        return events;
+    }
+
+    function getMarkets(bytes32 _event) external view override returns(address[] memory){
+        return eventMarkets[_event];
+    }
+
+    function createEvent() external onlyEventAdmin returns(bytes32){
+        bytes32 eventHash;
+        uint i = 0;
+        while(i >= 0){
+            eventHash = keccak256(abi.encodePacked(
+                msg.sender,
+                events.length + 1 + i,
+                block.timestamp,
+                block.difficulty
+            ));
+            if(eventsStatus[eventHash] == 0){
+                break;
+            }
+            i++;
+        }
+        eventsStatus[eventHash] = 1; // event started
+        events.push(eventHash);
+
+        emit EventCreated(eventHash);
+        return eventHash;
+    }
+
+    function createMarket(bytes32 _event) external onlyEventAdmin returns(address) {
+        Market market = new Market(msg.sender);
+        eventMarkets[_event].push(address(market));
+
+        emit MarketCreated(_event, address(market));
         return address(market);
+    }
+
+    function setMarketsWinners(bytes32 _event, Struct.Winner[] calldata _winners) external {
+        uint marketsLength = _winners.length;
+        for(uint i = 0; i < marketsLength; i++){
+            IMarket market = IMarket(_winners[i].market);
+            market.setWinningSide(_winners[i].winningSide);
+        }
+        eventsStatus[_event] = 2; // event ended
+    }
+
+    function settleMarkets(bytes32 _event, Struct.Winner[] calldata _winners) external {
+        uint marketsLength = _winners.length;
+        for(uint i = 0; i < marketsLength; i++){
+            IMarket market = IMarket(_winners[i].market);
+            market.settle(_winners[i].winningSide);
+        }
+        eventsStatus[_event] = 2; // event ended
+    }
+
+    function startEvent(bytes32 _event) external onlyEventAdmin {
+        address[] memory markets = eventMarkets[_event];
+        eventsStatus[_event] = 4; // event live
+        uint marketsLength = markets.length;
+        for(uint i = 0; i < marketsLength; i++){
+            IMarket market = IMarket(markets[i]);
+            market.start();
+        }
+        return;
+    }
+
+    function cancelEvent(bytes32 _event) external onlyEventAdmin {
+        address[] memory markets = eventMarkets[_event];
+        eventsStatus[_event] = 3; // event canceled
+        uint marketsLength = markets.length;
+        for(uint i = 0; i < marketsLength; i++){
+            IMarket market = IMarket(markets[i]);
+            market.cancel();
+        }
+        return;
     }
 
     function transferOwnership(address newOwner) external onlyOwner {
         contractOwner = newOwner;
+        return;
     }
     
-    function setAddrs(address _holdAddr, address _ecoAddr,address _scAddr) external onlySystemAdmin {
+    function setAddrs(
+        address _holdAddr,
+        address _ecoAddr,
+        address _scAddr,
+        uint256 _scDecimals
+    ) 
+        external onlySystemAdmin 
+    {
         holdAddr = _holdAddr;
         ecoAddr = _ecoAddr;
         scAddr = _scAddr;
+        scDecimals = _scDecimals;
+        return;
     }
 
-    function setVigPercentage(uint256 _percent) external onlySystemAdmin {
+    function setVig(uint256 _percent, uint _unitMinStake) external onlySystemAdmin {
         require(
             _percent < 100,
-            "vig <100"
+            "E4"
         );
         vig = _percent;
+        minStake = _unitMinStake * 10 ** scDecimals;
+        return;
     }
 
     function setVigShare(
@@ -84,63 +180,73 @@ contract Web3BetsFO is IWeb3BetsFO {
     ) external onlySystemAdmin {
         require(
             _hVig <= 100 && _eVig <= 100 && _aVig <= 100,
-            "h,e <100"
+            "E5"
         );
         require(
             _hVig + _eVig + _aVig == 100,
-            "h+e+a =100"
+            "E6"
         );
 
         hVig = _hVig;
         eVig = _eVig;
         aVig = _aVig;
+        return;
     }
     
     function addSystemAdmin(address _addr)
         external
         onlyOwner
     {
-        require(admins[_addr] == address(0), "alr sys adm");
+        require(admins[_addr] == address(0), "E7");
         admins[_addr] = _addr;
+        return;
     }
 
     function deleteSystemAdmin(address _systemAdmin)
         external
         onlyOwner
     {
-        require(msg.sender == contractOwner,"crt own o");
-        require (admins[_systemAdmin] != address(0), "x evt own");
+        require (admins[_systemAdmin] != address(0), "E8");
         
         delete admins[_systemAdmin];
+        return;
     }
     
     function addEventAdmin(address _addr)
         external
         onlySystemAdmin
     {
-        require(eventOwners[_addr] == address(0), "alr evt adm");
+        require(eventAdmins[_addr] == address(0), "E9");
 
-        eventOwners[_addr] = _addr;
+        eventAdmins[_addr] = _addr;
+        return;
     }
 
-    function deleteEventAdmin(address _eventOwner) external onlySystemAdmin {
-        require (eventOwners[_eventOwner] != address(0), "x evt own");
-        
-        delete eventOwners[_eventOwner];
+    function deleteEventAdmin(address _eventOwner)
+        external
+        onlySystemAdmin 
+    {
+        require (eventAdmins[_eventOwner] != address(0), "E10");
+        delete eventAdmins[_eventOwner];
+        return;
     }
     
     function addBlacked(address _addr)
         external
         onlySystemAdmin
     {
-        require(black[_addr] == address(0), "alr xst");
-        eventOwners[_addr] = _addr;
+        require(black[_addr] == address(0), "E11");
+        black[_addr] = _addr;
+        return;
     }
 
-    function removeBlacked(address _addr) external onlySystemAdmin {
-        require (black[_addr] != address(0), "x evt own");
-        
+    function removeBlacked(address _addr) 
+        external 
+        onlySystemAdmin 
+    {
+        require (black[_addr] != address(0), "E12");
         delete black[_addr];
+        return;
     }
 
 }

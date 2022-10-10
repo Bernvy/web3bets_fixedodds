@@ -4,44 +4,44 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+import "../library/Struct.sol";
+
 interface IMarket{
-    struct MarketBet {
-        address better;
-        address affiliate;
-        uint256 stake;
-        uint256 matched;
-        uint256 odds;
-        uint8 side;
-    }
-
-    function factory() external view returns (address);
-
-    function status() external view returns (uint8);
-
-    function token() external view returns (IERC20);
+    function status() external view returns (uint256);
 
     function getBalance(address _user) external view returns(uint256);
 
-    function getUserBets(address _user) external view returns(MarketBet[] memory);
+    function getUserBets(address _user) external view returns(Struct.MarketBet[] memory);
 
     function withdraw(address _address) external returns(bool);
 
-    function cancelPending(bytes32 _bet) external;
+    function withdrawPending(bytes32 _bet) external;
 
-    function settlePair(bytes32 _pairHash) external returns(bool);
+    function cancelBet(bytes32 _bet) external;
+
+    function settleBet(bytes32 _bet) external;
+
     /*
     @dev 1: side A is winner, 2: side B is winer
     */
-    function setWinningSide(uint8 _winningSide) external returns(bool);
+    function setWinningSide(uint256 _winningSide) external returns(bool);
 
-    function cancelMarket() external returns(bool);
+    /*
+    @dev set winning side and settle all markets
+    @dev 1: side A is winner, 2: side B is winer
+    */
+    function settle(uint256 _winningSide) external returns(bool);
+
+    function cancel() external returns(bool);
+
+    function start() external returns(bool);
 
     function addBet(
         address _better,
         address _affiliate,
         uint256 _stake,
         uint256 _odds,
-        uint8 _side,
+        uint256 _side,
         bool instant
     ) external returns(bytes32);
 
