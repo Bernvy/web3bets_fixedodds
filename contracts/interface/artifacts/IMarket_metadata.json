@@ -76,6 +76,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "cancelPlusPairs",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -97,12 +110,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_user",
-						"type": "address"
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
 					}
 				],
-				"name": "getUserBets",
+				"name": "getBet",
 				"outputs": [
 					{
 						"components": [
@@ -137,9 +150,41 @@
 								"type": "uint256"
 							}
 						],
-						"internalType": "struct Struct.MarketBet[]",
+						"internalType": "struct Struct.MarketBet",
 						"name": "",
-						"type": "tuple[]"
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserBets",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "marketEvent",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
 					}
 				],
 				"stateMutability": "view",
@@ -291,19 +336,19 @@
 			]
 		},
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0xebd97f4537fd74a5ddf9a83552401597671de23290c1ad91824a2aa66d57bdd0",
+			"keccak256": "0x4f4ad283ed96d71a19ab67e11ebec50995b87e5b01652877c725fce308a03b6c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dcbb158a3c9b9e66a86edb2896faf869c6681e6a127dce69aedea688a339bd5e",
-				"dweb:/ipfs/QmSFMG3wJstw8wTnNpejM82LpjErhA6hfU1LprkTB7f4ue"
+				"bzz-raw://752b3ac612fddd1b9c611fb0bc0c5d141928ac65b444d97fad16fa6e4ddd561f",
+				"dweb:/ipfs/QmSWj7nRyeZGDws9hdFGTeiGxfyn23a1gMPBeMZBon4BG8"
 			]
 		},
 		"contracts/library/Struct.sol": {
-			"keccak256": "0x14ee8f579f0c902e20996298e3f4ee6dc9e4fc79f80b3b571bbdc1e8df53b4a2",
+			"keccak256": "0xd78c8991942b656ee47dcfd129e1b2f4f38edb1c053f2f88464dd3c8c4cb7477",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://de551fb25bcc629a2f5936c843b8ec51b873ef2ee03edeff292ee7b46447e02f",
-				"dweb:/ipfs/QmXE67zMRDY33BXgQqJ7HyReRToeiVRPK9oYuBP8eJrGSw"
+				"bzz-raw://498906a51af7aa58f421175241024eeb9536d4a64e5e0f7294ade09062b3cd41",
+				"dweb:/ipfs/QmdDBptNU6QRmzSp29vSE43M4noBQUXcKwCb53WvRsaiyo"
 			]
 		}
 	},

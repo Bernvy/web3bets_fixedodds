@@ -58,6 +58,44 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getEventOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getEventStatus",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "getEvents",
 				"outputs": [
@@ -202,11 +240,11 @@
 	},
 	"sources": {
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x41f0c873e297570d030d56303d5c7d16ea0126e2e44e9d1d6c82d2005d138006",
+			"keccak256": "0xa3e257f60f3b6179afee917f5bab1b51f9e01930d0de6b71da85c84e2a82baa8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://67941851003c3eead5f3e7b56f3c4f1fc79f60c6dfdde930c4651990c1ecf03a",
-				"dweb:/ipfs/QmQuQeCevuzB6TgVduS4tA7FteHqMD1GBKJRWe9Kf4v4CL"
+				"bzz-raw://41188dc6daa6b41cdc910d92291860f58ddb4e6dd1ec0ceab6a9ce0926b28959",
+				"dweb:/ipfs/QmcoT4njB5ghXX11eRqPga8rp8rtur54ykdsZYfuVq5NMJ"
 			]
 		}
 	},

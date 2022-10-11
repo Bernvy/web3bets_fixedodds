@@ -7,11 +7,15 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../library/Struct.sol";
 
 interface IMarket{
+    function marketEvent() external view returns (bytes32);
+
     function status() external view returns (uint256);
 
     function getBalance(address _user) external view returns(uint256);
 
-    function getUserBets(address _user) external view returns(Struct.MarketBet[] memory);
+    function getUserBets(address _user) external view returns(bytes32[] memory);
+
+    function getBet(bytes32 _bet) external view returns(Struct.MarketBet memory);
 
     function withdraw(address _address) external returns(bool);
 
@@ -33,6 +37,8 @@ interface IMarket{
     function settle(uint256 _winningSide) external returns(bool);
 
     function cancel() external returns(bool);
+
+    function cancelPlusPairs() external returns(bool);
 
     function start() external returns(bool);
 

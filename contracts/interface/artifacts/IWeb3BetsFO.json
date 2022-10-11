@@ -51,6 +51,8 @@
 			"contractOwner()": "ce606ee0",
 			"eVig()": "28576d45",
 			"ecoAddr()": "09953b2f",
+			"getEventOwner(bytes32)": "f2ac1998",
+			"getEventStatus(bytes32)": "4b0ecb30",
 			"getEvents()": "404aa8f9",
 			"getMarkets(bytes32)": "346467f2",
 			"hVig()": "6a0ccd9d",
@@ -109,6 +111,44 @@
 					"internalType": "address",
 					"name": "",
 					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "_event",
+					"type": "bytes32"
+				}
+			],
+			"name": "getEventOwner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "_event",
+					"type": "bytes32"
+				}
+			],
+			"name": "getEventStatus",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
 				}
 			],
 			"stateMutability": "view",

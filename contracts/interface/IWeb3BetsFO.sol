@@ -25,5 +25,9 @@ interface IWeb3BetsFO{
     
     function getEvents() external view returns(bytes32[] memory);
 
+    function getEventStatus(bytes32 _event) external view returns(uint256);
+
+    function getEventOwner(bytes32 _event) external view returns(address);
+
     function getMarkets(bytes32 _event) external view returns(address[] memory);
 }

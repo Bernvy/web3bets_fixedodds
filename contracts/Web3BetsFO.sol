@@ -22,17 +22,20 @@ contract Web3BetsFO is IWeb3BetsFO {
     uint256 public override minStake = 1 * 10 ** scDecimals;
     bytes32[] private events;
     mapping(bytes32 => uint256) private eventsStatus;
+    mapping(bytes32 => address) private eventOwners;
     mapping(bytes32 => address[]) private eventMarkets;
     mapping(address => address) private admins;
     mapping(address => address) private eventAdmins;
     mapping(address => address) private black;
 
-    modifier onlyOwner {
+    modifier onlyOwner
+    {
         require(msg.sender == contractOwner,"E1");
         _;
     }
 
-    modifier onlySystemAdmin {
+    modifier onlySystemAdmin
+    {
         require(
             admins[msg.sender] != address(0) || msg.sender == contractOwner,
             "E2"
@@ -40,7 +43,8 @@ contract Web3BetsFO is IWeb3BetsFO {
         _;
     }
 
-    modifier onlyEventAdmin {
+    modifier onlyEventAdmin
+    {
         require(
             eventAdmins[msg.sender] != address(0) || msg.sender == contractOwner,
             "E3"
@@ -50,13 +54,15 @@ contract Web3BetsFO is IWeb3BetsFO {
 
     event MarketCreated(bytes32 eventHash, address marketAddress);
 
-    event EventCreated(bytes32 eventHash);
+    event EventCreated(bytes32 eventHash, address eventOwner);
 
-    constructor() {
+    constructor()
+    {
         contractOwner = msg.sender;
     }
 
-    function isBlack(address _addr) external view override returns(bool){
+    function isBlack(address _addr) external view override returns(bool)
+    {
         if(black[_addr] != address(0)) {
             return false;
         }
@@ -65,8 +71,19 @@ contract Web3BetsFO is IWeb3BetsFO {
         }
     }
 
-    function getEvents() external view override returns(bytes32[] memory){
+    function getEvents() external view override returns(bytes32[] memory)
+    {
         return events;
+    }
+
+    function getEventStatus(bytes32 _event) external view override returns(uint256) 
+    {
+        return eventsStatus[_event];
+    }
+
+    function getEventOwner(bytes32 _event) external view override returns(address) 
+    {
+        return eventOwners[_event];
     }
 
     function getMarkets(bytes32 _event) external view override returns(address[] memory){
@@ -89,14 +106,15 @@ contract Web3BetsFO is IWeb3BetsFO {
             i++;
         }
         eventsStatus[eventHash] = 1; // event started
+        eventOwners[eventHash] = msg.sender; 
         events.push(eventHash);
 
-        emit EventCreated(eventHash);
+        emit EventCreated(eventHash, msg.sender);
         return eventHash;
     }
 
     function createMarket(bytes32 _event) external onlyEventAdmin returns(address) {
-        Market market = new Market(msg.sender);
+        Market market = new Market(_event);
         eventMarkets[_event].push(address(market));
 
         emit MarketCreated(_event, address(market));
@@ -116,6 +134,7 @@ contract Web3BetsFO is IWeb3BetsFO {
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
             IMarket market = IMarket(_winners[i].market);
+
             market.settle(_winners[i].winningSide);
         }
         eventsStatus[_event] = 2; // event ended

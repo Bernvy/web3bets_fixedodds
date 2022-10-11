@@ -7,7 +7,7 @@ import "./interface/IWeb3BetsFO.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Market is IMarket, ReentrancyGuard {
-    address private owner;
+    bytes32 immutable public override marketEvent;
     address private factory;
     /*
     @dev status of a market, 0: active, 1: sideA wins, 2: side B wins, 3: canceled, 4: stop
@@ -28,15 +28,11 @@ contract Market is IMarket, ReentrancyGuard {
     mapping(bytes32 => Struct.MarketPair) private pairsInfo;
     mapping(bytes32 => bytes32[]) private betPairs;
     IERC20 immutable private token;
-    IWeb3BetsFO immutable private app = IWeb3BetsFO(factory);
+    IWeb3BetsFO private app;
 
     modifier onlyFactory() {
         require(
-            msg.sender == owner 
-            || 
-            msg.sender == app.contractOwner()
-            ||
-            msg.sender == factory,
+            msg.sender == app.getEventOwner(marketEvent) || msg.sender == factory,
             "caller not authorized"
         );
         _;
@@ -56,42 +52,58 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 side
     );
 
-    constructor(address owner_) {
-        owner = owner_;
+    constructor(bytes32 event_) {
+        marketEvent = event_;
         factory = msg.sender;
-        token = IERC20(IWeb3BetsFO(factory).scAddr());
+        app = IWeb3BetsFO(factory);
+        token = IERC20(app.scAddr());
     }
 
+    /**
+    * @dev Returns the amount of tokens owned by `_user` in this market.
+    */
     function getBalance(address _user) external view override returns(uint256) {
         return bal[_user];
     }
 
+    /**
+    * @dev Returns hash IDs of all the bets placed by `_user`.
+    */
     function getUserBets(address _user) 
-        external view override returns(Struct.MarketBet[] memory) 
+        external view override returns(bytes32[] memory) 
     {
-        Struct.MarketBet[] memory _userBets;
-        bytes32[] memory _bets = userBets[_user];
-        uint betsLength = bets.length;
-        for(uint i = 0; i < betsLength; i++){
-            _userBets[i] = betsInfo[_bets[i]];
-        }
-        return _userBets;
+        return userBets[_user];
     }
 
-    function withdraw(address _addr) public override nonReentrant returns(bool) {
-        uint256 availAmount = bal[_addr];
+    /**
+    * @dev Returns details of `_bet`.
+    */
+    function getBet(bytes32 _bet) 
+        external view override returns(Struct.MarketBet memory) 
+    {
+        return betsInfo[_bet];
+    }
+
+    /**
+    * @dev transfer bal[`_user`] to `_user`, bal
+    */
+    function withdraw(address _user) public override nonReentrant returns(bool) {
         require(
-            token.balanceOf(address(this)) >= availAmount && availAmount > 0,
+            token.balanceOf(address(this)) >= bal[_user] && bal[_user] > 0,
             "zero value available"
         );
-        bal[_addr] -= availAmount;
-        bool success = token.transfer(_addr, availAmount);
+        uint256 availAmount = bal[_user];
+        bal[_user] = 0;
+        bool success = token.transfer(_user, availAmount);
         require(success, "transfer to caller failed");
 
-        emit Withdraw(_addr, availAmount);
+        emit Withdraw(_user, availAmount);
         return true;
     } 
  
+    /**
+    * @dev refund all unmatched stake in `_bet`, and withraw for caller address
+    */
     function withdrawPending(bytes32 _bet) public override {
         Struct.MarketBet memory bet = betsInfo[_bet];
         require(msg.sender == bet.better, "unauthorized caller");
@@ -103,14 +115,20 @@ contract Market is IMarket, ReentrancyGuard {
         }
     }
 
+    /**
+    * @dev cancel all pairs in `_bet`, 
+    */
     function cancelBet(bytes32 _bet) external override {
         require(msg.sender == betsInfo[_bet].better, "unauthorized caller");
-        if(status == 0){
+        if(status == 0 || status == 4){
             _cancelBetPairs(_bet);
         }
         withdrawPending(_bet);
     }
 
+    /**
+    * @dev settle all pairs in `_bet`, 
+    */
     function settleBet(bytes32 _bet) external override {
         bytes32[] memory _pairs = betPairs[_bet];
         uint pairsLength = _pairs.length;
@@ -122,6 +140,9 @@ contract Market is IMarket, ReentrancyGuard {
         }
     }
 
+    /**
+    * @dev assign `_winningSide` to `status` 
+    */
     function setWinningSide(uint256 _winningSide)
         public
         override
@@ -138,6 +159,9 @@ contract Market is IMarket, ReentrancyGuard {
         
     }
 
+    /**
+    * @dev assign `_winningSide` to `status` 
+    */
     function settle(uint256 _winningSide)
         external
         override
@@ -158,6 +182,17 @@ contract Market is IMarket, ReentrancyGuard {
     }
 
     function cancel() external override onlyFactory returns(bool) 
+    { 
+        if(status == 0 || status == 4){
+            status = 3;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function cancelPlusPairs() external override onlyFactory returns(bool) 
     { 
         if(status == 0 || status == 4){
             uint pairsLength = pairs.length;
@@ -296,6 +331,9 @@ contract Market is IMarket, ReentrancyGuard {
         bytes32[] memory _pairs = betPairs[_bet];
         uint pairsLength = _pairs.length;
         for(uint i = 0; i < pairsLength; i++){
+            if(pairsInfo[_pairs[i]].settled){
+                continue;
+            }
             bytes32 counterBetHash;
             uint256 counterAmount;
             uint256 thisAmount;
