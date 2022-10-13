@@ -9,6 +9,11 @@ import "./Market.sol";
 /// @notice Contains Web3Bets ecosystem's variables and functions
 /// @custom:security contact okoro.victor@web3bets.io
 
+/**
+* Copied and modified some codes from 
+* https://github.com/wizardoma/web3_bets_contract/blob/main/contracts/Web3Bets.sol
+*/
+
 contract Web3BetsFO is IWeb3BetsFO {
     uint256 private scDecimals = 18;
     address public override contractOwner;
@@ -17,7 +22,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     address public override scAddr = 0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee;
     uint256 public override vig = 10;
     uint256 public override hVig = 50;
-    uint256 public override eVig = 50;
+    uint256 public override eVig = 25;
     uint256 public override aVig = 25;
     uint256 public override minStake = 1 * 10 ** scDecimals;
     bytes32[] private events;
@@ -63,7 +68,7 @@ contract Web3BetsFO is IWeb3BetsFO {
 
     function isBlack(address _addr) external view override returns(bool)
     {
-        if(black[_addr] != address(0)) {
+        if(black[_addr] == address(0)) {
             return false;
         }
         else {
@@ -114,6 +119,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function createMarket(bytes32 _event) external onlyEventAdmin returns(address) {
+        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4);
         Market market = new Market(_event);
         eventMarkets[_event].push(address(market));
 
@@ -122,6 +128,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function setMarketsWinners(bytes32 _event, Struct.Winner[] calldata _winners) external {
+        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4);
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
             IMarket market = IMarket(_winners[i].market);
@@ -131,6 +138,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function settleMarkets(bytes32 _event, Struct.Winner[] calldata _winners) external {
+        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4);
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
             IMarket market = IMarket(_winners[i].market);
@@ -141,17 +149,19 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function startEvent(bytes32 _event) external onlyEventAdmin {
+        require(eventsStatus[_event] == 1, "event can't start");
         address[] memory markets = eventMarkets[_event];
         eventsStatus[_event] = 4; // event live
         uint marketsLength = markets.length;
         for(uint i = 0; i < marketsLength; i++){
             IMarket market = IMarket(markets[i]);
-            market.start();
+            market.stopNewBet();
         }
         return;
     }
 
     function cancelEvent(bytes32 _event) external onlyEventAdmin {
+        require(eventsStatus[_event] != 3 && eventsStatus[_event] != 2, "event can't cancel");
         address[] memory markets = eventMarkets[_event];
         eventsStatus[_event] = 3; // event canceled
         uint marketsLength = markets.length;

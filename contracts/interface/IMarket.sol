@@ -15,7 +15,15 @@ interface IMarket{
 
     function getUserBets(address _user) external view returns(bytes32[] memory);
 
+    function getBets() external view returns(bytes32[] memory);
+
     function getBet(bytes32 _bet) external view returns(Struct.MarketBet memory);
+
+    function getBetPairs(bytes32 _bet) external view returns(bytes32[] memory);
+
+    function getPairs() external view returns(bytes32[] memory);
+
+    function getPair(bytes32 _pair) external view returns(Struct.MarketPair memory);
 
     function withdraw(address _address) external returns(bool);
 
@@ -40,10 +48,9 @@ interface IMarket{
 
     function cancelPlusPairs() external returns(bool);
 
-    function start() external returns(bool);
+    function stopNewBet() external returns(bool);
 
     function addBet(
-        address _better,
         address _affiliate,
         uint256 _stake,
         uint256 _odds,

@@ -47,19 +47,23 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addBet(address,address,uint256,uint256,uint256,bool)": "78d65b2f",
+			"addBet(address,uint256,uint256,uint256,bool)": "ba8006c6",
 			"cancel()": "ea8a1af0",
 			"cancelBet(bytes32)": "2940ff1e",
 			"cancelPlusPairs()": "ae8cd090",
 			"getBalance(address)": "f8b2cb4f",
 			"getBet(bytes32)": "37e8c09e",
+			"getBetPairs(bytes32)": "25c22a45",
+			"getBets()": "a6afd5fd",
+			"getPair(bytes32)": "b8e5303d",
+			"getPairs()": "767eb5ef",
 			"getUserBets(address)": "2d56657d",
 			"marketEvent()": "7a47d494",
 			"setWinningSide(uint256)": "d0ed7295",
 			"settle(uint256)": "8df82800",
 			"settleBet(bytes32)": "675f6537",
-			"start()": "be9a6555",
 			"status()": "200d2ed2",
+			"stopNewBet()": "6bef0267",
 			"withdraw(address)": "51cff8d9",
 			"withdrawPending(bytes32)": "7d7f9232"
 		}
@@ -67,11 +71,6 @@
 	"abi": [
 		{
 			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_better",
-					"type": "address"
-				},
 				{
 					"internalType": "address",
 					"name": "_affiliate",
@@ -221,6 +220,97 @@
 		{
 			"inputs": [
 				{
+					"internalType": "bytes32",
+					"name": "_bet",
+					"type": "bytes32"
+				}
+			],
+			"name": "getBetPairs",
+			"outputs": [
+				{
+					"internalType": "bytes32[]",
+					"name": "",
+					"type": "bytes32[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getBets",
+			"outputs": [
+				{
+					"internalType": "bytes32[]",
+					"name": "",
+					"type": "bytes32[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "_pair",
+					"type": "bytes32"
+				}
+			],
+			"name": "getPair",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "bytes32",
+							"name": "betHashA",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "bytes32",
+							"name": "betHashB",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountA",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountB",
+							"type": "uint256"
+						},
+						{
+							"internalType": "bool",
+							"name": "settled",
+							"type": "bool"
+						}
+					],
+					"internalType": "struct Struct.MarketPair",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getPairs",
+			"outputs": [
+				{
+					"internalType": "bytes32[]",
+					"name": "",
+					"type": "bytes32[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "address",
 					"name": "_user",
 					"type": "address"
@@ -303,19 +393,6 @@
 		},
 		{
 			"inputs": [],
-			"name": "start",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
 			"name": "status",
 			"outputs": [
 				{
@@ -325,6 +402,19 @@
 				}
 			],
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "stopNewBet",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{

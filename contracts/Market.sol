@@ -10,7 +10,7 @@ contract Market is IMarket, ReentrancyGuard {
     bytes32 immutable public override marketEvent;
     address private factory;
     /*
-    @dev status of a market, 0: active, 1: sideA wins, 2: side B wins, 3: canceled, 4: stop
+    @dev status of a market, 0: active, 1: sideA wins, 2: side B wins, 3: canceled, 4: no new bet
     */
     uint256 public override status = 0;
     /*
@@ -27,8 +27,8 @@ contract Market is IMarket, ReentrancyGuard {
     mapping(address => bytes32[]) private userBets;
     mapping(bytes32 => Struct.MarketPair) private pairsInfo;
     mapping(bytes32 => bytes32[]) private betPairs;
-    IERC20 immutable private token;
-    IWeb3BetsFO private app;
+    IWeb3BetsFO private app = IWeb3BetsFO(factory);
+    IERC20 immutable private token = IERC20(app.scAddr());
 
     modifier onlyFactory() {
         require(
@@ -55,8 +55,6 @@ contract Market is IMarket, ReentrancyGuard {
     constructor(bytes32 event_) {
         marketEvent = event_;
         factory = msg.sender;
-        app = IWeb3BetsFO(factory);
-        token = IERC20(app.scAddr());
     }
 
     /**
@@ -78,10 +76,43 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev Returns details of `_bet`.
     */
+    function getBets() external view override returns(bytes32[] memory) 
+    {
+        return bets;
+    }
+
+    /**
+    * @dev Returns details of `_bet`.
+    */
     function getBet(bytes32 _bet) 
         external view override returns(Struct.MarketBet memory) 
     {
         return betsInfo[_bet];
+    }
+
+    /**
+    * @dev Returns hash IDs of all the bets placed by `_user`.
+    */
+    function getBetPairs(bytes32 _bet) 
+        external view override returns(bytes32[] memory) 
+    {
+        return betPairs[_bet];
+    }
+
+    /**
+    * @dev Returns details of `_bet`.
+    */
+    function getPairs() external view override returns(bytes32[] memory) 
+    {
+        return pairs;
+    }
+
+    /**
+    * @dev Returns details of `_bet`.
+    */
+    function getPair(bytes32 _pair) external view override returns(Struct.MarketPair memory) 
+    {
+        return pairsInfo[_pair];
     }
 
     /**
@@ -120,7 +151,7 @@ contract Market is IMarket, ReentrancyGuard {
     */
     function cancelBet(bytes32 _bet) external override {
         require(msg.sender == betsInfo[_bet].better, "unauthorized caller");
-        if(status == 0 || status == 4){
+        if(status == 0 || status == 3){
             _cancelBetPairs(_bet);
         }
         withdrawPending(_bet);
@@ -149,7 +180,12 @@ contract Market is IMarket, ReentrancyGuard {
         onlyFactory
         returns(bool)
     {
-        if((status == 0 || status == 4) && (_winningSide == 1 || _winningSide == 2)){
+        if(
+            (status == 0 || status == 1 || status == 2 || status == 4)
+            &&
+            (_winningSide == 1 || _winningSide == 2)
+        )
+        {
             status = _winningSide;
             return true;
         }
@@ -207,7 +243,7 @@ contract Market is IMarket, ReentrancyGuard {
         }
     }
 
-    function start() external override onlyFactory returns(bool){
+    function stopNewBet() external override onlyFactory returns(bool){
         if(status == 0){
             status = 4;
             return true;
@@ -218,7 +254,6 @@ contract Market is IMarket, ReentrancyGuard {
     }
 
     function addBet(
-        address _better,
         address _affiliate,
         uint256 _stake,
         uint256 _odds,
@@ -240,7 +275,7 @@ contract Market is IMarket, ReentrancyGuard {
             "transfer from caller failed"
         );
         bytes32 betHash = _createBet(
-            _better,
+            msg.sender,
             _affiliate,
             _stake,
             0,
@@ -267,7 +302,7 @@ contract Market is IMarket, ReentrancyGuard {
                     }
                 }
                 uint256 betterAmount = 0;
-                if(maxOdds > _odds || (maxOdds > 0 && _instant)) {
+                if(maxOdds >= _odds || (maxOdds > 0 && _instant)) {
                     bytes32 selectedHash = bets[selectedIndex];
                     Struct.MarketBet memory selectedBet = betsInfo[selectedHash];
                     uint offeredStake = (selectedBet.stake - selectedBet.matched) / (_odds - 100);
@@ -360,13 +395,16 @@ contract Market is IMarket, ReentrancyGuard {
         return true;
     }
 
-    function _cancelPair(bytes32 _pair) private {
+    function _cancelPair(bytes32 _pair) private returns(bool) {
+        if(pairsInfo[_pair].settled){
+            return false;
+        }
         address betterA = betsInfo[pairsInfo[_pair].betHashA].better;
         address betterB = betsInfo[pairsInfo[_pair].betHashB].better;
         bal[betterA] += pairsInfo[_pair].amountA;
         bal[betterB] += pairsInfo[_pair].amountB;
         pairsInfo[_pair].settled = true;
-        return;
+        return true;
     }
     
     function _settlePair(bytes32 _pair) private nonReentrant returns(bool) {

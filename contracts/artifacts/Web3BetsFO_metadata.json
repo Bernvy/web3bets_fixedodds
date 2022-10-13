@@ -1,0 +1,622 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "eventHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventOwner",
+						"type": "address"
+					}
+				],
+				"name": "EventCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "eventHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "marketAddress",
+						"type": "address"
+					}
+				],
+				"name": "MarketCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "aVig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "addBlacked",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "addEventAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "addSystemAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "cancelEvent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "contractOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createEvent",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "createMarket",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_eventOwner",
+						"type": "address"
+					}
+				],
+				"name": "deleteEventAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_systemAdmin",
+						"type": "address"
+					}
+				],
+				"name": "deleteSystemAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "eVig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ecoAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getEventOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getEventStatus",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getEvents",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "getMarkets",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hVig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "holdAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "isBlack",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minStake",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "removeBlacked",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "scAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_holdAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_ecoAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_scAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_scDecimals",
+						"type": "uint256"
+					}
+				],
+				"name": "setAddrs",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Struct.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "setMarketsWinners",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_percent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_unitMinStake",
+						"type": "uint256"
+					}
+				],
+				"name": "setVig",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_hVig",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_eVig",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_aVig",
+						"type": "uint256"
+					}
+				],
+				"name": "setVigShare",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Struct.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "settleMarkets",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_event",
+						"type": "bytes32"
+					}
+				],
+				"name": "startEvent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "vig",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"notice": "Copied and modified some codes from  https://github.com/wizardoma/web3_bets_contract/blob/main/contracts/Web3Bets.sol",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Web3BetsFO.sol": "Web3BetsFO"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0x0e9621f60b2faabe65549f7ed0f24e8853a45c1b7990d47e8160e523683f3935",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://287a2f8d5814dd0f05f22b740f18ca8321acc21c9bd03a6cb2203ea626e2f3f2",
+				"dweb:/ipfs/QmZRQv9iuwU817VuqkA2WweiaibKii69x9QxYBBEfbNEud"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"contracts/Market.sol": {
+			"keccak256": "0xf3c4bfe03a96bcd4349c763d7a8ec1730824337db6033f2d546fbc07f21fba1e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1f841b2c7c353912bd7b9a95a142260fb5142a274575ec1d5bf069e8634d9e14",
+				"dweb:/ipfs/QmPzfi2eLVXRgVXckDNdqU3wRsguwq7rAWBRhSNiENZ7wD"
+			]
+		},
+		"contracts/Web3BetsFO.sol": {
+			"keccak256": "0x900d8bf717482783ef25c1957c3f3f373614660c6002a8217e17bfe219096e5d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3d3ba25201482550b8f10f333d61c42fd38343ceb054343e1c5f2c596f3148d7",
+				"dweb:/ipfs/QmdcDtJzma6nXFygdr2qVTFf1cskLYJqPHpsdbriiCf344"
+			]
+		},
+		"contracts/interface/IMarket.sol": {
+			"keccak256": "0xbc8abdb1321ea372925fcd5b34f19f5bb21884493e85f48c35e3c2f48ff02fd4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c062f2956116afd7a75ccc239adf6d00356d57426ce9745445b54feb595427e9",
+				"dweb:/ipfs/QmX6k4bwzYonGJ7JosJ18no9pvyFy2HPqBHbwiEVZK5R7x"
+			]
+		},
+		"contracts/interface/IWeb3BetsFO.sol": {
+			"keccak256": "0xa3e257f60f3b6179afee917f5bab1b51f9e01930d0de6b71da85c84e2a82baa8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41188dc6daa6b41cdc910d92291860f58ddb4e6dd1ec0ceab6a9ce0926b28959",
+				"dweb:/ipfs/QmcoT4njB5ghXX11eRqPga8rp8rtur54ykdsZYfuVq5NMJ"
+			]
+		},
+		"contracts/library/Struct.sol": {
+			"keccak256": "0xd78c8991942b656ee47dcfd129e1b2f4f38edb1c053f2f88464dd3c8c4cb7477",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://498906a51af7aa58f421175241024eeb9536d4a64e5e0f7294ade09062b3cd41",
+				"dweb:/ipfs/QmdDBptNU6QRmzSp29vSE43M4noBQUXcKwCb53WvRsaiyo"
+			]
+		}
+	},
+	"version": 1
+}
