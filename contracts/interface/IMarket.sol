@@ -7,8 +7,6 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../library/Struct.sol";
 
 interface IMarket{
-    function marketEvent() external view returns (bytes32);
-
     function status() external view returns (uint256);
 
     function getBalance(address _user) external view returns(uint256);

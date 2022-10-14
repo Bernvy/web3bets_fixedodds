@@ -7,32 +7,35 @@ import "./interface/IWeb3BetsFO.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Market is IMarket, ReentrancyGuard {
-    bytes32 immutable public override marketEvent;
-    address private factory;
+    Struct.App private a;
+    IERC20 immutable private token;
+    IWeb3BetsFO private app = IWeb3BetsFO(msg.sender);
     /*
     @dev status of a market, 0: active, 1: sideA wins, 2: side B wins, 3: canceled, 4: no new bet
     */
-    uint256 public override status = 0;
-    /*
-    @dev stores the hash of all bets
-    */
-    bytes32[] private pairs;
+    uint256 public override status;
+    mapping(address => uint256) private bal;
     /*
     @dev stores the hash of all bets
     */
     bytes32[] private bets;
-    
-    mapping(address => uint256) private bal;
-    mapping(bytes32 => Struct.MarketBet) private betsInfo;
     mapping(address => bytes32[]) private userBets;
-    mapping(bytes32 => Struct.MarketPair) private pairsInfo;
+    mapping(bytes32 => Struct.MarketBet) private betsInfo;
+    /*
+    @dev stores the hash of all bets
+    */
+    bytes32[] private pairs;
     mapping(bytes32 => bytes32[]) private betPairs;
-    IWeb3BetsFO private app = IWeb3BetsFO(factory);
-    IERC20 immutable private token = IERC20(app.scAddr());
+    mapping(bytes32 => Struct.MarketPair) private pairsInfo;
+    
 
+    modifier notBlack() {
+        require(!app.isBlack(msg.sender), "caller not authorized");
+        _;
+    }
     modifier onlyFactory() {
         require(
-            msg.sender == app.getEventOwner(marketEvent) || msg.sender == factory,
+            msg.sender == a.eventOwner || msg.sender == a.factory,
             "caller not authorized"
         );
         _;
@@ -53,8 +56,19 @@ contract Market is IMarket, ReentrancyGuard {
     );
 
     constructor(bytes32 event_) {
-        marketEvent = event_;
-        factory = msg.sender;
+        a = Struct.App(
+            event_,
+            msg.sender,
+            app.getEventOwner(event_),
+            app.holdAddr(),
+            app.ecoAddr(),
+            app.minStake(),
+            app.vig(),
+            app.aVig(),
+            app.eVig(),
+            app.hVig()
+        );
+        token = IERC20(app.scAddr());
     }
 
     /**
@@ -262,14 +276,14 @@ contract Market is IMarket, ReentrancyGuard {
     ) 
     external
     override
+    notBlack
     returns(bytes32)
     {
-        require(!app.isBlack(msg.sender), "blacklist");
         require(status == 0, "market not active");
         require(_side == 1 || _side == 2, "invalid side");
         require(token.balanceOf(msg.sender) >= _stake,"not enough token balalnce");
         require(token.allowance(msg.sender, address(this)) >= _stake,"not enough allowance");
-        require(_stake >= app.minStake(),"less than min stake");
+        require(_stake >= a.minStake,"less than min stake");
         require(
             token.transferFrom(msg.sender, address(this), _stake),
             "transfer from caller failed"
@@ -288,7 +302,7 @@ contract Market is IMarket, ReentrancyGuard {
         if(bets.length > 0){
             uint _remStake = _stake;
             uint256 betsLength = bets.length;
-            while(_remStake >= app.minStake()){
+            while(_remStake >= a.minStake){
                 uint selectedIndex = 0;
                 uint256 maxOdds = 0;
                 for(uint i = 0; i < betsLength; i++){
@@ -384,12 +398,12 @@ contract Market is IMarket, ReentrancyGuard {
                 counterAmount = pairsInfo[_pairs[i]].amountA;
             }
             counterBetter = betsInfo[counterBetHash].better;
-            bal[bet.better] += thisAmount * (100 - app.vig()) / 100;
+            bal[bet.better] += thisAmount * (100 - a.vig) / 100;
             betsInfo[counterBetHash].matched -= counterAmount;
-            uint256 vigAmount = thisAmount * app.vig() / 100;
-            bal[app.holdAddr()] += vigAmount * app.hVig() / 100;
-            bal[app.ecoAddr()] += vigAmount * app.eVig() / 100;
-            bal[bet.affiliate] += vigAmount * app.aVig() / 100;
+            uint256 vigAmount = thisAmount * a.vig / 100;
+            bal[a.holdAddr] += vigAmount * a.hVig / 100;
+            bal[a.ecoAddr] += vigAmount * a.eVig / 100;
+            bal[bet.affiliate] += vigAmount * a.aVig / 100;
             pairsInfo[_pairs[i]].settled = true;
         }
         return true;
@@ -417,23 +431,23 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 vigAmount;
         if(status == 1){
             winner = betsInfo[pairsInfo[_pair].betHashA].better;
-            winAmount = pairsInfo[_pair].amountA + (pairsInfo[_pair].amountB * (100 - app.vig()) / 100);
-            vigAmount = pairsInfo[_pair].amountB * app.vig() / 100;
+            winAmount = pairsInfo[_pair].amountA + (pairsInfo[_pair].amountB * (100 - a.vig) / 100);
+            vigAmount = pairsInfo[_pair].amountB * a.vig / 100;
             affiliate = betsInfo[pairsInfo[_pair].betHashA].affiliate;
         }
         else if(status == 2){
             winner = betsInfo[pairsInfo[_pair].betHashB].better;
-            winAmount = pairsInfo[_pair].amountB + (pairsInfo[_pair].amountA * (100 - app.vig()) / 100);
-            vigAmount = pairsInfo[_pair].amountA * app.vig() / 100;
+            winAmount = pairsInfo[_pair].amountB + (pairsInfo[_pair].amountA * (100 - a.vig) / 100);
+            vigAmount = pairsInfo[_pair].amountA * a.vig / 100;
             affiliate = betsInfo[pairsInfo[_pair].betHashB].affiliate;
         }
         else{
             return false;
         }
         bal[winner] += winAmount;
-        bal[app.holdAddr()] += vigAmount * app.hVig() / 100;
-        bal[app.ecoAddr()] += vigAmount * app.eVig() / 100;
-        bal[affiliate] += vigAmount * app.aVig() / 100;
+        bal[a.holdAddr] += vigAmount * a.hVig / 100;
+        bal[a.ecoAddr] += vigAmount * a.eVig / 100;
+        bal[affiliate] += vigAmount * a.aVig / 100;
         pairsInfo[_pair].settled = true;
         return true;
     }
@@ -465,7 +479,7 @@ contract Market is IMarket, ReentrancyGuard {
             i++;
         }
         if(_affiliate == address(0)){
-            _affiliate = app.ecoAddr();
+            _affiliate = a.ecoAddr;
         }
         betsInfo[betHash] = Struct.MarketBet(_better, _affiliate, _stake, _matched, _odds, _side);
         bets.push(betHash);
