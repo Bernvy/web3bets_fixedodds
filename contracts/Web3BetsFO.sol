@@ -18,6 +18,10 @@ contract Web3BetsFO is IWeb3BetsFO {
     address public override contractOwner;
     address public override holdAddr = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
     address public override ecoAddr = 0xBffe45D497Bde6f9809200f736084106d1d079df;
+    /**
+    * replace 0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee with the
+    * contract address of the stablecoin for the deployment network
+    */
     address public override scAddr = 0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee;
     uint256 public override vig = 10;
     uint256 public override hVig = 50;
@@ -34,7 +38,7 @@ contract Web3BetsFO is IWeb3BetsFO {
 
     modifier onlyOwner
     {
-        require(msg.sender == contractOwner,"caller not super");
+        require(msg.sender == contractOwner,"W1");
         _;
     }
 
@@ -42,7 +46,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     {
         require(
             admins[msg.sender] != address(0) || msg.sender == contractOwner,
-            "caller not system"
+            "W2"
         );
         _;
     }
@@ -51,7 +55,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     {
         require(
             eventAdmins[msg.sender] != address(0) || msg.sender == contractOwner,
-            "caller not event"
+            "W3"
         );
         _;
     }
@@ -118,7 +122,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function createMarket(bytes32 _event) external onlyEventAdmin returns(address) {
-        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "event not open");
+        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "W4");
         Market market = new Market(_event);
         eventMarkets[_event].push(address(market));
 
@@ -127,7 +131,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function setMarketsWinners(bytes32 _event, Struct.Winner[] calldata _winners) external {
-        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "can't set win");
+        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "W5");
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
             IMarket market = IMarket(_winners[i].market);
@@ -137,7 +141,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function settleMarkets(bytes32 _event, Struct.Winner[] calldata _winners) external {
-        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "can't settle");
+        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "W6");
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
             IMarket market = IMarket(_winners[i].market);
@@ -148,7 +152,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function startEvent(bytes32 _event) external onlyEventAdmin {
-        require(eventsStatus[_event] == 1, "can't start");
+        require(eventsStatus[_event] == 1, "W7");
         address[] memory markets = eventMarkets[_event];
         eventsStatus[_event] = 4; // event live
         uint marketsLength = markets.length;
@@ -159,7 +163,7 @@ contract Web3BetsFO is IWeb3BetsFO {
     }
 
     function cancelEvent(bytes32 _event) external onlyEventAdmin {
-        require(eventsStatus[_event] != 3 && eventsStatus[_event] != 2, "can't cancel");
+        require(eventsStatus[_event] != 3 && eventsStatus[_event] != 2, "W8");
         address[] memory markets = eventMarkets[_event];
         eventsStatus[_event] = 3; // event canceled
         uint marketsLength = markets.length;
@@ -188,11 +192,10 @@ contract Web3BetsFO is IWeb3BetsFO {
     function setVig(uint256 _percent, uint _minStake) external onlySystemAdmin {
         require(
             _percent < 10,
-            "must be less than 100"
+            "W9"
         );
         vig = _percent;
         minStake = _minStake;
-        return;
     }
 
     function setVigShare(
@@ -202,11 +205,11 @@ contract Web3BetsFO is IWeb3BetsFO {
     ) external onlySystemAdmin {
         require(
             _hVig <= 100 && _eVig <= 100 && _aVig <= 100,
-            "each must be less than 100"
+            "W10"
         );
         require(
             _hVig + _eVig + _aVig == 100,
-            "sums to 100"
+            "W11"
         );
 
         hVig = _hVig;
@@ -218,7 +221,7 @@ contract Web3BetsFO is IWeb3BetsFO {
         external
         onlyOwner
     {
-        require(admins[_addr] == address(0), "already sys admin");
+        require(admins[_addr] == address(0), "W12");
         admins[_addr] = _addr;
     }
 
@@ -226,7 +229,7 @@ contract Web3BetsFO is IWeb3BetsFO {
         external
         onlyOwner
     {
-        require (admins[_systemAdmin] != address(0), "not sys admin");
+        require (admins[_systemAdmin] != address(0), "W13");
         
         delete admins[_systemAdmin];
     }
@@ -235,37 +238,33 @@ contract Web3BetsFO is IWeb3BetsFO {
         external
         onlySystemAdmin
     {
-        require(eventAdmins[_addr] == address(0), "already event admin");
+        require(eventAdmins[_addr] == address(0), "W14");
 
         eventAdmins[_addr] = _addr;
-        return;
     }
 
     function deleteEventAdmin(address _eventOwner)
         external
         onlySystemAdmin 
     {
-        require (eventAdmins[_eventOwner] != address(0), "not event admin");
+        require (eventAdmins[_eventOwner] != address(0), "W15");
         delete eventAdmins[_eventOwner];
-        return;
     }
     
     function addBlacked(address _addr)
         external
         onlySystemAdmin
     {
-        require(black[_addr] == address(0), "already black");
+        require(black[_addr] == address(0), "W16");
         black[_addr] = _addr;
-        return;
     }
 
     function removeBlacked(address _addr) 
         external 
         onlySystemAdmin 
     {
-        require (black[_addr] != address(0), "not black");
+        require (black[_addr] != address(0), "W17");
         delete black[_addr];
-        return;
     }
 
 }

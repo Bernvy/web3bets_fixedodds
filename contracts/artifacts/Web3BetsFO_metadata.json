@@ -535,7 +535,11 @@
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"scAddr()": {
+					"notice": "replace 0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee with the contract address of the stablecoin for the deployment network"
+				}
+			},
 			"notice": "Copied and modified some codes from  https://github.com/wizardoma/web3_bets_contract/blob/main/contracts/Web3Bets.sol",
 			"version": 1
 		}
@@ -573,19 +577,19 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0x563ebc4999e53e835ac80a19faeecdd3f0c23a320d6b907ccfb940d4f442d8da",
+			"keccak256": "0x228c541c8a69dde62f6bff99123fdc2971ea418535e61f65f4935de4768479cf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9d5665d9ba9cf5c08667a28f1f9944032748c74d3fce13cd5837a0a357cf3e2e",
-				"dweb:/ipfs/Qmbva13gotxZKiHj3kyqxbav6UicpMU7nUT3bhnikF7U4U"
+				"bzz-raw://f4c1e71880e964205cbe068e40651d04ba27cf9d5c4fa35609aed94d781c2888",
+				"dweb:/ipfs/QmeMgwRArVpmucK9CDwS8x9SGzrai9xmLYWHm6T8QUhHTV"
 			]
 		},
 		"contracts/Web3BetsFO.sol": {
-			"keccak256": "0xeb7139cd2d136ea4d6c39cbf80018955e96901625f6b78b0aeafe5c6214f0522",
+			"keccak256": "0x47541f9efd64fb644171d47552838d7f969beffb4f46c9fec99f1a3036a7f2c0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://37e703cdc8c4da3a8f1b23f912db85ced2ec8092db81b1cc2b27eae5319f9245",
-				"dweb:/ipfs/QmV1gNXtW18d9jPWu7tKYthwgXeeiKzkfgqEuN6rcbk4E5"
+				"bzz-raw://eea328855642aa65fed31397ca0ea0fd01a6cb8497d13dd702e6d2c3097cb91c",
+				"dweb:/ipfs/QmcsmqU4CjyugdZuPcqaDPFtCdpEZTQf36H4yEGgzya3HZ"
 			]
 		},
 		"contracts/interface/IMarket.sol": {
