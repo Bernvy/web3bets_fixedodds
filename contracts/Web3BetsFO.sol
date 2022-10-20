@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.4;
 
-import "./Market.sol";
+import "./EventFactory.sol";
 
 /// @author Victor Okoro
 /// @title Web3Bets Contract for FixedOdds decentralized betting exchange
@@ -15,26 +15,27 @@ import "./Market.sol";
 */
 
 contract Web3BetsFO is IWeb3BetsFO {
-    address public override contractOwner;
-    address public override holdAddr = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
-    address public override ecoAddr = 0xBffe45D497Bde6f9809200f736084106d1d079df;
-    address public override scAddr = 0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee;
     uint256 public override vig = 10;
     uint256 public override hVig = 50;
     uint256 public override eVig = 25;
     uint256 public override aVig = 25;
     uint256 public override minStake = 1000000000000000000;
-    bytes32[] private events;
-    mapping(bytes32 => uint256) private eventsStatus;
-    mapping(bytes32 => address) private eventOwners;
-    mapping(bytes32 => address[]) private eventMarkets;
+    address public override holdAddr = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
+    address public override ecoAddr = 0xBffe45D497Bde6f9809200f736084106d1d079df;
+    /**
+    * replace 0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1 with the
+    * contract address of the stablecoin for the deployment network
+    */
+    address public override scAddr = 0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1;
+    address private contractOwner;
     mapping(address => address) private admins;
     mapping(address => address) private eventAdmins;
     mapping(address => address) private black;
+    address[] eventFactories;
 
     modifier onlyOwner
     {
-        require(msg.sender == contractOwner,"caller not super");
+        require(msg.sender == contractOwner,"W1");
         _;
     }
 
@@ -42,23 +43,10 @@ contract Web3BetsFO is IWeb3BetsFO {
     {
         require(
             admins[msg.sender] != address(0) || msg.sender == contractOwner,
-            "caller not system"
+            "W2"
         );
         _;
     }
-
-    modifier onlyEventAdmin
-    {
-        require(
-            eventAdmins[msg.sender] != address(0) || msg.sender == contractOwner,
-            "caller not event"
-        );
-        _;
-    }
-
-    event MarketCreated(bytes32 eventHash, address marketAddress);
-
-    event EventCreated(bytes32 eventHash, address eventOwner);
 
     constructor()
     {
@@ -74,98 +62,14 @@ contract Web3BetsFO is IWeb3BetsFO {
             return true;
         }
     }
-
-    function getEvents() external view override returns(bytes32[] memory)
+    
+    function isEventAdmin(address _addr) external view override returns(bool)
     {
-        return events;
-    }
-
-    function getEventStatus(bytes32 _event) external view override returns(uint256) 
-    {
-        return eventsStatus[_event];
-    }
-
-    function getEventOwner(bytes32 _event) external view override returns(address) 
-    {
-        return eventOwners[_event];
-    }
-
-    function getMarkets(bytes32 _event) external view override returns(address[] memory){
-        return eventMarkets[_event];
-    }
-
-    function createEvent() external onlyEventAdmin returns(bytes32){
-        bytes32 eventHash;
-        uint i = 0;
-        while(i >= 0){
-            eventHash = keccak256(abi.encodePacked(
-                msg.sender,
-                events.length + 1 + i,
-                block.timestamp,
-                block.difficulty
-            ));
-            if(eventsStatus[eventHash] == 0){
-                break;
-            }
-            i++;
+        if(eventAdmins[_addr] == address(0)) {
+            return false;
         }
-        eventsStatus[eventHash] = 1; // event started
-        eventOwners[eventHash] = msg.sender; 
-        events.push(eventHash);
-
-        emit EventCreated(eventHash, msg.sender);
-        return eventHash;
-    }
-
-    function createMarket(bytes32 _event) external onlyEventAdmin returns(address) {
-        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "event not open");
-        Market market = new Market(_event);
-        eventMarkets[_event].push(address(market));
-
-        emit MarketCreated(_event, address(market));
-        return address(market);
-    }
-
-    function setMarketsWinners(bytes32 _event, Struct.Winner[] calldata _winners) external {
-        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "can't set win");
-        uint marketsLength = _winners.length;
-        for(uint i = 0; i < marketsLength; i++){
-            IMarket market = IMarket(_winners[i].market);
-            market.setWinningSide(_winners[i].winningSide);
-        }
-        eventsStatus[_event] = 2; // event ended
-    }
-
-    function settleMarkets(bytes32 _event, Struct.Winner[] calldata _winners) external {
-        require(eventsStatus[_event] == 1 || eventsStatus[_event] == 4, "can't settle");
-        uint marketsLength = _winners.length;
-        for(uint i = 0; i < marketsLength; i++){
-            IMarket market = IMarket(_winners[i].market);
-
-            market.settle(_winners[i].winningSide);
-        }
-        eventsStatus[_event] = 2; // event ended
-    }
-
-    function startEvent(bytes32 _event) external onlyEventAdmin {
-        require(eventsStatus[_event] == 1, "can't start");
-        address[] memory markets = eventMarkets[_event];
-        eventsStatus[_event] = 4; // event live
-        uint marketsLength = markets.length;
-        for(uint i = 0; i < marketsLength; i++){
-            IMarket market = IMarket(markets[i]);
-            market.stopNewBet();
-        }
-    }
-
-    function cancelEvent(bytes32 _event) external onlyEventAdmin {
-        require(eventsStatus[_event] != 3 && eventsStatus[_event] != 2, "can't cancel");
-        address[] memory markets = eventMarkets[_event];
-        eventsStatus[_event] = 3; // event canceled
-        uint marketsLength = markets.length;
-        for(uint i = 0; i < marketsLength; i++){
-            IMarket market = IMarket(markets[i]);
-            market.cancel();
+        else {
+            return true;
         }
     }
 
@@ -188,11 +92,10 @@ contract Web3BetsFO is IWeb3BetsFO {
     function setVig(uint256 _percent, uint _minStake) external onlySystemAdmin {
         require(
             _percent < 10,
-            "must be less than 100"
+            "W3"
         );
         vig = _percent;
         minStake = _minStake;
-        return;
     }
 
     function setVigShare(
@@ -202,11 +105,11 @@ contract Web3BetsFO is IWeb3BetsFO {
     ) external onlySystemAdmin {
         require(
             _hVig <= 100 && _eVig <= 100 && _aVig <= 100,
-            "each must be less than 100"
+            "W4"
         );
         require(
             _hVig + _eVig + _aVig == 100,
-            "sums to 100"
+            "W5"
         );
 
         hVig = _hVig;
@@ -218,7 +121,7 @@ contract Web3BetsFO is IWeb3BetsFO {
         external
         onlyOwner
     {
-        require(admins[_addr] == address(0), "already sys admin");
+        require(admins[_addr] == address(0), "W6");
         admins[_addr] = _addr;
     }
 
@@ -226,7 +129,7 @@ contract Web3BetsFO is IWeb3BetsFO {
         external
         onlyOwner
     {
-        require (admins[_systemAdmin] != address(0), "not sys admin");
+        require (admins[_systemAdmin] != address(0), "W7");
         
         delete admins[_systemAdmin];
     }
@@ -235,37 +138,40 @@ contract Web3BetsFO is IWeb3BetsFO {
         external
         onlySystemAdmin
     {
-        require(eventAdmins[_addr] == address(0), "already event admin");
+        require(eventAdmins[_addr] == address(0), "W8");
 
         eventAdmins[_addr] = _addr;
-        return;
     }
 
     function deleteEventAdmin(address _eventOwner)
         external
         onlySystemAdmin 
     {
-        require (eventAdmins[_eventOwner] != address(0), "not event admin");
+        require (eventAdmins[_eventOwner] != address(0), "W9");
         delete eventAdmins[_eventOwner];
-        return;
     }
     
     function addBlacked(address _addr)
         external
         onlySystemAdmin
     {
-        require(black[_addr] == address(0), "already black");
+        require(black[_addr] == address(0), "W10");
         black[_addr] = _addr;
-        return;
     }
 
     function removeBlacked(address _addr) 
         external 
         onlySystemAdmin 
     {
-        require (black[_addr] != address(0), "not black");
+        require (black[_addr] != address(0), "W11");
         delete black[_addr];
-        return;
+    }
+
+    function deployEventFactory() external onlyOwner returns(address)
+    {
+        EventFactory eventFactory = new EventFactory();
+        eventFactories.push(address(eventFactory));
+        return address(eventFactory);
     }
 
 }

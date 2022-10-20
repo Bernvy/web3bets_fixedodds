@@ -3,8 +3,6 @@
 pragma solidity ^0.8.4;
 
 interface IWeb3BetsFO{
-    function contractOwner() external view returns(address);
-
     function holdAddr() external view returns(address);
 
     function ecoAddr() external view returns(address);
@@ -22,12 +20,6 @@ interface IWeb3BetsFO{
     function minStake() external view returns(uint256);
 
     function isBlack(address _addr) external view returns(bool);
-    
-    function getEvents() external view returns(bytes32[] memory);
 
-    function getEventStatus(bytes32 _event) external view returns(uint256);
-
-    function getEventOwner(bytes32 _event) external view returns(address);
-
-    function getMarkets(bytes32 _event) external view returns(address[] memory);
+    function isEventAdmin(address _addr) external view returns(bool);
 }

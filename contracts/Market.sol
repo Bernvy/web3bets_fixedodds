@@ -3,13 +3,16 @@
 pragma solidity ^0.8.4;
 
 import "./interface/IMarket.sol";
+import "./interface/IEvent.sol";
 import "./interface/IWeb3BetsFO.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "./IERC20.sol";
+import "./ReentrancyGuard.sol";
 
 contract Market is IMarket, ReentrancyGuard {
-    Struct.App private a;
+    address immutable private factory = msg.sender;
     IERC20 immutable private token;
-    IWeb3BetsFO private app = IWeb3BetsFO(msg.sender);
+    IWeb3BetsFO private app;
+    Struct.App private a;
     /*
     @dev status of a market, 0: active, 1: sideA wins, 2: side B wins, 3: canceled, 4: no new bet
     */
@@ -30,13 +33,13 @@ contract Market is IMarket, ReentrancyGuard {
     
 
     modifier notBlack() {
-        require(!app.isBlack(msg.sender), "caller not authorized");
+        require(!app.isBlack(msg.sender), "M1");
         _;
     }
     modifier onlyFactory() {
         require(
-            msg.sender == a.eventOwner || msg.sender == a.factory,
-            "caller not authorized"
+            msg.sender == factory,
+            "M2"
         );
         _;
     }
@@ -55,11 +58,9 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 side
     );
 
-    constructor(bytes32 event_) {
+    constructor(address w_) {
+        app = IWeb3BetsFO(w_);
         a = Struct.App(
-            event_,
-            msg.sender,
-            app.getEventOwner(event_),
             app.holdAddr(),
             app.ecoAddr(),
             app.minStake(),
@@ -135,12 +136,12 @@ contract Market is IMarket, ReentrancyGuard {
     function withdraw(address _user) public override nonReentrant returns(bool) {
         require(
             token.balanceOf(address(this)) >= bal[_user] && bal[_user] > 0,
-            "zero value available"
+            "M3"
         );
         uint256 availAmount = bal[_user];
         bal[_user] = 0;
         bool success = token.transfer(_user, availAmount);
-        require(success, "transfer to caller failed");
+        require(success, "M4");
 
         emit Withdraw(_user, availAmount);
         return true;
@@ -151,7 +152,7 @@ contract Market is IMarket, ReentrancyGuard {
     */
     function withdrawPending(bytes32 _bet) public override {
         Struct.MarketBet memory bet = betsInfo[_bet];
-        require(msg.sender == bet.better, "unauthorized caller");
+        require(msg.sender == bet.better, "M5");
         uint remStake = bet.stake - bet.matched;
         bal[bet.better] += remStake;
         betsInfo[_bet].matched = bet.stake;
@@ -164,7 +165,7 @@ contract Market is IMarket, ReentrancyGuard {
     * @dev cancel all pairs in `_bet`, 
     */
     function cancelBet(bytes32 _bet) external override {
-        require(msg.sender == betsInfo[_bet].better, "unauthorized caller");
+        require(msg.sender == betsInfo[_bet].better, "M6");
         if(status == 0 || status == 3){
             _cancelBetPairs(_bet);
         }
@@ -279,14 +280,14 @@ contract Market is IMarket, ReentrancyGuard {
     notBlack
     returns(bytes32)
     {
-        require(status == 0, "market not active");
-        require(_side == 1 || _side == 2, "invalid side");
-        require(token.balanceOf(msg.sender) >= _stake,"not enough token balalnce");
-        require(token.allowance(msg.sender, address(this)) >= _stake,"not enough allowance");
-        require(_stake >= a.minStake,"less than min stake");
+        require(status == 0, "M7");
+        require(_side == 1 || _side == 2, "M8");
+        require(token.balanceOf(msg.sender) >= _stake,"M9");
+        require(token.allowance(msg.sender, address(this)) >= _stake,"M10");
+        require(_stake >= a.minStake,"M11");
         require(
             token.transferFrom(msg.sender, address(this), _stake),
-            "transfer from caller failed"
+            "M12"
         );
         bytes32 betHash = _createBet(
             msg.sender,
@@ -308,6 +309,9 @@ contract Market is IMarket, ReentrancyGuard {
                 for(uint i = 0; i < betsLength; i++){
                     bytes32 bet = bets[i];
                     if(_side == betsInfo[bet].side){
+                        continue;
+                    }
+                    if(msg.sender == betsInfo[bet].better){
                         continue;
                     }
                     if(betsInfo[bet].odds > maxOdds){

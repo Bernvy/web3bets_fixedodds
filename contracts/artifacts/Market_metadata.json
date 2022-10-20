@@ -1,0 +1,574 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "w_",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "better",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "marketAddr",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "stake",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "odds",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "side",
+						"type": "uint256"
+					}
+				],
+				"name": "BetCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Withdraw",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_affiliate",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_stake",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_odds",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_side",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_instant",
+						"type": "bool"
+					}
+				],
+				"name": "addBet",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cancel",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "cancelBet",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cancelPlusPairs",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "getBet",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "better",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "affiliate",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "stake",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "matched",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "odds",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "side",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Struct.MarketBet",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "getBetPairs",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBets",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_pair",
+						"type": "bytes32"
+					}
+				],
+				"name": "getPair",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "bytes32",
+								"name": "betHashA",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "betHashB",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amountA",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amountB",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "settled",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct Struct.MarketPair",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPairs",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserBets",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_winningSide",
+						"type": "uint256"
+					}
+				],
+				"name": "setWinningSide",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_winningSide",
+						"type": "uint256"
+					}
+				],
+				"name": "settle",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "settleBet",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "status",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stopNewBet",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_bet",
+						"type": "bytes32"
+					}
+				],
+				"name": "withdrawPending",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"cancelBet(bytes32)": {
+					"details": "cancel all pairs in `_bet`, "
+				},
+				"getBalance(address)": {
+					"details": "Returns the amount of tokens owned by `_user` in this market."
+				},
+				"getBet(bytes32)": {
+					"details": "Returns details of `_bet`."
+				},
+				"getBetPairs(bytes32)": {
+					"details": "Returns hash IDs of all the bets placed by `_user`."
+				},
+				"getBets()": {
+					"details": "Returns details of `_bet`."
+				},
+				"getPair(bytes32)": {
+					"details": "Returns details of `_bet`."
+				},
+				"getPairs()": {
+					"details": "Returns details of `_bet`."
+				},
+				"getUserBets(address)": {
+					"details": "Returns hash IDs of all the bets placed by `_user`."
+				},
+				"setWinningSide(uint256)": {
+					"details": "assign `_winningSide` to `status` "
+				},
+				"settle(uint256)": {
+					"details": "assign `_winningSide` to `status` "
+				},
+				"settleBet(bytes32)": {
+					"details": "settle all pairs in `_bet`, "
+				},
+				"withdraw(address)": {
+					"details": "transfer bal[`_user`] to `_user`, bal"
+				},
+				"withdrawPending(bytes32)": {
+					"details": "refund all unmatched stake in `_bet`, and withraw for caller address"
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Market.sol": "Market"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"contracts/Market.sol": {
+			"keccak256": "0x46143d8ac56528faac4edeb98a2b5c4e839c5e88e5ca2ea60ce617fcfa437107",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cf723f98b31b9b6671487c87c275b8a67b874aeab629f3c39dfcdd1c6e92f639",
+				"dweb:/ipfs/QmPR94AFK4wWtQr92zpPxY61LssYgdqucZbE6KEFqbm6Ny"
+			]
+		},
+		"contracts/ReentrancyGuard.sol": {
+			"keccak256": "0x0e9621f60b2faabe65549f7ed0f24e8853a45c1b7990d47e8160e523683f3935",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://287a2f8d5814dd0f05f22b740f18ca8321acc21c9bd03a6cb2203ea626e2f3f2",
+				"dweb:/ipfs/QmZRQv9iuwU817VuqkA2WweiaibKii69x9QxYBBEfbNEud"
+			]
+		},
+		"contracts/interface/IEvent.sol": {
+			"keccak256": "0xf94631e336c9ea666666a4d56d1eef206a3c7d0e212a6f5876f976c31f18e197",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0683f2e855cd3f7b72842fc9312b113075a8caf29ae4de9c2404ac52c2fcbbbf",
+				"dweb:/ipfs/QmavKwZoiVFcFPknMZ3PtR1sfX9X9gggdQ2RozBaozwWo1"
+			]
+		},
+		"contracts/interface/IMarket.sol": {
+			"keccak256": "0x29647b020baaad7803d9dec2f3568eb2c7013a80995f909f4580168d4f03084d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://710589a10c4f4ce35e236ab2e1e41802f27454afdd1bad2f5e09ed0f2011cb66",
+				"dweb:/ipfs/QmaKiqZHm8efbXcXoN4RCsoiQapoKCseCF9Tno19rqPgKc"
+			]
+		},
+		"contracts/interface/IWeb3BetsFO.sol": {
+			"keccak256": "0x1190af9a9e20c8685c7a33959d64b2d5d6fb46f369f8f802dbcb8eb5995c1e9d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6652012d5810da58eec8948bd40b8e5de80ea297da3871cc8283fd0295e39260",
+				"dweb:/ipfs/Qme8Lj6qGsH1L7xRpTyo4WUeLwMQd424NRcrj2RKz5nkoH"
+			]
+		},
+		"contracts/library/Struct.sol": {
+			"keccak256": "0xb54da96e33cf8cf20ce3cd72f7b2399a49ec18c900d8d6cd6c302a46bd292d08",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7ded948f4aded309bfd2dd5f19f4f8b79e8f7394fb43887758c4a5b84d2145e0",
+				"dweb:/ipfs/QmXabzoVdjRYYaaJ6nP7JsQYd8Rdcz7iNojYPDFtrwzWQH"
+			]
+		}
+	},
+	"version": 1
+}

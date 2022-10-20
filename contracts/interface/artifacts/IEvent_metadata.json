@@ -1,0 +1,244 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "cancel",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_side1",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_side2",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					}
+				],
+				"name": "createMarket",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "end",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_market",
+						"type": "address"
+					}
+				],
+				"name": "getMarketString",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "marketName",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "side1",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "side2",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "desc",
+								"type": "string"
+							}
+						],
+						"internalType": "struct IEvent.MarketString",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getMarkets",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct IEvent.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "setMarketsWinners",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct IEvent.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "settleMarkets",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "start",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "status",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interface/IEvent.sol": "IEvent"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interface/IEvent.sol": {
+			"keccak256": "0xf70bc89d59183e8a460445b4ca0d60d9563633013fe88285ca4be7ac8a4906a9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2051c481497b9da754d2f516d08e978a7a192e4c65884cfd5eed915465441dbf",
+				"dweb:/ipfs/Qmbh1ccikT7eUjNfrGJNrVsC5P5WSpwi4LF1ZQykEyrAfi"
+			]
+		}
+	},
+	"version": 1
+}

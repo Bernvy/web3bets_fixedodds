@@ -33,11 +33,11 @@
 	},
 	"sources": {
 		"contracts/library/Struct.sol": {
-			"keccak256": "0x576e42f594fb46203670887c9a62ecaba1b6d3352a008986ebd6118313d19a95",
+			"keccak256": "0x3701800f3214661890b6f1230a1b54e56c17ba658220394e9b595ee2a929f9b8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8eff4edbc824410e6ad228a962a5e7bd860316f9575641a69e4747b32608cadf",
-				"dweb:/ipfs/QmVEdTQbkdBYkQ6GEDqJqXV7phVtxQ1Z82dbGaoxrPKDfj"
+				"bzz-raw://df61b9f5750b96e678bedfa059eebe2907859a07c77a2efed76bd9f7aca59274",
+				"dweb:/ipfs/QmaxE7rs4DNGoYPq4eArPFzFPskCaY4HgwjJG9Eqph5qUX"
 			]
 		}
 	},
