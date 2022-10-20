@@ -6,6 +6,54 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"name": "cancel",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_side1",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_side2",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					}
+				],
+				"name": "createMarket",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "end",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -73,6 +121,63 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct IEvent.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "setMarketsWinners",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "market",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "winningSide",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct IEvent.Winner[]",
+						"name": "_winners",
+						"type": "tuple[]"
+					}
+				],
+				"name": "settleMarkets",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "start",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "startTime",
 				"outputs": [
@@ -127,11 +232,11 @@
 	},
 	"sources": {
 		"contracts/interface/IEvent.sol": {
-			"keccak256": "0xf94631e336c9ea666666a4d56d1eef206a3c7d0e212a6f5876f976c31f18e197",
+			"keccak256": "0xf70bc89d59183e8a460445b4ca0d60d9563633013fe88285ca4be7ac8a4906a9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0683f2e855cd3f7b72842fc9312b113075a8caf29ae4de9c2404ac52c2fcbbbf",
-				"dweb:/ipfs/QmavKwZoiVFcFPknMZ3PtR1sfX9X9gggdQ2RozBaozwWo1"
+				"bzz-raw://2051c481497b9da754d2f516d08e978a7a192e4c65884cfd5eed915465441dbf",
+				"dweb:/ipfs/Qmbh1ccikT7eUjNfrGJNrVsC5P5WSpwi4LF1ZQykEyrAfi"
 			]
 		}
 	},

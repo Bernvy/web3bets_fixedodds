@@ -30,9 +30,4 @@ library Struct {
         uint256 amountB;
         bool settled;
     }
-
-    struct Winner {
-        address market;
-        uint winningSide;
-    }
 }

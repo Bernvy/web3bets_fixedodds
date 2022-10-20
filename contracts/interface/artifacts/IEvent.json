@@ -47,14 +47,68 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
+			"cancel()": "ea8a1af0",
+			"createMarket(string,string,string,string)": "f7429133",
+			"end()": "efbe1c1c",
 			"getMarketString(address)": "dab41dc5",
 			"getMarkets()": "ec2c9016",
 			"owner()": "8da5cb5b",
+			"setMarketsWinners((address,uint256)[])": "c79f2106",
+			"settleMarkets((address,uint256)[])": "96990fbd",
+			"start()": "be9a6555",
 			"startTime()": "78e97925",
 			"status()": "200d2ed2"
 		}
 	},
 	"abi": [
+		{
+			"inputs": [],
+			"name": "cancel",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_side1",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_side2",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_description",
+					"type": "string"
+				}
+			],
+			"name": "createMarket",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "end",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
 		{
 			"inputs": [
 				{
@@ -120,6 +174,63 @@
 				}
 			],
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"components": [
+						{
+							"internalType": "address",
+							"name": "market",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "winningSide",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct IEvent.Winner[]",
+					"name": "_winners",
+					"type": "tuple[]"
+				}
+			],
+			"name": "setMarketsWinners",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"components": [
+						{
+							"internalType": "address",
+							"name": "market",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "winningSide",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct IEvent.Winner[]",
+					"name": "_winners",
+					"type": "tuple[]"
+				}
+			],
+			"name": "settleMarkets",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "start",
+			"outputs": [],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{

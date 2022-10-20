@@ -43,7 +43,7 @@ contract Event is IEvent {
         return details;
     }
 
-    function start() external onlyOwner {
+    function start() external override onlyOwner {
         require(status == 0, "E2");
         status = 1; // event live
         uint marketsLength = markets.length;
@@ -53,7 +53,7 @@ contract Event is IEvent {
         }
     }
 
-    function end() external onlyOwner {
+    function end() external override onlyOwner {
         require(status != 3 && status != 2, "E3");
         uint marketsLength = markets.length;
         uint notSet;
@@ -70,7 +70,7 @@ contract Event is IEvent {
         }
     }
 
-    function cancel() onlyOwner external {
+    function cancel() external override onlyOwner {
         require(status != 3 && status != 2, "E4");
         status = 3; // event canceled
         uint marketsLength = markets.length;
@@ -85,7 +85,7 @@ contract Event is IEvent {
         string memory _side1,
         string memory _side2,
         string memory _description
-    ) external onlyOwner returns(address) {
+    ) external override onlyOwner returns(address) {
         require(status == 0 || status == 1, "E5");
         
         Market market = new Market(web3bets);
@@ -100,7 +100,7 @@ contract Event is IEvent {
         return marketAddress;
     }
 
-    function setMarketsWinners(Struct.Winner[] calldata _winners) external onlyOwner {
+    function setMarketsWinners(Winner[] calldata _winners) external override onlyOwner {
         require(status == 0 || status == 1, "E6");
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
@@ -109,7 +109,7 @@ contract Event is IEvent {
         }
     }
 
-    function settleMarkets(Struct.Winner[] calldata _winners) external onlyOwner {
+    function settleMarkets(Winner[] calldata _winners) external override onlyOwner {
         require(status == 0 || status == 1, "E7");
         uint marketsLength = _winners.length;
         for(uint i = 0; i < marketsLength; i++){
