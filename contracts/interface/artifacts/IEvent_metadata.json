@@ -1,0 +1,139 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_market",
+						"type": "address"
+					}
+				],
+				"name": "getMarketString",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "marketName",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "side1",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "side2",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "desc",
+								"type": "string"
+							}
+						],
+						"internalType": "struct IEvent.MarketString",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getMarkets",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "status",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interface/IEvent.sol": "IEvent"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interface/IEvent.sol": {
+			"keccak256": "0xf94631e336c9ea666666a4d56d1eef206a3c7d0e212a6f5876f976c31f18e197",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0683f2e855cd3f7b72842fc9312b113075a8caf29ae4de9c2404ac52c2fcbbbf",
+				"dweb:/ipfs/QmavKwZoiVFcFPknMZ3PtR1sfX9X9gggdQ2RozBaozwWo1"
+			]
+		}
+	},
+	"version": 1
+}

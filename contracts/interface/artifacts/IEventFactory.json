@@ -1,0 +1,206 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"createEvent(string,string,string)": "9b503fd8",
+			"getEvents()": "404aa8f9",
+			"getFactory()": "88cc58e4",
+			"getString(address)": "7d434425",
+			"setCategory(address,string)": "c2e2f01d",
+			"setName(address,string)": "3121db1c",
+			"setSubcategory(address,string)": "8ce4a53e"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_cat",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_sub",
+					"type": "string"
+				}
+			],
+			"name": "createEvent",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getEvents",
+			"outputs": [
+				{
+					"internalType": "address[]",
+					"name": "",
+					"type": "address[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getFactory",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_event",
+					"type": "address"
+				}
+			],
+			"name": "getString",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "eventName",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "eventCat",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "eventSub",
+							"type": "string"
+						}
+					],
+					"internalType": "struct IEventFactory.EventString",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_event",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "_cat",
+					"type": "string"
+				}
+			],
+			"name": "setCategory",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_event",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				}
+			],
+			"name": "setName",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_event",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "_sub",
+					"type": "string"
+				}
+			],
+			"name": "setSubcategory",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

@@ -48,16 +48,12 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"aVig()": "54cd1a5c",
-			"contractOwner()": "ce606ee0",
 			"eVig()": "28576d45",
 			"ecoAddr()": "09953b2f",
-			"getEventOwner(bytes32)": "f2ac1998",
-			"getEventStatus(bytes32)": "4b0ecb30",
-			"getEvents()": "404aa8f9",
-			"getMarkets(bytes32)": "346467f2",
 			"hVig()": "6a0ccd9d",
 			"holdAddr()": "b7640a54",
 			"isBlack(address)": "332daccf",
+			"isEventAdmin(address)": "cb146622",
 			"minStake()": "375b3c0a",
 			"scAddr()": "04b376c8",
 			"vig()": "55c4a8bf"
@@ -72,19 +68,6 @@
 					"internalType": "uint256",
 					"name": "",
 					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "contractOwner",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
 				}
 			],
 			"stateMutability": "view",
@@ -111,76 +94,6 @@
 					"internalType": "address",
 					"name": "",
 					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "bytes32",
-					"name": "_event",
-					"type": "bytes32"
-				}
-			],
-			"name": "getEventOwner",
-			"outputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "bytes32",
-					"name": "_event",
-					"type": "bytes32"
-				}
-			],
-			"name": "getEventStatus",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "getEvents",
-			"outputs": [
-				{
-					"internalType": "bytes32[]",
-					"name": "",
-					"type": "bytes32[]"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "bytes32",
-					"name": "_event",
-					"type": "bytes32"
-				}
-			],
-			"name": "getMarkets",
-			"outputs": [
-				{
-					"internalType": "address[]",
-					"name": "",
-					"type": "address[]"
 				}
 			],
 			"stateMutability": "view",
@@ -221,6 +134,25 @@
 				}
 			],
 			"name": "isBlack",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_addr",
+					"type": "address"
+				}
+			],
+			"name": "isEventAdmin",
 			"outputs": [
 				{
 					"internalType": "bool",

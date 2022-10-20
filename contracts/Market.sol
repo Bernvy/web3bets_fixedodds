@@ -3,13 +3,16 @@
 pragma solidity ^0.8.4;
 
 import "./interface/IMarket.sol";
+import "./interface/IEvent.sol";
 import "./interface/IWeb3BetsFO.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "./IERC20.sol";
+import "./ReentrancyGuard.sol";
 
 contract Market is IMarket, ReentrancyGuard {
-    Struct.App private a;
+    address immutable private factory = msg.sender;
     IERC20 immutable private token;
-    IWeb3BetsFO private app = IWeb3BetsFO(msg.sender);
+    IWeb3BetsFO private app;
+    Struct.App private a;
     /*
     @dev status of a market, 0: active, 1: sideA wins, 2: side B wins, 3: canceled, 4: no new bet
     */
@@ -35,7 +38,7 @@ contract Market is IMarket, ReentrancyGuard {
     }
     modifier onlyFactory() {
         require(
-            msg.sender == a.eventOwner || msg.sender == a.factory,
+            msg.sender == factory,
             "M2"
         );
         _;
@@ -55,11 +58,9 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 side
     );
 
-    constructor(bytes32 event_) {
+    constructor(address w_) {
+        app = IWeb3BetsFO(w_);
         a = Struct.App(
-            event_,
-            msg.sender,
-            app.getEventOwner(event_),
             app.holdAddr(),
             app.ecoAddr(),
             app.minStake(),
@@ -310,9 +311,6 @@ contract Market is IMarket, ReentrancyGuard {
                     if(_side == betsInfo[bet].side){
                         continue;
                     }
-                    /**
-                    * absent in BSC testnet source code
-                    */
                     if(msg.sender == betsInfo[bet].better){
                         continue;
                     }

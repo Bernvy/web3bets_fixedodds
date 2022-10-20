@@ -3,10 +3,8 @@
 pragma solidity ^0.8.4;
 
 library Struct {
+
     struct App {
-        bytes32 eventHash;
-        address factory;
-        address eventOwner;
         address holdAddr;
         address ecoAddr;
         uint256 minStake;
