@@ -11,6 +11,19 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "factoryAddress",
+						"type": "address"
+					}
+				],
+				"name": "FactoryCreated",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "aVig",
 				"outputs": [
@@ -378,11 +391,11 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0x46143d8ac56528faac4edeb98a2b5c4e839c5e88e5ca2ea60ce617fcfa437107",
+			"keccak256": "0xee7fa7d42dacd56eaa9031f4b5a5626b4b00bfbec84c46ec600b7083cadb2b29",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cf723f98b31b9b6671487c87c275b8a67b874aeab629f3c39dfcdd1c6e92f639",
-				"dweb:/ipfs/QmPR94AFK4wWtQr92zpPxY61LssYgdqucZbE6KEFqbm6Ny"
+				"bzz-raw://40132771c884b3063ad81cce34a54726eb8214f77985e770f96472333a87ba87",
+				"dweb:/ipfs/QmPCXrk4Ps4i5iCWyw5fHoJjnuZaYyaSwVQJk1yQ5C1Npz"
 			]
 		},
 		"contracts/ReentrancyGuard.sol": {
@@ -394,11 +407,11 @@
 			]
 		},
 		"contracts/Web3BetsFO.sol": {
-			"keccak256": "0xb998ba3f4561feb9555fe4f4a28a97d100a7b2863c9a9326fbea4a2760bbd92e",
+			"keccak256": "0xc74d4b8a9c657e81a08990bd8e9a710145e72b518aafabc7ece2e7b338c8dbc1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://915eed41ff350077534e54658772b69ed9e8714273baefe63b62b52a6e3aa4e0",
-				"dweb:/ipfs/QmS1WXPxoK18DJkr2bXko9YVifaWuVvhozpXuw1uZa79S5"
+				"bzz-raw://ca680dbb4e2becf68dc0fbfbd99564ff2f80e9fc01d441ff057f45122de6eb68",
+				"dweb:/ipfs/Qma6mGVDYgA5YZd6SHgLaeiUKhRVTJrckzYWAUJcGpX1kC"
 			]
 		},
 		"contracts/interface/IEvent.sol": {

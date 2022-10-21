@@ -1,0 +1,215 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventOwner",
+						"type": "address"
+					}
+				],
+				"name": "EventCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_cat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_sub",
+						"type": "string"
+					}
+				],
+				"name": "createEvent",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getEvents",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getFactory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_event",
+						"type": "address"
+					}
+				],
+				"name": "getString",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "eventName",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "eventCat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "eventSub",
+								"type": "string"
+							}
+						],
+						"internalType": "struct IEventFactory.EventString",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_event",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_cat",
+						"type": "string"
+					}
+				],
+				"name": "setCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_event",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "setName",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_event",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_sub",
+						"type": "string"
+					}
+				],
+				"name": "setSubcategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Web3BetsFO_flat.sol": "EventFactory"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Web3BetsFO_flat.sol": {
+			"keccak256": "0x33195d530483d27d70f24439382ec66f34d213cd5e8e860944113a9994aa17a0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://268b6d46828050504c30678d26169f9e07539c63ad18102c81f07e163f554a9c",
+				"dweb:/ipfs/QmPzSuiRS4PELLwry1KDEv7PdATFA9WDatJmChG8RGoYFk"
+			]
+		}
+	},
+	"version": 1
+}

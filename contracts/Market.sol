@@ -58,6 +58,13 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 side
     );
 
+    event PairCreated(
+        bytes32 betHashA,
+        bytes32 betHashB,
+        uint256 amountA,
+        uint256 amountB
+    );
+
     constructor(address w_) {
         app = IWeb3BetsFO(w_);
         a = Struct.App(
@@ -517,6 +524,8 @@ contract Market is IMarket, ReentrancyGuard {
         }
         pairsInfo[pairHash] = Struct.MarketPair(_betHashA, _betHashB, _amountA, _amountB, false);
         pairs.push(pairHash);
+
+        emit PairCreated(_betHashA, _betHashB, _amountA, _amountB);
         return pairHash;
     }
     
