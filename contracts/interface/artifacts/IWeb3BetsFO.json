@@ -61,6 +61,19 @@
 	},
 	"abi": [
 		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "factoryAddress",
+					"type": "address"
+				}
+			],
+			"name": "FactoryCreated",
+			"type": "event"
+		},
+		{
 			"inputs": [],
 			"name": "aVig",
 			"outputs": [

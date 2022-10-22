@@ -44,27 +44,6 @@ contract Market is IMarket, ReentrancyGuard {
         _;
     }
 
-    event Withdraw(
-        address beneficiary,
-        uint256 value
-    );
-
-    event BetCreated(
-        address better,
-        address marketAddr,
-        bytes32 hash,
-        uint256 stake,
-        uint256 odds,
-        uint256 side
-    );
-
-    event PairCreated(
-        bytes32 betHashA,
-        bytes32 betHashB,
-        uint256 amountA,
-        uint256 amountB
-    );
-
     constructor(address w_) {
         app = IWeb3BetsFO(w_);
         a = Struct.App(

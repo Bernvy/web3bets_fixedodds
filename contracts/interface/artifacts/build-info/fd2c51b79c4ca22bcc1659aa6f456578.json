@@ -1,0 +1,674 @@
+{
+	"id": "fd2c51b79c4ca22bcc1659aa6f456578",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.4",
+	"solcLongVersion": "0.8.4+commit.c7e474f2",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/interface/IEventFactory.sol": {
+				"content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.4;\n\ninterface IEventFactory {\n    struct EventString {\n        string eventName;\n        string eventCat;\n        string eventSub;\n    }\n\n    function getFactory() external view returns(address);\n\n    function getEvents() external view returns(address[] memory);\n\n    function getString(address _event) external view returns(EventString memory);\n\n    function createEvent(string calldata _name,string calldata _cat, string calldata _sub) external returns(address);\n\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": true,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/interface/IEventFactory.sol": {
+				"IEventFactory": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"internalType": "string",
+									"name": "_name",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "_cat",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "_sub",
+									"type": "string"
+								}
+							],
+							"name": "createEvent",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "getEvents",
+							"outputs": [
+								{
+									"internalType": "address[]",
+									"name": "",
+									"type": "address[]"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "getFactory",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "_event",
+									"type": "address"
+								}
+							],
+							"name": "getString",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "string",
+											"name": "eventName",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "eventCat",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "eventSub",
+											"type": "string"
+										}
+									],
+									"internalType": "struct IEventFactory.EventString",
+									"name": "",
+									"type": "tuple"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"createEvent(string,string,string)": "9b503fd8",
+							"getEvents()": "404aa8f9",
+							"getFactory()": "88cc58e4",
+							"getString(address)": "7d434425"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_cat\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_sub\",\"type\":\"string\"}],\"name\":\"createEvent\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getEvents\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_event\",\"type\":\"address\"}],\"name\":\"getString\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"eventName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"eventCat\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"eventSub\",\"type\":\"string\"}],\"internalType\":\"struct IEventFactory.EventString\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interface/IEventFactory.sol\":\"IEventFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interface/IEventFactory.sol\":{\"keccak256\":\"0xb76ab95dfd5d8a59baef241b0618612667a680f14fa18371fa9e2dc9cf3835a5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e2dd8833d5799b26b3a8be4999f86810de613283c192c713e5574ab96d68906b\",\"dweb:/ipfs/QmPR9DKz34pKvUkYZ759jeECdrPogaoPAbrCGyvhxe12EW\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/interface/IEventFactory.sol": {
+				"ast": {
+					"absolutePath": "contracts/interface/IEventFactory.sol",
+					"exportedSymbols": {
+						"IEventFactory": [
+							39
+						]
+					},
+					"id": 40,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".4"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 39,
+							"linearizedBaseContracts": [
+								39
+							],
+							"name": "IEventFactory",
+							"nameLocation": "68:13:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"canonicalName": "IEventFactory.EventString",
+									"id": 8,
+									"members": [
+										{
+											"constant": false,
+											"id": 3,
+											"mutability": "mutable",
+											"name": "eventName",
+											"nameLocation": "124:9:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 8,
+											"src": "117:16:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 2,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "117:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 5,
+											"mutability": "mutable",
+											"name": "eventCat",
+											"nameLocation": "150:8:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 8,
+											"src": "143:15:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 4,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "143:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 7,
+											"mutability": "mutable",
+											"name": "eventSub",
+											"nameLocation": "175:8:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 8,
+											"src": "168:15:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 6,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "168:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "EventString",
+									"nameLocation": "95:11:0",
+									"nodeType": "StructDefinition",
+									"scope": 39,
+									"src": "88:102:0",
+									"visibility": "public"
+								},
+								{
+									"functionSelector": "88cc58e4",
+									"id": 13,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getFactory",
+									"nameLocation": "205:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 9,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "215:2:0"
+									},
+									"returnParameters": {
+										"id": 12,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 11,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 13,
+												"src": "240:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 10,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "240:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "239:9:0"
+									},
+									"scope": 39,
+									"src": "196:53:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "404aa8f9",
+									"id": 19,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getEvents",
+									"nameLocation": "264:9:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 14,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "273:2:0"
+									},
+									"returnParameters": {
+										"id": 18,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 17,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 19,
+												"src": "298:16:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+													"typeString": "address[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 15,
+														"name": "address",
+														"nodeType": "ElementaryTypeName",
+														"src": "298:7:0",
+														"stateMutability": "nonpayable",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"id": 16,
+													"nodeType": "ArrayTypeName",
+													"src": "298:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+														"typeString": "address[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "297:18:0"
+									},
+									"scope": 39,
+									"src": "255:61:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "7d434425",
+									"id": 27,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getString",
+									"nameLocation": "331:9:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 22,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 21,
+												"mutability": "mutable",
+												"name": "_event",
+												"nameLocation": "349:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 27,
+												"src": "341:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 20,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "341:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "340:16:0"
+									},
+									"returnParameters": {
+										"id": 26,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 25,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 27,
+												"src": "379:18:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_EventString_$8_memory_ptr",
+													"typeString": "struct IEventFactory.EventString"
+												},
+												"typeName": {
+													"id": 24,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 23,
+														"name": "EventString",
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 8,
+														"src": "379:11:0"
+													},
+													"referencedDeclaration": 8,
+													"src": "379:11:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_EventString_$8_storage_ptr",
+														"typeString": "struct IEventFactory.EventString"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "378:20:0"
+									},
+									"scope": 39,
+									"src": "322:77:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "9b503fd8",
+									"id": 38,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createEvent",
+									"nameLocation": "414:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 34,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 29,
+												"mutability": "mutable",
+												"name": "_name",
+												"nameLocation": "442:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "426:21:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 28,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "426:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 31,
+												"mutability": "mutable",
+												"name": "_cat",
+												"nameLocation": "464:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "448:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 30,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "448:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 33,
+												"mutability": "mutable",
+												"name": "_sub",
+												"nameLocation": "486:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "470:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 32,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "470:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "425:66:0"
+									},
+									"returnParameters": {
+										"id": 37,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 36,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "509:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 35,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "509:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "508:9:0"
+									},
+									"scope": 39,
+									"src": "405:113:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 40,
+							"src": "58:463:0",
+							"usedErrors": []
+						}
+					],
+					"src": "33:488:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

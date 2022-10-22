@@ -30,23 +30,7 @@
 				"type": "event"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_cat",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_sub",
-						"type": "string"
-					}
-				],
+				"inputs": [],
 				"name": "createEvent",
 				"outputs": [
 					{
@@ -83,96 +67,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					}
-				],
-				"name": "getString",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "eventName",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "eventCat",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "eventSub",
-								"type": "string"
-							}
-						],
-						"internalType": "struct IEventFactory.EventString",
-						"name": "",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_cat",
-						"type": "string"
-					}
-				],
-				"name": "setCategory",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					}
-				],
-				"name": "setName",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_sub",
-						"type": "string"
-					}
-				],
-				"name": "setSubcategory",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -203,19 +97,19 @@
 	},
 	"sources": {
 		"contracts/Event.sol": {
-			"keccak256": "0x9922309d3af67c1277d776e3873f191c3b3d0591feac908766d3c2cfd61facf2",
+			"keccak256": "0x675643bae677119e7a4cf9db41e74d0303894e01d3b71bf06b45356c2e02e324",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2a6fb9db1321e9c6c44b2af8f87e304e2a9b90ed84a3af198e3b1e74effd9909",
-				"dweb:/ipfs/QmPco3zg6fmT6v1J63W4k4zNRb6qHezAkNzWtrVvkkHtfF"
+				"bzz-raw://ba824c6fe0b34bb26965bd5fb5a45323b631accbac46395b87a970ff018f09d5",
+				"dweb:/ipfs/QmUByJYxNaC4vHPeaF5aqeW248kPt3TubHh8zbPk7ke1rH"
 			]
 		},
 		"contracts/EventFactory.sol": {
-			"keccak256": "0x378f4cfee510fc94d236f88132fb9e1142c264bcc270ec26a9cf5b6e2b2c3b5b",
+			"keccak256": "0x53f996fa176ca852d278483c4aa40f22d1bd26046f7f5faa6c33254ba28aae4d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c752897bddab9312fc447e5015d92d14d172ed118989c0bc3044ce8ba635f8db",
-				"dweb:/ipfs/QmdoG2fkMED5Z4GBViAUatFAKrWwZ4t3yYgKVJLKdpU3m1"
+				"bzz-raw://a9fcf6e13fd68df1ac6b297c3b62b36507242f78940f0728c4b9dbf029668fcc",
+				"dweb:/ipfs/QmVfFDTEFMQej2NXi2sBqufzBxzqJa4zver4W6unBEF9uU"
 			]
 		},
 		"contracts/IERC20.sol": {
@@ -227,11 +121,11 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0xee7fa7d42dacd56eaa9031f4b5a5626b4b00bfbec84c46ec600b7083cadb2b29",
+			"keccak256": "0xb9a93938403bd76812e6db38670d42e014e41b25c3cca4f5098cda6cd80aab18",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://40132771c884b3063ad81cce34a54726eb8214f77985e770f96472333a87ba87",
-				"dweb:/ipfs/QmPCXrk4Ps4i5iCWyw5fHoJjnuZaYyaSwVQJk1yQ5C1Npz"
+				"bzz-raw://e159d7926cceed62b52308748bd2c8853f81a317547e0634375e0b6edd7dabe1",
+				"dweb:/ipfs/QmRMEtFMLiKxKvBJgtdTMp7WjyLhn1NqYzEbGgf8kTeJEn"
 			]
 		},
 		"contracts/ReentrancyGuard.sol": {
@@ -243,35 +137,35 @@
 			]
 		},
 		"contracts/interface/IEvent.sol": {
-			"keccak256": "0xf70bc89d59183e8a460445b4ca0d60d9563633013fe88285ca4be7ac8a4906a9",
+			"keccak256": "0x591a61cf051ede357cdc4185088b2943822e132164de3b17c301da07a1ccbd5a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2051c481497b9da754d2f516d08e978a7a192e4c65884cfd5eed915465441dbf",
-				"dweb:/ipfs/Qmbh1ccikT7eUjNfrGJNrVsC5P5WSpwi4LF1ZQykEyrAfi"
+				"bzz-raw://ce060d47e3994c0b734c7381fddcee3c8b4d58888e3e54098f1ba69ad8d3bb26",
+				"dweb:/ipfs/QmUkc9PNgPfoLf8FSwyvTiUuDz464HF2weMcTuPC1vBpKW"
 			]
 		},
 		"contracts/interface/IEventFactory.sol": {
-			"keccak256": "0x762ed9d3b77be18ccb6444d0ac2f9f8b29006867db18dabe0783454acdbbae30",
+			"keccak256": "0x67898d1077cd18ee0cb8d98fda8f9476ef8191369e20ebababc641999372f386",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0687b006a546d71acaf4a3b93548d10ef025c3f518dd66a0f5155fb9710d3a75",
-				"dweb:/ipfs/QmP74CjsPXB638mYtWCskxotNzXXLTxu1CNeeWvjo7mzLp"
+				"bzz-raw://275121da9361a6cfecf4aa83de26c5a6c4af93ab0075a57fb0db9e051e152fee",
+				"dweb:/ipfs/QmT5dNTcGfj6CFdy19j2B84mCMomLnEDwjn4XBZFsJsSmh"
 			]
 		},
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x29647b020baaad7803d9dec2f3568eb2c7013a80995f909f4580168d4f03084d",
+			"keccak256": "0x16850164676b8c73c85d67206818aae5c6a8625b810343db7ddc59db7db48b1d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://710589a10c4f4ce35e236ab2e1e41802f27454afdd1bad2f5e09ed0f2011cb66",
-				"dweb:/ipfs/QmaKiqZHm8efbXcXoN4RCsoiQapoKCseCF9Tno19rqPgKc"
+				"bzz-raw://ca9847ac8de5dfc04bef768da42e01d737d1a940e1afee5d9c4c8e9374505d54",
+				"dweb:/ipfs/QmXoncnt7UkDEYDmqRpoFa1aRXQGiNsBkY1RPQngGxwJpS"
 			]
 		},
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x1190af9a9e20c8685c7a33959d64b2d5d6fb46f369f8f802dbcb8eb5995c1e9d",
+			"keccak256": "0xe5a75c5c5950559a17693368a4d4656e00a7437ea80077b316ab2250e5945d2c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6652012d5810da58eec8948bd40b8e5de80ea297da3871cc8283fd0295e39260",
-				"dweb:/ipfs/Qme8Lj6qGsH1L7xRpTyo4WUeLwMQd424NRcrj2RKz5nkoH"
+				"bzz-raw://61bce20e98f03887e9db6d62e60adb1e1bb0234543aad5a077b2e7bcd1360633",
+				"dweb:/ipfs/QmW9fi7dHZuLgxBnxeUqxPEMFVSeB5ydDH91pkkyqLBE5g"
 			]
 		},
 		"contracts/library/Struct.sol": {

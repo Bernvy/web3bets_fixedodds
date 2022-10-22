@@ -6,6 +6,25 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "marketAddress",
+						"type": "address"
+					}
+				],
+				"name": "MarketCreated",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "cancel",
 				"outputs": [],
@@ -13,28 +32,7 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_side1",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_side2",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_description",
-						"type": "string"
-					}
-				],
+				"inputs": [],
 				"name": "createMarket",
 				"outputs": [
 					{
@@ -51,47 +49,6 @@
 				"name": "end",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_market",
-						"type": "address"
-					}
-				],
-				"name": "getMarketString",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "marketName",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "side1",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "side2",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "desc",
-								"type": "string"
-							}
-						],
-						"internalType": "struct IEvent.MarketString",
-						"name": "",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -179,19 +136,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "startTime",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "status",
 				"outputs": [
 					{
@@ -232,11 +176,11 @@
 	},
 	"sources": {
 		"contracts/interface/IEvent.sol": {
-			"keccak256": "0xf70bc89d59183e8a460445b4ca0d60d9563633013fe88285ca4be7ac8a4906a9",
+			"keccak256": "0x591a61cf051ede357cdc4185088b2943822e132164de3b17c301da07a1ccbd5a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2051c481497b9da754d2f516d08e978a7a192e4c65884cfd5eed915465441dbf",
-				"dweb:/ipfs/Qmbh1ccikT7eUjNfrGJNrVsC5P5WSpwi4LF1ZQykEyrAfi"
+				"bzz-raw://ce060d47e3994c0b734c7381fddcee3c8b4d58888e3e54098f1ba69ad8d3bb26",
+				"dweb:/ipfs/QmUkc9PNgPfoLf8FSwyvTiUuDz464HF2weMcTuPC1vBpKW"
 			]
 		}
 	},

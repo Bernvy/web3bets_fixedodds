@@ -33,8 +33,6 @@ contract Web3BetsFO is IWeb3BetsFO {
     mapping(address => address) private black;
     address[] eventFactories;
 
-    event FactoryCreated(address factoryAddress);
-
     modifier onlyOwner
     {
         require(msg.sender == contractOwner,"W1");

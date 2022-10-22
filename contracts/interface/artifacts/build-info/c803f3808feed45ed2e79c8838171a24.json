@@ -1,0 +1,882 @@
+{
+	"id": "c803f3808feed45ed2e79c8838171a24",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.4",
+	"solcLongVersion": "0.8.4+commit.c7e474f2",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/interface/IEvent.sol": {
+				"content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.4;\n\ninterface IEvent {\n    struct Winner {\n        address market;\n        uint winningSide;\n    }\n\n\n\n    event MarketCreated(address eventAddress, address marketAddress);\n\n    function status() external view returns(uint256);\n\n    function owner() external view returns(address);\n\n    function getMarkets() external view returns(address[] memory);\n\n    function start() external;\n\n    function end() external;\n\n    function cancel() external;\n\n    function createMarket() external returns(address);\n\n    function setMarketsWinners(Winner[] calldata _winners) external;\n\n    function settleMarkets(Winner[] calldata _winners) external;\n\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": true,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/interface/IEvent.sol": {
+				"IEvent": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "address",
+									"name": "eventAddress",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "address",
+									"name": "marketAddress",
+									"type": "address"
+								}
+							],
+							"name": "MarketCreated",
+							"type": "event"
+						},
+						{
+							"inputs": [],
+							"name": "cancel",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "createMarket",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "end",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "getMarkets",
+							"outputs": [
+								{
+									"internalType": "address[]",
+									"name": "",
+									"type": "address[]"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "owner",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"components": [
+										{
+											"internalType": "address",
+											"name": "market",
+											"type": "address"
+										},
+										{
+											"internalType": "uint256",
+											"name": "winningSide",
+											"type": "uint256"
+										}
+									],
+									"internalType": "struct IEvent.Winner[]",
+									"name": "_winners",
+									"type": "tuple[]"
+								}
+							],
+							"name": "setMarketsWinners",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"components": [
+										{
+											"internalType": "address",
+											"name": "market",
+											"type": "address"
+										},
+										{
+											"internalType": "uint256",
+											"name": "winningSide",
+											"type": "uint256"
+										}
+									],
+									"internalType": "struct IEvent.Winner[]",
+									"name": "_winners",
+									"type": "tuple[]"
+								}
+							],
+							"name": "settleMarkets",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "start",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "status",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"cancel()": "ea8a1af0",
+							"createMarket()": "aea0e35f",
+							"end()": "efbe1c1c",
+							"getMarkets()": "ec2c9016",
+							"owner()": "8da5cb5b",
+							"setMarketsWinners((address,uint256)[])": "c79f2106",
+							"settleMarkets((address,uint256)[])": "96990fbd",
+							"start()": "be9a6555",
+							"status()": "200d2ed2"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"eventAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"marketAddress\",\"type\":\"address\"}],\"name\":\"MarketCreated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"cancel\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"createMarket\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"end\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getMarkets\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"market\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winningSide\",\"type\":\"uint256\"}],\"internalType\":\"struct IEvent.Winner[]\",\"name\":\"_winners\",\"type\":\"tuple[]\"}],\"name\":\"setMarketsWinners\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"market\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winningSide\",\"type\":\"uint256\"}],\"internalType\":\"struct IEvent.Winner[]\",\"name\":\"_winners\",\"type\":\"tuple[]\"}],\"name\":\"settleMarkets\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"start\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"status\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interface/IEvent.sol\":\"IEvent\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interface/IEvent.sol\":{\"keccak256\":\"0xa56655eca7cbb6ae132c8e5b52f1077dd8b03811c82c991afa6bdf8847ea7e2b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a5477430849e07c8d8ea6fb83b93b36b65297f614dca6abcc231182bf97dc17f\",\"dweb:/ipfs/QmavVkihD1vMUxSJCuDm1zcdn2kBwqXhYA2NBaE2A4Mvip\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/interface/IEvent.sol": {
+				"ast": {
+					"absolutePath": "contracts/interface/IEvent.sol",
+					"exportedSymbols": {
+						"IEvent": [
+							57
+						]
+					},
+					"id": 58,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".4"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 57,
+							"linearizedBaseContracts": [
+								57
+							],
+							"name": "IEvent",
+							"nameLocation": "68:6:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"canonicalName": "IEvent.Winner",
+									"id": 6,
+									"members": [
+										{
+											"constant": false,
+											"id": 3,
+											"mutability": "mutable",
+											"name": "market",
+											"nameLocation": "113:6:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 6,
+											"src": "105:14:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											},
+											"typeName": {
+												"id": 2,
+												"name": "address",
+												"nodeType": "ElementaryTypeName",
+												"src": "105:7:0",
+												"stateMutability": "nonpayable",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 5,
+											"mutability": "mutable",
+											"name": "winningSide",
+											"nameLocation": "134:11:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 6,
+											"src": "129:16:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 4,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "129:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "Winner",
+									"nameLocation": "88:6:0",
+									"nodeType": "StructDefinition",
+									"scope": 57,
+									"src": "81:71:0",
+									"visibility": "public"
+								},
+								{
+									"anonymous": false,
+									"id": 12,
+									"name": "MarketCreated",
+									"nameLocation": "166:13:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 11,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 8,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "eventAddress",
+												"nameLocation": "188:12:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 12,
+												"src": "180:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 7,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "180:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 10,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "marketAddress",
+												"nameLocation": "210:13:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 12,
+												"src": "202:21:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 9,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "202:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "179:45:0"
+									},
+									"src": "160:65:0"
+								},
+								{
+									"functionSelector": "200d2ed2",
+									"id": 17,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "status",
+									"nameLocation": "240:6:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 13,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "246:2:0"
+									},
+									"returnParameters": {
+										"id": 16,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 15,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 17,
+												"src": "271:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 14,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "271:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "270:9:0"
+									},
+									"scope": 57,
+									"src": "231:49:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "8da5cb5b",
+									"id": 22,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "owner",
+									"nameLocation": "295:5:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 18,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "300:2:0"
+									},
+									"returnParameters": {
+										"id": 21,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 20,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 22,
+												"src": "325:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 19,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "325:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "324:9:0"
+									},
+									"scope": 57,
+									"src": "286:48:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "ec2c9016",
+									"id": 28,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getMarkets",
+									"nameLocation": "349:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 23,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "359:2:0"
+									},
+									"returnParameters": {
+										"id": 27,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 26,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "384:16:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+													"typeString": "address[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 24,
+														"name": "address",
+														"nodeType": "ElementaryTypeName",
+														"src": "384:7:0",
+														"stateMutability": "nonpayable",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"id": 25,
+													"nodeType": "ArrayTypeName",
+													"src": "384:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+														"typeString": "address[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "383:18:0"
+									},
+									"scope": 57,
+									"src": "340:62:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "be9a6555",
+									"id": 31,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "start",
+									"nameLocation": "417:5:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 29,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "422:2:0"
+									},
+									"returnParameters": {
+										"id": 30,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "433:0:0"
+									},
+									"scope": 57,
+									"src": "408:26:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "efbe1c1c",
+									"id": 34,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "end",
+									"nameLocation": "449:3:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 32,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "452:2:0"
+									},
+									"returnParameters": {
+										"id": 33,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "463:0:0"
+									},
+									"scope": 57,
+									"src": "440:24:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "ea8a1af0",
+									"id": 37,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "cancel",
+									"nameLocation": "479:6:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 35,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "485:2:0"
+									},
+									"returnParameters": {
+										"id": 36,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "496:0:0"
+									},
+									"scope": 57,
+									"src": "470:27:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "aea0e35f",
+									"id": 42,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createMarket",
+									"nameLocation": "512:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 38,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "524:2:0"
+									},
+									"returnParameters": {
+										"id": 41,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 40,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 42,
+												"src": "544:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 39,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "544:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "543:9:0"
+									},
+									"scope": 57,
+									"src": "503:50:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "c79f2106",
+									"id": 49,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "setMarketsWinners",
+									"nameLocation": "568:17:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 47,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 46,
+												"mutability": "mutable",
+												"name": "_winners",
+												"nameLocation": "604:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 49,
+												"src": "586:26:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_struct$_Winner_$6_calldata_ptr_$dyn_calldata_ptr",
+													"typeString": "struct IEvent.Winner[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 44,
+														"nodeType": "UserDefinedTypeName",
+														"pathNode": {
+															"id": 43,
+															"name": "Winner",
+															"nodeType": "IdentifierPath",
+															"referencedDeclaration": 6,
+															"src": "586:6:0"
+														},
+														"referencedDeclaration": 6,
+														"src": "586:6:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_struct$_Winner_$6_storage_ptr",
+															"typeString": "struct IEvent.Winner"
+														}
+													},
+													"id": 45,
+													"nodeType": "ArrayTypeName",
+													"src": "586:8:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_struct$_Winner_$6_storage_$dyn_storage_ptr",
+														"typeString": "struct IEvent.Winner[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "585:28:0"
+									},
+									"returnParameters": {
+										"id": 48,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "622:0:0"
+									},
+									"scope": 57,
+									"src": "559:64:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "96990fbd",
+									"id": 56,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "settleMarkets",
+									"nameLocation": "638:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 54,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 53,
+												"mutability": "mutable",
+												"name": "_winners",
+												"nameLocation": "670:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 56,
+												"src": "652:26:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_struct$_Winner_$6_calldata_ptr_$dyn_calldata_ptr",
+													"typeString": "struct IEvent.Winner[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 51,
+														"nodeType": "UserDefinedTypeName",
+														"pathNode": {
+															"id": 50,
+															"name": "Winner",
+															"nodeType": "IdentifierPath",
+															"referencedDeclaration": 6,
+															"src": "652:6:0"
+														},
+														"referencedDeclaration": 6,
+														"src": "652:6:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_struct$_Winner_$6_storage_ptr",
+															"typeString": "struct IEvent.Winner"
+														}
+													},
+													"id": 52,
+													"nodeType": "ArrayTypeName",
+													"src": "652:8:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_struct$_Winner_$6_storage_$dyn_storage_ptr",
+														"typeString": "struct IEvent.Winner[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "651:28:0"
+									},
+									"returnParameters": {
+										"id": 55,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "688:0:0"
+									},
+									"scope": 57,
+									"src": "629:60:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 58,
+							"src": "58:634:0",
+							"usedErrors": []
+						}
+					],
+					"src": "33:659:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

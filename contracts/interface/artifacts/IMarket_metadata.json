@@ -6,6 +6,99 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "better",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "marketAddr",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "stake",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "odds",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "side",
+						"type": "uint256"
+					}
+				],
+				"name": "BetCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "betHashA",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "betHashB",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amountA",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amountB",
+						"type": "uint256"
+					}
+				],
+				"name": "PairCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Withdraw",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -401,19 +494,19 @@
 	},
 	"sources": {
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x29647b020baaad7803d9dec2f3568eb2c7013a80995f909f4580168d4f03084d",
+			"keccak256": "0x16850164676b8c73c85d67206818aae5c6a8625b810343db7ddc59db7db48b1d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://710589a10c4f4ce35e236ab2e1e41802f27454afdd1bad2f5e09ed0f2011cb66",
-				"dweb:/ipfs/QmaKiqZHm8efbXcXoN4RCsoiQapoKCseCF9Tno19rqPgKc"
+				"bzz-raw://ca9847ac8de5dfc04bef768da42e01d737d1a940e1afee5d9c4c8e9374505d54",
+				"dweb:/ipfs/QmXoncnt7UkDEYDmqRpoFa1aRXQGiNsBkY1RPQngGxwJpS"
 			]
 		},
 		"contracts/library/Struct.sol": {
-			"keccak256": "0xb54da96e33cf8cf20ce3cd72f7b2399a49ec18c900d8d6cd6c302a46bd292d08",
+			"keccak256": "0x3701800f3214661890b6f1230a1b54e56c17ba658220394e9b595ee2a929f9b8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7ded948f4aded309bfd2dd5f19f4f8b79e8f7394fb43887758c4a5b84d2145e0",
-				"dweb:/ipfs/QmXabzoVdjRYYaaJ6nP7JsQYd8Rdcz7iNojYPDFtrwzWQH"
+				"bzz-raw://df61b9f5750b96e678bedfa059eebe2907859a07c77a2efed76bd9f7aca59274",
+				"dweb:/ipfs/QmaxE7rs4DNGoYPq4eArPFzFPskCaY4HgwjJG9Eqph5qUX"
 			]
 		}
 	},

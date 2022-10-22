@@ -69,6 +69,99 @@
 	},
 	"abi": [
 		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "better",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "marketAddr",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "hash",
+					"type": "bytes32"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "stake",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "odds",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "side",
+					"type": "uint256"
+				}
+			],
+			"name": "BetCreated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "betHashA",
+					"type": "bytes32"
+				},
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "betHashB",
+					"type": "bytes32"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amountA",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amountB",
+					"type": "uint256"
+				}
+			],
+			"name": "PairCreated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "beneficiary",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "value",
+					"type": "uint256"
+				}
+			],
+			"name": "Withdraw",
+			"type": "event"
+		},
+		{
 			"inputs": [
 				{
 					"internalType": "address",

@@ -48,19 +48,36 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"cancel()": "ea8a1af0",
-			"createMarket(string,string,string,string)": "f7429133",
+			"createMarket()": "aea0e35f",
 			"end()": "efbe1c1c",
-			"getMarketString(address)": "dab41dc5",
 			"getMarkets()": "ec2c9016",
 			"owner()": "8da5cb5b",
 			"setMarketsWinners((address,uint256)[])": "c79f2106",
 			"settleMarkets((address,uint256)[])": "96990fbd",
 			"start()": "be9a6555",
-			"startTime()": "78e97925",
 			"status()": "200d2ed2"
 		}
 	},
 	"abi": [
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "eventAddress",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "marketAddress",
+					"type": "address"
+				}
+			],
+			"name": "MarketCreated",
+			"type": "event"
+		},
 		{
 			"inputs": [],
 			"name": "cancel",
@@ -69,28 +86,7 @@
 			"type": "function"
 		},
 		{
-			"inputs": [
-				{
-					"internalType": "string",
-					"name": "_name",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "_side1",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "_side2",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "_description",
-					"type": "string"
-				}
-			],
+			"inputs": [],
 			"name": "createMarket",
 			"outputs": [
 				{
@@ -107,47 +103,6 @@
 			"name": "end",
 			"outputs": [],
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_market",
-					"type": "address"
-				}
-			],
-			"name": "getMarketString",
-			"outputs": [
-				{
-					"components": [
-						{
-							"internalType": "string",
-							"name": "marketName",
-							"type": "string"
-						},
-						{
-							"internalType": "string",
-							"name": "side1",
-							"type": "string"
-						},
-						{
-							"internalType": "string",
-							"name": "side2",
-							"type": "string"
-						},
-						{
-							"internalType": "string",
-							"name": "desc",
-							"type": "string"
-						}
-					],
-					"internalType": "struct IEvent.MarketString",
-					"name": "",
-					"type": "tuple"
-				}
-			],
-			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -231,19 +186,6 @@
 			"name": "start",
 			"outputs": [],
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "startTime",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
 			"type": "function"
 		},
 		{

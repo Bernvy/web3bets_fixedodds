@@ -8,14 +8,7 @@ contract Event is IEvent {
     address immutable private web3bets;
     address immutable public override owner;
     uint256 public override status;
-    uint256 public override startTime;
     address[] private markets;
-    mapping(address => string) public marketsName;
-    mapping(address => string) public side1s;
-    mapping(address => string) public side2s;
-    mapping(address => string) public descriptions;
-
-    event MarketCreated(address eventAddress, address marketAddress);
 
     modifier onlyOwner() {
         require(owner == msg.sender, "E1");
@@ -31,16 +24,6 @@ contract Event is IEvent {
     function getMarkets() external view override returns(address[] memory)
     {
         return markets;
-    }
-
-    function getMarketString(address _market) external view override returns(MarketString memory) {
-        MarketString memory details = MarketString(
-            marketsName[_market],
-            side1s[_market],
-            side2s[_market],
-            descriptions[_market]
-        );
-        return details;
     }
 
     function start() external override onlyOwner {
@@ -80,21 +63,11 @@ contract Event is IEvent {
         }
     }
 
-    function createMarket(
-        string memory _name,
-        string memory _side1,
-        string memory _side2,
-        string memory _description
-    ) external override onlyOwner returns(address) {
+    function createMarket() external override onlyOwner returns(address) {
         require(status == 0 || status == 1, "E5");
-        
         Market market = new Market(web3bets);
         address marketAddress = address(market);
         markets.push(marketAddress);
-        marketsName[marketAddress] = _name;
-        side1s[marketAddress] = _side1;
-        side2s[marketAddress] = _side2;
-        descriptions[marketAddress] = _description;
 
         emit MarketCreated(address(this), marketAddress);
         return marketAddress;

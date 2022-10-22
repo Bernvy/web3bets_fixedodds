@@ -3,6 +3,8 @@
 pragma solidity ^0.8.4;
 
 interface IWeb3BetsFO{
+    event FactoryCreated(address factoryAddress);
+
     function holdAddr() external view returns(address);
 
     function ecoAddr() external view returns(address);

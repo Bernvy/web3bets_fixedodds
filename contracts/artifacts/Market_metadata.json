@@ -553,11 +553,11 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0xee7fa7d42dacd56eaa9031f4b5a5626b4b00bfbec84c46ec600b7083cadb2b29",
+			"keccak256": "0xb9a93938403bd76812e6db38670d42e014e41b25c3cca4f5098cda6cd80aab18",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://40132771c884b3063ad81cce34a54726eb8214f77985e770f96472333a87ba87",
-				"dweb:/ipfs/QmPCXrk4Ps4i5iCWyw5fHoJjnuZaYyaSwVQJk1yQ5C1Npz"
+				"bzz-raw://e159d7926cceed62b52308748bd2c8853f81a317547e0634375e0b6edd7dabe1",
+				"dweb:/ipfs/QmRMEtFMLiKxKvBJgtdTMp7WjyLhn1NqYzEbGgf8kTeJEn"
 			]
 		},
 		"contracts/ReentrancyGuard.sol": {
@@ -569,27 +569,27 @@
 			]
 		},
 		"contracts/interface/IEvent.sol": {
-			"keccak256": "0xf70bc89d59183e8a460445b4ca0d60d9563633013fe88285ca4be7ac8a4906a9",
+			"keccak256": "0x591a61cf051ede357cdc4185088b2943822e132164de3b17c301da07a1ccbd5a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2051c481497b9da754d2f516d08e978a7a192e4c65884cfd5eed915465441dbf",
-				"dweb:/ipfs/Qmbh1ccikT7eUjNfrGJNrVsC5P5WSpwi4LF1ZQykEyrAfi"
+				"bzz-raw://ce060d47e3994c0b734c7381fddcee3c8b4d58888e3e54098f1ba69ad8d3bb26",
+				"dweb:/ipfs/QmUkc9PNgPfoLf8FSwyvTiUuDz464HF2weMcTuPC1vBpKW"
 			]
 		},
 		"contracts/interface/IMarket.sol": {
-			"keccak256": "0x29647b020baaad7803d9dec2f3568eb2c7013a80995f909f4580168d4f03084d",
+			"keccak256": "0x16850164676b8c73c85d67206818aae5c6a8625b810343db7ddc59db7db48b1d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://710589a10c4f4ce35e236ab2e1e41802f27454afdd1bad2f5e09ed0f2011cb66",
-				"dweb:/ipfs/QmaKiqZHm8efbXcXoN4RCsoiQapoKCseCF9Tno19rqPgKc"
+				"bzz-raw://ca9847ac8de5dfc04bef768da42e01d737d1a940e1afee5d9c4c8e9374505d54",
+				"dweb:/ipfs/QmXoncnt7UkDEYDmqRpoFa1aRXQGiNsBkY1RPQngGxwJpS"
 			]
 		},
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x1190af9a9e20c8685c7a33959d64b2d5d6fb46f369f8f802dbcb8eb5995c1e9d",
+			"keccak256": "0xe5a75c5c5950559a17693368a4d4656e00a7437ea80077b316ab2250e5945d2c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6652012d5810da58eec8948bd40b8e5de80ea297da3871cc8283fd0295e39260",
-				"dweb:/ipfs/Qme8Lj6qGsH1L7xRpTyo4WUeLwMQd424NRcrj2RKz5nkoH"
+				"bzz-raw://61bce20e98f03887e9db6d62e60adb1e1bb0234543aad5a077b2e7bcd1360633",
+				"dweb:/ipfs/QmW9fi7dHZuLgxBnxeUqxPEMFVSeB5ydDH91pkkyqLBE5g"
 			]
 		},
 		"contracts/library/Struct.sol": {

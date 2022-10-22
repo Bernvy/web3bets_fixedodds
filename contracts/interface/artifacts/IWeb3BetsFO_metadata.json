@@ -6,6 +6,19 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "factoryAddress",
+						"type": "address"
+					}
+				],
+				"name": "FactoryCreated",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "aVig",
 				"outputs": [
@@ -176,11 +189,11 @@
 	},
 	"sources": {
 		"contracts/interface/IWeb3BetsFO.sol": {
-			"keccak256": "0x1190af9a9e20c8685c7a33959d64b2d5d6fb46f369f8f802dbcb8eb5995c1e9d",
+			"keccak256": "0xe5a75c5c5950559a17693368a4d4656e00a7437ea80077b316ab2250e5945d2c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6652012d5810da58eec8948bd40b8e5de80ea297da3871cc8283fd0295e39260",
-				"dweb:/ipfs/Qme8Lj6qGsH1L7xRpTyo4WUeLwMQd424NRcrj2RKz5nkoH"
+				"bzz-raw://61bce20e98f03887e9db6d62e60adb1e1bb0234543aad5a077b2e7bcd1360633",
+				"dweb:/ipfs/QmW9fi7dHZuLgxBnxeUqxPEMFVSeB5ydDH91pkkyqLBE5g"
 			]
 		}
 	},

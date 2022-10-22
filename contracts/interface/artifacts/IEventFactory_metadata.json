@@ -6,23 +6,26 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventAddress",
+						"type": "address"
 					},
 					{
-						"internalType": "string",
-						"name": "_cat",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_sub",
-						"type": "string"
+						"indexed": false,
+						"internalType": "address",
+						"name": "eventOwner",
+						"type": "address"
 					}
 				],
+				"name": "EventCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
 				"name": "createEvent",
 				"outputs": [
 					{
@@ -59,96 +62,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					}
-				],
-				"name": "getString",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "eventName",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "eventCat",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "eventSub",
-								"type": "string"
-							}
-						],
-						"internalType": "struct IEventFactory.EventString",
-						"name": "",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_cat",
-						"type": "string"
-					}
-				],
-				"name": "setCategory",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					}
-				],
-				"name": "setName",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_event",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "_sub",
-						"type": "string"
-					}
-				],
-				"name": "setSubcategory",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -179,11 +92,11 @@
 	},
 	"sources": {
 		"contracts/interface/IEventFactory.sol": {
-			"keccak256": "0x762ed9d3b77be18ccb6444d0ac2f9f8b29006867db18dabe0783454acdbbae30",
+			"keccak256": "0x67898d1077cd18ee0cb8d98fda8f9476ef8191369e20ebababc641999372f386",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0687b006a546d71acaf4a3b93548d10ef025c3f518dd66a0f5155fb9710d3a75",
-				"dweb:/ipfs/QmP74CjsPXB638mYtWCskxotNzXXLTxu1CNeeWvjo7mzLp"
+				"bzz-raw://275121da9361a6cfecf4aa83de26c5a6c4af93ab0075a57fb0db9e051e152fee",
+				"dweb:/ipfs/QmT5dNTcGfj6CFdy19j2B84mCMomLnEDwjn4XBZFsJsSmh"
 			]
 		}
 	},
