@@ -62,6 +62,25 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserEvents",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -92,11 +111,11 @@
 	},
 	"sources": {
 		"contracts/interface/IEventFactory.sol": {
-			"keccak256": "0x67898d1077cd18ee0cb8d98fda8f9476ef8191369e20ebababc641999372f386",
+			"keccak256": "0xaaa9bdef0feca79a4dfb2b05d19d7b5f896069f20571b70c080f17b09e64fe3e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://275121da9361a6cfecf4aa83de26c5a6c4af93ab0075a57fb0db9e051e152fee",
-				"dweb:/ipfs/QmT5dNTcGfj6CFdy19j2B84mCMomLnEDwjn4XBZFsJsSmh"
+				"bzz-raw://8fe7b7b2768909e37cfc7cfb641737d25319d6484cbb538d8547f2b75089c9f9",
+				"dweb:/ipfs/QmcvjonWtGQ2bTo5aNMA3Tbkq9EUqFq7K5Skj8i7TzL25B"
 			]
 		}
 	},

@@ -49,7 +49,8 @@
 		"methodIdentifiers": {
 			"createEvent()": "b33eb0a0",
 			"getEvents()": "404aa8f9",
-			"getFactory()": "88cc58e4"
+			"getFactory()": "88cc58e4",
+			"getUserEvents(address)": "171e5ba2"
 		}
 	},
 	"abi": [
@@ -106,6 +107,25 @@
 					"internalType": "address",
 					"name": "",
 					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				}
+			],
+			"name": "getUserEvents",
+			"outputs": [
+				{
+					"internalType": "address[]",
+					"name": "",
+					"type": "address[]"
 				}
 			],
 			"stateMutability": "view",

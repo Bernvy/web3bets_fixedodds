@@ -9,6 +9,8 @@ interface IEventFactory {
 
     function getEvents() external view returns(address[] memory);
 
+    function getUserEvents(address _user) external view returns(address[] memory);
+
     function createEvent() external returns(address);
 
 }

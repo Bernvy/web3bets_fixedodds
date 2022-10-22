@@ -67,6 +67,25 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserEvents",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -105,11 +124,11 @@
 			]
 		},
 		"contracts/EventFactory.sol": {
-			"keccak256": "0x53f996fa176ca852d278483c4aa40f22d1bd26046f7f5faa6c33254ba28aae4d",
+			"keccak256": "0xb4bea8e737aa570b6d2b5581bc4672fd1d453b398cc947dd90281f954b0de543",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a9fcf6e13fd68df1ac6b297c3b62b36507242f78940f0728c4b9dbf029668fcc",
-				"dweb:/ipfs/QmVfFDTEFMQej2NXi2sBqufzBxzqJa4zver4W6unBEF9uU"
+				"bzz-raw://470aeb6da38562cde495b316b75190749d0f2f41c0fef7bf6918de2b34857cfa",
+				"dweb:/ipfs/Qmb6cVHaL8XX8SdhqmGifsV14MNXxWRK47HuFLBMPnmz6k"
 			]
 		},
 		"contracts/IERC20.sol": {
@@ -145,11 +164,11 @@
 			]
 		},
 		"contracts/interface/IEventFactory.sol": {
-			"keccak256": "0x67898d1077cd18ee0cb8d98fda8f9476ef8191369e20ebababc641999372f386",
+			"keccak256": "0xaaa9bdef0feca79a4dfb2b05d19d7b5f896069f20571b70c080f17b09e64fe3e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://275121da9361a6cfecf4aa83de26c5a6c4af93ab0075a57fb0db9e051e152fee",
-				"dweb:/ipfs/QmT5dNTcGfj6CFdy19j2B84mCMomLnEDwjn4XBZFsJsSmh"
+				"bzz-raw://8fe7b7b2768909e37cfc7cfb641737d25319d6484cbb538d8547f2b75089c9f9",
+				"dweb:/ipfs/QmcvjonWtGQ2bTo5aNMA3Tbkq9EUqFq7K5Skj8i7TzL25B"
 			]
 		},
 		"contracts/interface/IMarket.sol": {
