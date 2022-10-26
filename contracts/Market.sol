@@ -38,7 +38,7 @@ contract Market is IMarket, ReentrancyGuard {
     }
     modifier onlyFactory() {
         require(
-            msg.sender == factory,
+            msg.sender == factory || msg.sender == IEvent(factory).owner(),
             "M2"
         );
         _;

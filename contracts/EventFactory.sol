@@ -10,11 +10,6 @@ contract EventFactory is IEventFactory {
     address[] private events;
     mapping(address => address[]) private userEvents;
 
-    modifier onlyEventOwner(address _event) {
-        require(IEvent(_event).owner() == msg.sender, "F1");
-        _;
-    }
-
     constructor(){
         app = IWeb3BetsFO(msg.sender);
     }

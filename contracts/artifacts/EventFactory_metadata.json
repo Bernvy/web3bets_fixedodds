@@ -124,11 +124,11 @@
 			]
 		},
 		"contracts/EventFactory.sol": {
-			"keccak256": "0xfc62044d8acbcf25e5b8d1874fc7caac432de4647aae55fc86821bb39dea9b35",
+			"keccak256": "0x4cd31ad81996acf839894cbb287cf44a5487b62b50cb255ce6536d3844d0ecaa",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fc3733942e93d8f6a486b18f7adc1c23c89adf6705e11f5535470feea2382ac6",
-				"dweb:/ipfs/QmT3d56jEjqm6svPunA63KHewLHtACAeaPxsjgRQfyRiZg"
+				"bzz-raw://1314acaddafbc76b822dc12e4ccb508b76dc5ce08f3ee6d7517c2612531d1c10",
+				"dweb:/ipfs/QmXx9RGjPjrEjoZNEJChkn4DKCuKjsz1PDnsPoeEbZyrJt"
 			]
 		},
 		"contracts/IERC20.sol": {

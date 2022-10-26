@@ -208,11 +208,11 @@
 			]
 		},
 		"contracts/Market.sol": {
-			"keccak256": "0xb9a93938403bd76812e6db38670d42e014e41b25c3cca4f5098cda6cd80aab18",
+			"keccak256": "0xc60780b962bb495e288afb7548f3f95afd63f36333510d43d4d1fc3c8926a0eb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e159d7926cceed62b52308748bd2c8853f81a317547e0634375e0b6edd7dabe1",
-				"dweb:/ipfs/QmRMEtFMLiKxKvBJgtdTMp7WjyLhn1NqYzEbGgf8kTeJEn"
+				"bzz-raw://87ba60160d1826028ab9f11a5066b9c4f54d0c673ed582c7901e94f5c57d90fd",
+				"dweb:/ipfs/QmaQ3McQyFmdw23cCFoPgD2qERvdqQyCK7LQHdYTHhP2in"
 			]
 		},
 		"contracts/ReentrancyGuard.sol": {
