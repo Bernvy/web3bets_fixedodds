@@ -13,15 +13,15 @@ interface IMarket{
     event BetCreated(
         address better,
         address marketAddr,
-        bytes32 hash,
+        uint256 id,
         uint256 stake,
         uint256 odds,
         uint256 side
     );
 
     event PairCreated(
-        bytes32 betHashA,
-        bytes32 betHashB,
+        uint256 betIdA,
+        uint256 betIdB,
         uint256 amountA,
         uint256 amountB
     );
@@ -30,25 +30,25 @@ interface IMarket{
 
     function getBalance(address _user) external view returns(uint256);
 
-    function getUserBets(address _user) external view returns(bytes32[] memory);
+    function getUserBets(address _user) external view returns(uint256[] memory);
 
-    function getBets() external view returns(bytes32[] memory);
+    function getBets() external view returns(uint256[] memory);
 
-    function getBet(bytes32 _bet) external view returns(Struct.MarketBet memory);
+    function getBet(uint256 _bet) external view returns(Struct.MarketBet memory);
 
-    function getBetPairs(bytes32 _bet) external view returns(bytes32[] memory);
+    function getBetPairs(uint256 _bet) external view returns(uint256[] memory);
 
-    function getPairs() external view returns(bytes32[] memory);
+    function getPairs() external view returns(uint256[] memory);
 
-    function getPair(bytes32 _pair) external view returns(Struct.MarketPair memory);
+    function getPair(uint256 _pair) external view returns(Struct.MarketPair memory);
 
     function withdraw(address _address) external returns(bool);
 
-    function withdrawPending(bytes32 _bet) external;
+    function withdrawPending(uint256 _bet) external;
 
-    function cancelBet(bytes32 _bet) external;
+    function cancelBet(uint256 _bet) external;
 
-    function settleBet(bytes32 _bet) external;
+    function settleBet(uint256 _bet) external;
 
     /*
     @dev 1: side A is winner, 2: side B is winer
@@ -73,6 +73,6 @@ interface IMarket{
         uint256 _odds,
         uint256 _side,
         bool instant
-    ) external returns(bytes32);
+    ) external;
 
 }

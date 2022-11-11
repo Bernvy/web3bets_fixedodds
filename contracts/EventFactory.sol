@@ -10,11 +10,6 @@ contract EventFactory is IEventFactory {
     address[] private events;
     mapping(address => address[]) private userEvents;
 
-    modifier onlyEventOwner(address _event) {
-        require(IEvent(_event).owner() == msg.sender, "F1");
-        _;
-    }
-
     constructor(){
         app = IWeb3BetsFO(msg.sender);
     }
@@ -35,7 +30,8 @@ contract EventFactory is IEventFactory {
 
     function createEvent() external override returns(address)
     {
-        require(app.isEventAdmin(msg.sender) && app.isBlack(msg.sender), "F2");
+        require(app.isEventAdmin(msg.sender), "F2");
+        require(!app.isBlack(msg.sender), "F3");
         Event e = new Event(msg.sender, address(app));
         address eventAddress = address(e);
         events.push(eventAddress);

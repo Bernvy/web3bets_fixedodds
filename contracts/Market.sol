@@ -21,15 +21,15 @@ contract Market is IMarket, ReentrancyGuard {
     /*
     @dev stores the hash of all bets
     */
-    bytes32[] private bets;
-    mapping(address => bytes32[]) private userBets;
-    mapping(bytes32 => Struct.MarketBet) private betsInfo;
+    uint256[] private bets;
+    mapping(address => uint256[]) private userBets;
+    mapping(uint256 => Struct.MarketBet) private betsInfo;
     /*
     @dev stores the hash of all bets
     */
-    bytes32[] private pairs;
-    mapping(bytes32 => bytes32[]) private betPairs;
-    mapping(bytes32 => Struct.MarketPair) private pairsInfo;
+    uint256[] private pairs;
+    mapping(uint256 => uint256[]) private betPairs;
+    mapping(uint256 => Struct.MarketPair) private pairsInfo;
     
 
     modifier notBlack() {
@@ -38,14 +38,14 @@ contract Market is IMarket, ReentrancyGuard {
     }
     modifier onlyFactory() {
         require(
-            msg.sender == factory,
+            msg.sender == factory || msg.sender == IEvent(factory).owner(),
             "M2"
         );
         _;
     }
 
-    constructor(address w_) {
-        app = IWeb3BetsFO(w_);
+    constructor(address web3bets_) {
+        app = IWeb3BetsFO(web3bets_);
         a = Struct.App(
             app.holdAddr(),
             app.ecoAddr(),
@@ -69,7 +69,7 @@ contract Market is IMarket, ReentrancyGuard {
     * @dev Returns hash IDs of all the bets placed by `_user`.
     */
     function getUserBets(address _user) 
-        external view override returns(bytes32[] memory) 
+        external view override returns(uint256[] memory) 
     {
         return userBets[_user];
     }
@@ -77,7 +77,7 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev Returns details of `_bet`.
     */
-    function getBets() external view override returns(bytes32[] memory) 
+    function getBets() external view override returns(uint256[] memory) 
     {
         return bets;
     }
@@ -85,7 +85,7 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev Returns details of `_bet`.
     */
-    function getBet(bytes32 _bet) 
+    function getBet(uint256 _bet) 
         external view override returns(Struct.MarketBet memory) 
     {
         return betsInfo[_bet];
@@ -94,8 +94,8 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev Returns hash IDs of all the bets placed by `_user`.
     */
-    function getBetPairs(bytes32 _bet) 
-        external view override returns(bytes32[] memory) 
+    function getBetPairs(uint256 _bet) 
+        external view override returns(uint256[] memory) 
     {
         return betPairs[_bet];
     }
@@ -103,7 +103,7 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev Returns details of `_bet`.
     */
-    function getPairs() external view override returns(bytes32[] memory) 
+    function getPairs() external view override returns(uint256[] memory) 
     {
         return pairs;
     }
@@ -111,7 +111,7 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev Returns details of `_bet`.
     */
-    function getPair(bytes32 _pair) external view override returns(Struct.MarketPair memory) 
+    function getPair(uint256 _pair) external view override returns(Struct.MarketPair memory) 
     {
         return pairsInfo[_pair];
     }
@@ -136,7 +136,7 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev refund all unmatched stake in `_bet`, and withraw for caller address
     */
-    function withdrawPending(bytes32 _bet) public override {
+    function withdrawPending(uint256 _bet) public override {
         Struct.MarketBet memory bet = betsInfo[_bet];
         require(msg.sender == bet.better, "M5");
         uint remStake = bet.stake - bet.matched;
@@ -150,7 +150,7 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev cancel all pairs in `_bet`, 
     */
-    function cancelBet(bytes32 _bet) external override {
+    function cancelBet(uint256 _bet) external override {
         require(msg.sender == betsInfo[_bet].better, "M6");
         if(status == 0 || status == 3){
             _cancelBetPairs(_bet);
@@ -161,8 +161,8 @@ contract Market is IMarket, ReentrancyGuard {
     /**
     * @dev settle all pairs in `_bet`, 
     */
-    function settleBet(bytes32 _bet) external override {
-        bytes32[] memory _pairs = betPairs[_bet];
+    function settleBet(uint256 _bet) external override {
+        uint256[] memory _pairs = betPairs[_bet];
         uint pairsLength = _pairs.length;
         for(uint i = 0; i < pairsLength; i++){
             _settlePair(_pairs[i]);
@@ -264,7 +264,6 @@ contract Market is IMarket, ReentrancyGuard {
     external
     override
     notBlack
-    returns(bytes32)
     {
         require(status == 0, "M7");
         require(_side == 1 || _side == 2, "M8");
@@ -275,7 +274,7 @@ contract Market is IMarket, ReentrancyGuard {
             token.transferFrom(msg.sender, address(this), _stake),
             "M12"
         );
-        bytes32 betHash = _createBet(
+        uint256 betId = _createBet(
             msg.sender,
             _affiliate,
             _stake,
@@ -283,17 +282,17 @@ contract Market is IMarket, ReentrancyGuard {
             (_odds * 100) / (_odds - 100),
             _side
         );
+        emit BetCreated(msg.sender, address(this), betId, _stake, _odds, _side);
         // _odds is the odds the better inputed which represents the min odds they want to receive
         // (_odds * 100) / (_odds - 100) is the complement of _odds, it represents the max odds - 
         // the better offer to pay
         if(bets.length > 0){
-            uint _remStake = _stake;
             uint256 betsLength = bets.length;
-            while(_remStake >= a.minStake){
+            while(_stake >= a.minStake){
                 uint selectedIndex = 0;
                 uint256 maxOdds = 0;
                 for(uint i = 0; i < betsLength; i++){
-                    bytes32 bet = bets[i];
+                    uint256 bet = bets[i];
                     if(_side == betsInfo[bet].side){
                         continue;
                     }
@@ -307,21 +306,18 @@ contract Market is IMarket, ReentrancyGuard {
                 }
                 uint256 betterAmount = 0;
                 if(maxOdds >= _odds || (maxOdds > 0 && _instant)) {
-                    bytes32 selectedHash = bets[selectedIndex];
-                    Struct.MarketBet memory selectedBet = betsInfo[selectedHash];
+                    Struct.MarketBet memory selectedBet = betsInfo[bets[selectedIndex]];
                     uint offeredStake = (selectedBet.stake - selectedBet.matched) / (_odds - 100);
                     offeredStake *= 100;
                     
-                    betterAmount = _match(_stake, offeredStake, _odds, _side, betHash, selectedHash);
+                    betterAmount = _match(_stake, offeredStake, _odds, _side, betId, bets[selectedIndex]);
                 }
                 else {
                     break;
                 }
-                _remStake -= betterAmount;
+                _stake -= betterAmount;
             }
         }
-        emit BetCreated(msg.sender, address(this), betHash, _stake, _odds, _side);
-        return betHash;
     }
 
     function _match(
@@ -329,22 +325,22 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 _offeredStake,
         uint256 _odds,
         uint256 _side,
-        bytes32 _betHash,
-        bytes32 _selectedHash
+        uint256 _betId,
+        uint256 _selectedId
     ) private returns (uint256)
     {
         uint256 betterAmount;
         uint256 makerAmount;
-        bytes32 pairHash;
+        uint256 pairId;
         if(_offeredStake <= _stake) {
             betterAmount = _offeredStake;
             makerAmount = _offeredStake * (_odds - 100);
             makerAmount /= 100;
             if(_side == 1){
-                pairHash = _createPair(_betHash,_selectedHash,betterAmount,makerAmount);
+                pairId = _createPair(_betId,_selectedId,betterAmount,makerAmount);
             }
             else if(_side == 2){
-                pairHash = _createPair(_selectedHash,_betHash,makerAmount,betterAmount);
+                pairId = _createPair(_selectedId,_betId,makerAmount,betterAmount);
             }
         }
         else {
@@ -352,39 +348,39 @@ contract Market is IMarket, ReentrancyGuard {
             makerAmount = _stake * (_odds - 100);
             makerAmount /= 100;
             if(_side == 1){
-                pairHash = _createPair(_betHash,_selectedHash,betterAmount,makerAmount);
+                pairId = _createPair(_betId,_selectedId,betterAmount,makerAmount);
             }
             else if(_side == 2){
-                pairHash = _createPair(_selectedHash,_betHash,makerAmount,betterAmount);
+                pairId = _createPair(_selectedId,_betId,makerAmount,betterAmount);
             }
         }
-        betPairs[_betHash].push(pairHash);
-        betPairs[_selectedHash].push(pairHash);
-        betsInfo[_betHash].matched += betterAmount;
-        betsInfo[_selectedHash].matched += makerAmount;
+        betPairs[_betId].push(pairId);
+        betPairs[_selectedId].push(pairId);
+        betsInfo[_betId].matched += betterAmount;
+        betsInfo[_selectedId].matched += makerAmount;
         return betterAmount;
     }
 
-    function _cancelBetPairs(bytes32 _bet) private returns(bool) {
+    function _cancelBetPairs(uint256 _bet) private returns(bool) {
         Struct.MarketBet memory bet = betsInfo[_bet];
-        bytes32[] memory _pairs = betPairs[_bet];
+        uint256[] memory _pairs = betPairs[_bet];
         uint pairsLength = _pairs.length;
         for(uint i = 0; i < pairsLength; i++){
             if(pairsInfo[_pairs[i]].settled){
                 continue;
             }
-            bytes32 counterBetHash;
+            uint256 counterBetHash;
             uint256 counterAmount;
             uint256 thisAmount;
             address counterBetter;
             if(bet.side == 1) {
                 thisAmount = pairsInfo[_pairs[i]].amountA;
-                counterBetHash = pairsInfo[_pairs[i]].betHashB;
+                counterBetHash = pairsInfo[_pairs[i]].betIdB;
                 counterAmount = pairsInfo[_pairs[i]].amountB;
             }
             else if(bet.side == 2) {
                 thisAmount = pairsInfo[_pairs[i]].amountB;
-                counterBetHash = pairsInfo[_pairs[i]].betHashA;
+                counterBetHash = pairsInfo[_pairs[i]].betIdA;
                 counterAmount = pairsInfo[_pairs[i]].amountA;
             }
             counterBetter = betsInfo[counterBetHash].better;
@@ -399,19 +395,19 @@ contract Market is IMarket, ReentrancyGuard {
         return true;
     }
 
-    function _cancelPair(bytes32 _pair) private returns(bool) {
+    function _cancelPair(uint256 _pair) private returns(bool) {
         if(pairsInfo[_pair].settled){
             return false;
         }
-        address betterA = betsInfo[pairsInfo[_pair].betHashA].better;
-        address betterB = betsInfo[pairsInfo[_pair].betHashB].better;
+        address betterA = betsInfo[pairsInfo[_pair].betIdA].better;
+        address betterB = betsInfo[pairsInfo[_pair].betIdB].better;
         bal[betterA] += pairsInfo[_pair].amountA;
         bal[betterB] += pairsInfo[_pair].amountB;
         pairsInfo[_pair].settled = true;
         return true;
     }
     
-    function _settlePair(bytes32 _pair) private nonReentrant returns(bool) {
+    function _settlePair(uint256 _pair) private nonReentrant returns(bool) {
         if(pairsInfo[_pair].settled){
             return false;
         }
@@ -420,16 +416,16 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 winAmount;
         uint256 vigAmount;
         if(status == 1){
-            winner = betsInfo[pairsInfo[_pair].betHashA].better;
+            winner = betsInfo[pairsInfo[_pair].betIdA].better;
             winAmount = pairsInfo[_pair].amountA + (pairsInfo[_pair].amountB * (100 - a.vig) / 100);
             vigAmount = pairsInfo[_pair].amountB * a.vig / 100;
-            affiliate = betsInfo[pairsInfo[_pair].betHashA].affiliate;
+            affiliate = betsInfo[pairsInfo[_pair].betIdA].affiliate;
         }
         else if(status == 2){
-            winner = betsInfo[pairsInfo[_pair].betHashB].better;
+            winner = betsInfo[pairsInfo[_pair].betIdB].better;
             winAmount = pairsInfo[_pair].amountB + (pairsInfo[_pair].amountA * (100 - a.vig) / 100);
             vigAmount = pairsInfo[_pair].amountA * a.vig / 100;
-            affiliate = betsInfo[pairsInfo[_pair].betHashB].affiliate;
+            affiliate = betsInfo[pairsInfo[_pair].betIdB].affiliate;
         }
         else{
             return false;
@@ -451,19 +447,13 @@ contract Market is IMarket, ReentrancyGuard {
         uint256 _side
     )
     private
-    returns(bytes32)
+    returns(uint256)
     {
-        bytes32 betHash;
+        uint256 betId;
         uint i = 0;
         while(i >= 0){
-            betHash = keccak256(abi.encodePacked(
-                _better,
-                address(this),
-                bets.length + 1 + i,
-                block.timestamp,
-                block.difficulty
-            ));
-            if(betsInfo[betHash].stake == 0){
+            betId = pairs.length + 1 + i;
+            if(betsInfo[betId].stake == 0){
                 break;
             }
             i++;
@@ -471,41 +461,35 @@ contract Market is IMarket, ReentrancyGuard {
         if(_affiliate == address(0)){
             _affiliate = a.ecoAddr;
         }
-        betsInfo[betHash] = Struct.MarketBet(_better, _affiliate, _stake, _matched, _odds, _side);
-        bets.push(betHash);
-        userBets[_better].push(betHash);
-        return betHash;
+        betsInfo[betId] = Struct.MarketBet(_better, _affiliate, _stake, _matched, _odds, _side);
+        bets.push(betId);
+        userBets[_better].push(betId);
+        return betId;
     }
 
     function _createPair(
-        bytes32 _betHashA,
-        bytes32 _betHashB,
+        uint256 _betIdA,
+        uint256 _betIdB,
         uint256 _amountA,
         uint256 _amountB
     ) 
     private
-    returns(bytes32)
+    returns(uint256)
     {
-        bytes32 pairHash;
+        uint256 pairId;
         uint i = 0;
         while(i >= 0){
-            pairHash = keccak256(abi.encodePacked(
-                _betHashA,
-                _betHashB,
-                pairs.length + 1 + i,
-                block.timestamp,
-                block.difficulty
-            ));
-            if(pairsInfo[pairHash].amountA == 0){
+            pairId = pairs.length + 1 + i;
+            if(pairsInfo[pairId].amountA == 0){
                 break;
             }
             i++;
         }
-        pairsInfo[pairHash] = Struct.MarketPair(_betHashA, _betHashB, _amountA, _amountB, false);
-        pairs.push(pairHash);
+        pairsInfo[pairId] = Struct.MarketPair(_betIdA, _betIdB, _amountA, _amountB, false);
+        pairs.push(pairId);
 
-        emit PairCreated(_betHashA, _betHashB, _amountA, _amountB);
-        return pairHash;
+        emit PairCreated(_betIdA, _betIdB, _amountA, _amountB);
+        return pairId;
     }
     
 }

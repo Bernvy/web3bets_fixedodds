@@ -17,9 +17,9 @@ import "./EventFactory.sol";
 contract Web3BetsFO is IWeb3BetsFO {
     uint256 public override vig = 10;
     uint256 public override hVig = 50;
-    uint256 public override eVig = 25;
-    uint256 public override aVig = 25;
-    uint256 public override minStake = 1000000000000000000;
+    uint256 public override eVig = 30;
+    uint256 public override aVig = 20;
+    uint256 public override minStake = 1 * 10 ** 18;
     address public override holdAddr = 0x602f6f6C93aC99008B9bc58ab8Ee61e7713aD43d;
     address public override ecoAddr = 0xBffe45D497Bde6f9809200f736084106d1d079df;
     /**

@@ -24,8 +24,8 @@ library Struct {
     }
     
     struct MarketPair {
-        bytes32 betHashA;
-        bytes32 betHashB;
+        uint256 betIdA;
+        uint256 betIdB;
         uint256 amountA;
         uint256 amountB;
         bool settled;
